@@ -23,7 +23,6 @@ public class CommentDao extends SuperDao{
 		try {
 			Connection conn = getConnection();
 			String sql = "select * from board_comment order by regDate desc";
-			System.out.println(sql);
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet re = stmt.executeQuery();

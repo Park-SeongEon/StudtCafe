@@ -23,7 +23,6 @@ public class BoardDao extends SuperDao{
 		try {
 			Connection conn = getConnection();
 			String sql = "select * from board where kate_no=? order by regDate desc";
-			System.out.println(sql);
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, katNo);

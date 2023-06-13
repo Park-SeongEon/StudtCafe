@@ -21,7 +21,6 @@ public class UserDao extends SuperDao{
 		try {
 			Connection conn = getConnection();
 			String sql = "select * from user  order by regDate desc";
-			System.out.println(sql);
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet re = stmt.executeQuery();

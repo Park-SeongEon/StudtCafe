@@ -24,7 +24,6 @@ public class KateDao extends SuperDao{
 		try {
 			Connection conn = getConnection();
 			String sql = "select * from Kategorie where user_type_cd = '02'";
-			System.out.println(sql);
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet re = stmt.executeQuery();
