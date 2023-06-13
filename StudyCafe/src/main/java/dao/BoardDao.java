@@ -16,16 +16,17 @@ public class BoardDao extends SuperDao{
 
 	}
 
-	public List<Board> selectAll() {
+	public List<Board> selectAll(int katNo) {
 
 		List<Board> list = new ArrayList<>();
 
 		try {
 			Connection conn = getConnection();
-			String sql = "select * from board order by regDate desc";
+			String sql = "select * from board where kate_no=? order by regDate desc";
 			System.out.println(sql);
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, katNo);
 			ResultSet re = stmt.executeQuery();
 			while (re.next()) {
 				Board vo = new Board();
