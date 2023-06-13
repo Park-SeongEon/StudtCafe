@@ -18,7 +18,7 @@ import model.User;
 @WebServlet("/member/*")
 public class UserConroller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    UserDao dao;   
+    UserDao userdao;   
 	
     public UserConroller() {
         super();
@@ -27,7 +27,7 @@ public class UserConroller extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		
-		dao = new UserDao();
+		userdao = new UserDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,7 +40,7 @@ public class UserConroller extends HttpServlet {
 		
 		if(action == null || "list.do".equals(action))
 		{
-			List<User> memList = dao.selectAll();
+			List<User> memList = userdao.selectAll();
 			request.setAttribute("memList", memList);
 			nextPage = "/view/member.jsp";
 			
@@ -56,7 +56,7 @@ public class UserConroller extends HttpServlet {
 			
 		}else if(action.equals("/modForm.do")) {
 			String id = request.getParameter("id");
-			User vo = dao.selectById(id);
+			User vo = userdao.selectById(id);
 			request.setAttribute("info", vo);
 			nextPage = "/view/modMemberForm.jsp";
 		} else if(action.equals("/mod.do")) {
@@ -66,16 +66,17 @@ public class UserConroller extends HttpServlet {
 			
 			
 
-			dao.update(vo);
+			userdao.update(vo);
 			nextPage = "/member/list.do";			
 		} else if(action.equals("/del.do")) {
 			String id = request.getParameter("id");
-			User vo = dao.selectById(id);
+			User vo = userdao.selectById(id);
+			userdao.delete(vo);
 			request.setAttribute("msg", "del");
 			nextPage = "/member/list.do";			
 		}
 		else {
-			List<User> memList = dao.selectAll();
+			List<User> memList = userdao.selectAll();
 			request.setAttribute("memList", memList);
 			nextPage = "/view/member.jsp";
 			
