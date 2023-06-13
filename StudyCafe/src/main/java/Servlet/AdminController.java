@@ -57,8 +57,6 @@ public class AdminController extends HttpServlet {
 			List<Board> list = null;
 			
 			if(action == null) {
-				String _section = request.getParameter("setion");
-				String _pageNum = request.getParameter("pageNum");
 				
 				nextPage = "/view/list.jsp";
 			} else if("/main.do".equals(action)) {

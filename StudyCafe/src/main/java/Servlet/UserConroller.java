@@ -48,7 +48,7 @@ public class UserConroller extends HttpServlet {
 			User vo = new User();
 
 			
-			request.setAttribute("msg","add");
+
 			nextPage = "/member/list.do";
 			
 		} else if(action.equals("/memberForm.do")) {
@@ -65,8 +65,8 @@ public class UserConroller extends HttpServlet {
 			
 			
 			
+
 			dao.update(vo);
-			request.setAttribute("msg","mod");
 			nextPage = "/member/list.do";			
 		} else if(action.equals("/del.do")) {
 			String id = request.getParameter("id");
