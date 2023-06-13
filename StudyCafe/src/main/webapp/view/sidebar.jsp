@@ -12,11 +12,41 @@
 			<a href="${contextPath}/main/main.do">Study Cafe</a>
 		</header>
 		<ul class="nav">
-			<li class="active"><a href="${contextPath}/main/main.do"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
+		
+			<c:choose>
+				<c:when test="${0 eq katTargetNo}">
+					<li class="active"><a href="${contextPath}/main/main.do"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${contextPath}/main/main.do"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
+				</c:otherwise>
+			</c:choose>
 			<c:forEach var="item" items="${katlist}">
-				<li><a href="${contextPath}/board/list.do?katNo=${item.kateNo}">${item.kateName}</a></li>
+				<c:choose>
+					<c:when test="${item.kateNo eq katTargetNo}">
+						<li class="active"><a href="${contextPath}/board/list.do?katNo=${item.kateNo}">${item.kateName}</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="${contextPath}/board/list.do?katNo=${item.kateNo}">${item.kateName}</a></li>				
+					</c:otherwise>
+				</c:choose>
 			</c:forEach>
-			<li><a href="${contextPath}/admin/list.do?">공지사항</a></li>
-			<li><a href="${contextPath}/admin/memberlist.do?${item.kateNo}">유저목록</a></li>
+			<c:choose>
+				<c:when test="${1 eq katTargetNo}">
+					<li class="active"><a href="${contextPath}/admin/list.do?katNo=1">공지사항</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${contextPath}/admin/list.do?katNo=1">공지사항</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${1 eq katTargetNo}">
+					<li class="active"><a href="${contextPath}/admin/memberlist.do??katNo=2">유저목록</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${contextPath}/admin/memberlist.do??katNo=2">유저목록</a></li>
+
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
