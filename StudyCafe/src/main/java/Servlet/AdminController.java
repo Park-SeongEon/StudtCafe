@@ -49,9 +49,10 @@ public class AdminController extends HttpServlet {
 		HttpSession session;
 		String action = request.getPathInfo();
 		
-		
 		List<Kategorie> katlist  = katDao.selectAll();
 		request.setAttribute("katlist", katlist);
+		int katNo = Integer.parseInt(request.getParameter("katNo"));
+		request.setAttribute("katTargetNo", katNo);
 
 		try {
 			List<Board> list = null;
@@ -71,7 +72,7 @@ public class AdminController extends HttpServlet {
 			} else if (action.equals("/add.do")){
 				
 			} else if(action.equals("/view.do")){
-				String no = request.getParameter("brdNO");
+				 String no = request.getParameter("brdNO");
 				Board vo = boardDao.selectById(Integer.parseInt(no));
 				request.setAttribute("vo", vo);
 				nextPage = "/view/view.jsp";

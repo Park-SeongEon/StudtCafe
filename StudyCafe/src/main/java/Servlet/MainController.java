@@ -49,9 +49,11 @@ public class MainController extends HttpServlet {
 		HttpSession session;
 		String action = request.getPathInfo();
 
-		
+
 		List<Kategorie> katlist  = katDao.selectAll();
 		request.setAttribute("katlist", katlist);
+		request.setAttribute("katTargetNo", 0);
+
 		
 		try {
 			if(action == null){

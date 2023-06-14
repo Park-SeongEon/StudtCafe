@@ -57,10 +57,13 @@ body {
 #sidebar header a:hover {
   color: #fff;
 }
-
-#sidebar .nav{
-  
+#sidebar .nav li.active{
+	background-color: #597381;
+  	color: #fff;
+	
 }
+
+
 
 #sidebar .nav a{
   background: none;
