@@ -14,10 +14,12 @@
 
 
 -- studycafe 데이터베이스 구조 내보내기
+DROP DATABASE IF EXISTS `studycafe`;
 CREATE DATABASE IF NOT EXISTS `studycafe` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `studycafe`;
 
 -- 테이블 studycafe.board 구조 내보내기
+DROP TABLE IF EXISTS `board`;
 CREATE TABLE IF NOT EXISTS `board` (
   `brd_no` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(500) NOT NULL,
@@ -28,13 +30,33 @@ CREATE TABLE IF NOT EXISTS `board` (
   `vote_no` int(5) NOT NULL DEFAULT 0,
   `cnt` int(5) DEFAULT NULL,
   PRIMARY KEY (`brd_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 테이블 데이터 studycafe.board:~0 rows (대략적) 내보내기
+-- 테이블 데이터 studycafe.board:~18 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
+INSERT INTO `board` (`brd_no`, `title`, `content`, `file_name`, `regDate`, `kate_no`, `vote_no`, `cnt`) VALUES
+	(1, '132', '123', NULL, '2023-06-14', 0, 0, NULL),
+	(2, '132', '123', NULL, '2023-06-14', 0, 0, NULL),
+	(3, '132', '123', NULL, '2023-06-14', 0, 0, NULL),
+	(4, '132', '123', NULL, '2023-06-14', 0, 0, NULL),
+	(5, '132', '123', NULL, '2023-06-14', 0, 0, NULL),
+	(6, '123', '132', NULL, '2023-06-14', 3, 0, NULL),
+	(7, '123', '132', NULL, '2023-06-14', 3, 0, NULL),
+	(8, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(9, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(10, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(11, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(12, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(13, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(14, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(15, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(16, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(17, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL),
+	(18, 'title', 'content', NULL, '2023-06-14', 3, 0, NULL);
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 
 -- 테이블 studycafe.board_comment 구조 내보내기
+DROP TABLE IF EXISTS `board_comment`;
 CREATE TABLE IF NOT EXISTS `board_comment` (
   `parent_no` int(10) NOT NULL,
   `com_no` int(10) NOT NULL,
@@ -49,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `board_comment` (
 /*!40000 ALTER TABLE `board_comment` ENABLE KEYS */;
 
 -- 테이블 studycafe.kategorie 구조 내보내기
+DROP TABLE IF EXISTS `kategorie`;
 CREATE TABLE IF NOT EXISTS `kategorie` (
   `kate_no` int(10) NOT NULL AUTO_INCREMENT,
   `kate_name` varchar(10) NOT NULL,
@@ -64,7 +87,74 @@ INSERT INTO `kategorie` (`kate_no`, `kate_name`, `user_type_cd`) VALUES
 	(3, '게시판', '02');
 /*!40000 ALTER TABLE `kategorie` ENABLE KEYS */;
 
+-- 테이블 studycafe.seat 구조 내보내기
+DROP TABLE IF EXISTS `seat`;
+CREATE TABLE IF NOT EXISTS `seat` (
+  `seat_no` varchar(2) NOT NULL,
+  `seat_comment` varchar(2) NOT NULL DEFAULT '01',
+  `seat_type` varchar(50) NOT NULL DEFAULT '',
+  `user_id` varchar(10) DEFAULT NULL,
+  `regdate` date NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`seat_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 테이블 데이터 studycafe.seat:~21 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `seat` DISABLE KEYS */;
+INSERT INTO `seat` (`seat_no`, `seat_comment`, `seat_type`, `user_id`, `regdate`) VALUES
+	('01', '01', '01', NULL, '2023-06-14'),
+	('02', '01', '01', NULL, '2023-06-14'),
+	('03', '01', '01', NULL, '2023-06-14'),
+	('04', '01', '01', NULL, '2023-06-14'),
+	('05', '01', '01', NULL, '2023-06-14'),
+	('06', '01', '01', NULL, '2023-06-14'),
+	('07', '01', '01', NULL, '2023-06-14'),
+	('08', '01', '01', NULL, '2023-06-14'),
+	('09', '01', '01', NULL, '2023-06-14'),
+	('10', '01', '01', NULL, '2023-06-14'),
+	('11', '01', '01', NULL, '2023-06-14'),
+	('12', '01', '01', NULL, '2023-06-14'),
+	('13', '01', '01', NULL, '2023-06-14'),
+	('14', '01', '01', NULL, '2023-06-14'),
+	('15', '01', '01', NULL, '2023-06-14'),
+	('16', '01', '01', NULL, '2023-06-14'),
+	('17', '01', '01', NULL, '2023-06-14'),
+	('18', '01', '01', NULL, '2023-06-14'),
+	('19', '01', '02', NULL, '2023-06-14'),
+	('20', '01', '02', NULL, '2023-06-14'),
+	('21', '01', '02', NULL, '2023-06-14');
+/*!40000 ALTER TABLE `seat` ENABLE KEYS */;
+
+-- 테이블 studycafe.seat_comment 구조 내보내기
+DROP TABLE IF EXISTS `seat_comment`;
+CREATE TABLE IF NOT EXISTS `seat_comment` (
+  `seat_comment` varchar(2) DEFAULT NULL,
+  `seat_comment_data` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 테이블 데이터 studycafe.seat_comment:~3 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `seat_comment` DISABLE KEYS */;
+INSERT INTO `seat_comment` (`seat_comment`, `seat_comment_data`) VALUES
+	('01', '빈 자리'),
+	('02', '사용중'),
+	('03', '예약');
+/*!40000 ALTER TABLE `seat_comment` ENABLE KEYS */;
+
+-- 테이블 studycafe.seat_type 구조 내보내기
+DROP TABLE IF EXISTS `seat_type`;
+CREATE TABLE IF NOT EXISTS `seat_type` (
+  `seat_type` varchar(2) DEFAULT NULL,
+  `seat_type_name` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 테이블 데이터 studycafe.seat_type:~2 rows (대략적) 내보내기
+/*!40000 ALTER TABLE `seat_type` DISABLE KEYS */;
+INSERT INTO `seat_type` (`seat_type`, `seat_type_name`) VALUES
+	('01', '좌석'),
+	('02', '룸');
+/*!40000 ALTER TABLE `seat_type` ENABLE KEYS */;
+
 -- 테이블 studycafe.user 구조 내보내기
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` varchar(10) NOT NULL,
   `user_pwd` varchar(10) NOT NULL,
@@ -87,6 +177,7 @@ INSERT INTO `user` (`user_id`, `user_pwd`, `user_name`, `user_email`, `user_cp`,
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 -- 테이블 studycafe.user_type_cd 구조 내보내기
+DROP TABLE IF EXISTS `user_type_cd`;
 CREATE TABLE IF NOT EXISTS `user_type_cd` (
   `user_type_cd` varchar(2) NOT NULL,
   `USER_TYPE_NAME` varchar(10) DEFAULT NULL
