@@ -61,7 +61,7 @@ public class AdminController extends HttpServlet {
 				nextPage = "/view/list.jsp";
 			} else if("/main.do".equals(action)) {
 
-;
+
 
 				nextPage = "/view/list.jsp";
 
