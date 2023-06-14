@@ -47,14 +47,20 @@ public class BoardController extends HttpServlet {
 		
 		List<Kategorie> katlist  = katDao.selectAll();
 		request.setAttribute("katlist", katlist);
+<<<<<<< HEAD
 		int katNo = Integer.parseInt(request.getParameter("katNo"));
 		request.setAttribute("katTargetNo", katNo);
 
 
+=======
+
+		
+>>>>>>> master
 		try {
 			List<Board> list = null;
 			
 			if(action == null) {
+				int katNo = Integer.parseInt(request.getParameter("katNo"));
 				
 /*페이징처리
 			int section = Integer.parseInt(((_section == null) ? "1" : _section));
@@ -77,6 +83,8 @@ public class BoardController extends HttpServlet {
 
 				String _section = request.getParameter("setion");
 				String _pageNum = request.getParameter("pageNum");
+
+				int katNo = Integer.parseInt(request.getParameter("katNo"));
 
 				/*
 				int section = Integer.parseInt(((_section == null) ? "1" : _section));
