@@ -11,50 +11,71 @@
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="../css/bootstrap.css">
 <link rel="stylesheet" href="../css/sidebar.css">
-
+<link rel="stylesheet" href="../css/main.css">
 <title>JSP 게시판 웹 사이트</title>
 </head>
 <body>
 	<div id="viewport">
-
+		<!--SideBar  -->
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		<!-- Content -->
 		<div id="content">
-
+			<!--Top  -->
 			<jsp:include page="top.jsp"></jsp:include>
-
 			<div class="container-fluid">
-				<div class="wrapper" style="margin-top: 150px;">
-					<%-- 통계영역 --%>
-					<div class="stats" style="margin-bottom: 50px;">
-						<table>
-							<tbody>
-								<tr>
-									<td class="enf" title="test">
-										<div class="sub-wrapper">
-											<p class="title left-2"></p>
-											<p class="title-1">사용</p>
-											<p class="value-1">
-												<fmt:formatNumber value="${enfCount.enf_yesterday_cnt}"
-													type="number" />
-											</p>
-											<p class="title-2"></p>
-											<p class="value-2">
-												<fmt:formatNumber value="${enfCount.enf_month_cnt}"
-													type="number" />
-											</p>
+				<div class="wrapper" style="text-align:center;margin-top: 10px;">
+					<table style="width:80%">
+						<tr>
+						<c:forEach begin="0" end="8" varStatus="stat">
+							<td>
+								<div class="card">
+									<div class="card-head">
+										<p>좌석 ${stat.count}</p>
+									</div>
+									<div class="card-main">
+										<p>빈자리</p>
+									</div>
+								</div>
+							</td>
+						</c:forEach>
+						</tr>
+						<tr>
+						<c:forEach begin="9" end="17" varStatus="stat">
+							<td>
+								<div class="card">
+									<div class="card-head">
+										<p>좌석 ${stat.count}</p>
+									</div>
+									<div class="card-main">
+										<p>빈자리</p>
+									</div>
+								</div>
+							</td>
+						</c:forEach>
+						</tr>
+					</table>
+					<table style="width:80%">
+						<tr>
+							<c:forEach begin="1" end="3" varStatus="stat">
+								<td>
+									<div class="room">
+										<div class="room-head">
+											<p>룸 ${stat.count}</p>
 										</div>
-									</td>
-									
-								</tr>
-							</tbody>
-						</table>
-					</div>
+										<div class="room-main">
+											<p>빈자리</p>
+										</div>
+									</div>
+								</td>
+							</c:forEach>
+						<tr>
+					</table>
+					<%-- 통계영역 --%>
+					
 				</div>
 			</div>
-		</div>
+		</div><!-- Content End  -->
 	</div>
-
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="../js/bootstrap.js"></script>

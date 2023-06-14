@@ -60,10 +60,11 @@ body {
 #sidebar .nav li.active{
 	background-color: #597381;
   	color: #fff;
-	
+
 }
-
-
+#sidebar .nav li.active a{
+	color : #fff;
+}
 
 #sidebar .nav a{
   background: none;

@@ -11,9 +11,6 @@
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="../css/bootstrap.css">
 <link rel="stylesheet" href="../css/sidebar.css">
-
-
-
 <title>JSP 게시판 웹 사이트</title>
 <style type="text/css">
 a, a:hover {
@@ -23,9 +20,7 @@ a, a:hover {
 </style>
 </head>
 <body>
-
 	<div id="viewport">
-
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		<!-- Content -->
 		<div id="content">
@@ -40,8 +35,8 @@ a, a:hover {
 									<td>
 										<select class="form-control" name="searchField">
 											<option value="0">선택</option>
-											<option value="bbsTitle">제목</option>
-											<option value="userID">작성자</option>
+											<option value="title">제목</option>
+											<option value="user_id">작성자</option>
 										</select>
 									</td>
 									<td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
@@ -90,7 +85,6 @@ a, a:hover {
 			</div>
 		</div>
 	</div>
-
 
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="../js/bootstrap.js"></script>

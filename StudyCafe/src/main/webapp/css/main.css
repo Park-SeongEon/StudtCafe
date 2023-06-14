@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+.card{
+	width: 90%;
+    border: 2px solid rgba(0, 0, 0, .1);
+    flex-direction: column;
+    position: relative;
+    margin-right: 10px; 
+    margin-bottom: 10px;
+}
+.card-head{
+	text-align:center;
+	height: 80%;
+ 	vertical-align : middle;
+	position: relative;
+	font-size: 14px;
+}
+.card-head p{
+	padding: 12px;
+}
+.card-main{
+	font-size: 14px;
+	position: relative;
+	text-align:center;	
+}
+.card-main p {
+	padding: 12px 5px 5px;
+}
+
+.card-footer{
+	text-align:center;
+	top: 20%;
+	font-size: 14px;
+	padding-bottom: 10px
+}
+
+
+.room{
+	width: 97%;
+    border: 2px solid rgba(0, 0, 0, .1);
+    flex-direction: column;
+    position: relative;
+    margin-right: 10px; 
+}
+.room-head{
+	text-align:center;
+	height: 30px;
+ 	vertical-align : middle;
+	position: relative;
+	font-size: 14px;
+}
+.room-head p{
+	padding: 12px;
+}
+.v-main{
+	font-size: 14px;
+	position: relative;
+	text-align:center;	
+}
+.room-main p {
+	padding: 12px 5px 5px;
+}
+
+.room-footer{
+	text-align:center;
+	top: 20%;
+	font-size: 14px;
+	padding-bottom: 10px
+}
