@@ -161,6 +161,7 @@ public class UserDao extends SuperDao{
 
 	}
 
+
 	public void delete(User vo) {
 
 		try {
@@ -177,11 +178,37 @@ public class UserDao extends SuperDao{
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			close();
 		}
-
 		
+	}
+
+	public boolean authenticateUser(String userId, String userPwd) {
+	    boolean isAuthenticated = false;
+	    
+	    try {
+	        Connection conn = getConnection();
+	        String sql = "SELECT * FROM user WHERE user_id = ? AND user_pw = ?";
+	        
+	        PreparedStatement stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, userId);
+	        stmt.setString(2, userPwd);
+	        
+	        ResultSet rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            // 해당 사용자가 존재하고 비밀번호가 일치하는 경우
+	            isAuthenticated = true;
+	        }
+	        
+	        rs.close();
+	        stmt.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        close();
+	    }
+	    
+	    return isAuthenticated;
 	}
 
 	

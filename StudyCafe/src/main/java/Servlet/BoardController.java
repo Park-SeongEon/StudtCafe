@@ -47,14 +47,20 @@ public class BoardController extends HttpServlet {
 		
 		List<Kategorie> katlist  = katDao.selectAll();
 		request.setAttribute("katlist", katlist);
-
+<<<<<<< HEAD
 		int katNo = Integer.parseInt(request.getParameter("katNo"));
 		request.setAttribute("katTargetNo", katNo);
 
+
+=======
+
+		
+>>>>>>> master
 		try {
 			List<Board> list = null;
 			
 			if(action == null) {
+				int katNo = Integer.parseInt(request.getParameter("katNo"));
 				
 /*페이징처리
 			int section = Integer.parseInt(((_section == null) ? "1" : _section));
@@ -68,14 +74,17 @@ public class BoardController extends HttpServlet {
 				map.put("pageNum", pageNum);
 				request.setAttribute("map", map);
 */ 				
-
+	
 				list = boardDao.selectAll(katNo);
 				request.setAttribute("list", list);
 
 				nextPage = "/view/list.jsp";
 			} else if("/list.do".equals(action)) {
+
 				String _section = request.getParameter("setion");
 				String _pageNum = request.getParameter("pageNum");
+
+				int katNo = Integer.parseInt(request.getParameter("katNo"));
 
 				/*
 				int section = Integer.parseInt(((_section == null) ? "1" : _section));
@@ -96,10 +105,20 @@ public class BoardController extends HttpServlet {
 				nextPage = "/view/list.jsp";
 
 			} else if(action.equals("/Form.do")) {
-				nextPage = "/view/Form.jsp";
+				nextPage = "/view/articleForm.jsp";
 				
 			} else if (action.equals("/add.do")){
-				
+				String title = request.getParameter("title");
+				String content = request.getParameter("content");
+				String imageFileName = request.getParameter("imageFileName");
+				System.out.println(title + "," + content);
+
+				Board brd =new Board();
+				brd.setTitle(title);
+				brd.setContent(content);
+				brd.setKateNo(katNo);
+				boardDao.create(brd);
+				nextPage = "/board/list.do";
 			} else if(action.equals("/view.do")){
 				String no = request.getParameter("brdNO");
 				Board vo = boardDao.selectById(Integer.parseInt(no));
