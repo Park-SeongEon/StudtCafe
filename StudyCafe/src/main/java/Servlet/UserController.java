@@ -39,7 +39,7 @@ public class UserController extends HttpServlet {
 
 		String action = request.getPathInfo();		
 		
-		if(action == null || "list.do".equals(action))
+		if(action == null || "login.do".equals(action))
 		{
 			List<User> memList = dao.selectAll();
 			request.setAttribute("memList", memList);
