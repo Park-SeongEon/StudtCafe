@@ -110,6 +110,7 @@ public class BoardController extends HttpServlet {
 				brd.setTitle(title);
 				brd.setContent(content);
 				brd.setKateNo(katNo);
+				
 				boardDao.create(brd);
 				nextPage = "/board/list.do";
 			} else if(action.equals("/view.do")){

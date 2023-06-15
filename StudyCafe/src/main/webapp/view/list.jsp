@@ -10,7 +10,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="../css/bootstrap.css">
-
 <link rel="stylesheet" href="../css/sidebar.css">
 
 
@@ -47,10 +46,11 @@ a, a:hover {
 											<option value="0">선택</option>
 											<option value="bbsTitle">제목</option>
 											<option value="userID">작성자</option>
+											
 										</select>
 									</td>
 									<td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
-									<td><button type="submit" class="btn btn-success">검색</button></td>
+									<td><button type="submit" class="btn btn-dark">검색</button></td>
 								</tr>
 							</table>
 						</form>
@@ -63,13 +63,13 @@ a, a:hover {
 							style="text-align: center; border: 1px solid #dddddd">
 							<thead>
 								<tr>
-									<th style="background-color: #2e8b57; text-align: center;">번호</th>
-									<th style="background-color: #2e8b57; text-align: center;">제목</th>
-									<th style="background-color: #2e8b57; text-align: center;">글내용</th>
-									<th style="background-color: #2e8b57; text-align: center;">작성자</th>
-									<th style="background-color: #2e8b57; text-align: center;">작성일</th>
-									<th style="background-color: #2e8b57; text-align: center;">조회수</th>
-									<th style="background-color: #2e8b57; text-align: center;">추천수👍</th>
+									<th style="background-color: #455A64; text-align: center;">번호</th>
+									<th style="background-color: #455A64; text-align: center;">제목</th>
+									<th style="background-color: #455A64; text-align: center;">글내용</th>
+									<th style="background-color: #455A64; text-align: center;">작성자</th>
+									<th style="background-color: #455A64; text-align: center;">작성일</th>
+									<th style="background-color: #455A64; text-align: center;">조회수</th>
+									<th style="background-color: #455A64; text-align: center;">추천수</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -90,6 +90,10 @@ a, a:hover {
 												<td width="5%">${articleNum.count}</td>
 												<td width="10%">${item.title}</td>
 												<td width="50%">${item.content}</td>
+											<%-- 	<td width="7%">${articleNum.count}</td>
+												<td width="7%">${articleNum.count}</td>
+												<td width="7%">${articleNum.count}</td>
+												<td width="7%">${item.count}</td>  --%>
 										</c:forEach>
 									</c:when>
 								</c:choose>
@@ -99,7 +103,7 @@ a, a:hover {
 				</div>
 			</div>
 			<div class=container style="text-align: center">	
-				<a href="${contextPath}/board/Form.do?katNo=${katTargetNo}" class="btn btn-success pull-right">글쓰기</a>
+				<a href="${contextPath}/board/Form.do?katNo=${katTargetNo}" class="btn btn-success pull-right" >글쓰기</a>				
 			</div>	
 		</div>
 	</div>
