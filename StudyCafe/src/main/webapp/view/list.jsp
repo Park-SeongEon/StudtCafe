@@ -73,34 +73,26 @@ a, a:hover {
 								</tr>
 							</thead>
 							<tbody>
-					
-				
-					
-							<tbody>
-							<c:choose>
-								
-  <c:when test="${list ==null }" >
-    <tr  height="10">
-      <td colspan="4">
-         <p align="center">
-            <b><span style="font-size:9pt;">등록된 글이 없습니다.</span></b>
-        </p>
-      </td>  
-    </tr>
-  </c:when>
-  <c:when test="${list !=null }" >
-    <c:forEach  var="item" items="${list }" varStatus="articleNum" >
-     <tr align="center">
-	<td width="5%">${articleNum.count}</td>
-	<td width="10%">${item.title }</td>
-	<td width="50%">${item.content }</td>
-	
-	
-
-    </c:forEach>
-     </c:when>
-    </c:choose>
-										
+								<c:choose>
+									<c:when test="${list ==null }">
+										<tr height="10">
+											<td colspan="4">
+												<p align="center">
+													<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
+												</p>
+											</td>
+										</tr>
+									</c:when>
+									<c:when test="${list !=null }">
+										<c:forEach var="item" items="${list }" varStatus="articleNum">
+											<tr align="center">
+												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
+												<td width="5%">${articleNum.count}</td>
+												<td width="10%">${item.title }</td>
+												<td width="50%">${item.content}</td>
+										</c:forEach>
+									</c:when>
+								</c:choose>
 							</tbody>
 						</table>
 					</div>
@@ -112,69 +104,6 @@ a, a:hover {
 		</div>
 	</div>
 
-
-=======
-	<jsp:include page="top.jsp"></jsp:include>
-
-	<div class="container">
-		<div class="row">
-			<form method="post" name="search" >
-				<div class="alert alert-info">
-						오늘을 공유해주세요
-				</div>
-				<table class="pull-right">
-					<tr>
-						<td>
-							<select class="form-control" name="searchField">
-								<option value="0">선택</option>
-								<option value="bbsTitle">제목</option>
-								<option value="userID">작성자</option>
-							</select>
-						</td>
-						<td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
-						<td><button type="submit" class="btn btn-success">검색</button></td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div>
-	<br>
-	<div class="container">
-		<div class="row">
-			<table class="active table table-striped"
-				style="text-align: center; border: 1px solid #dddddd">
-				<thead>
-					<tr>
-						<th style="background-color: #2e8b57; text-align: center;">번호</th>
-						<th style="background-color: #2e8b57; text-align: center;">제목</th>
-						<th style="background-color: #2e8b57; text-align: center;">작성자</th>
-						<th style="background-color: #2e8b57; text-align: center;">작성일</th>
-						<th style="background-color: #2e8b57; text-align: center;">조회수</th>
-						<th style="background-color: #2e8b57; text-align: center;">추천수👍</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:choose>
-					<c:when test="${empty list}">
-						<tr>
-							<td colspan="4">
-								<p align="center">
-									<b><span style="font-size: 9pt;"></span></b>
-								</p>
-							</td>
-						</tr>
-					</c:when>
-						<c:when test="${!empty list}">
-							<c:forEach var="item" items="${list}">
-							
-							</c:forEach>
-						</c:when>
-					</c:choose>
-				</tbody>
-			</table>
-		</div>
-	</div>
->>>>>>> master
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
 </body>

@@ -47,18 +47,23 @@ public class UserController extends HttpServlet {
 			
 		} else if (action.equals("/save.do")){
 			User vo = new User();
+			// 회원 가입
+			
+			
+			
+			//
 			nextPage = "/main/main.do";
 		}else if(action.equals("/join.do")) {
 			nextPage = "/view/join.jsp";
 		} else if(action.equals("/mod.do")) {
 			User vo = new User();
 
-			dao.update(vo);
+//			dao.update(vo);
 			nextPage = "/member/list.do";			
 		} else if(action.equals("/del.do")) {
 			String id = request.getParameter("id");
 			User vo = dao.selectById(id);
-			request.setAttribute("msg", "del");
+
 			nextPage = "/member/list.do";			
 		} else if("/login.do".equals(action)){
 	        String userID = request.getParameter("userID");

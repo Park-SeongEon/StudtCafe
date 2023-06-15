@@ -50,19 +50,14 @@ public class BoardController extends HttpServlet {
 
 		int katNo = Integer.parseInt(request.getParameter("katNo"));
 		request.setAttribute("katTargetNo", katNo);
-
-
-
-
 		
-
 		try {
 			List<Board> list = null;
 			
 			if(action == null) {
 				
-/*페이징처리
-			int section = Integer.parseInt(((_section == null) ? "1" : _section));
+				/*페이징처리
+				int section = Integer.parseInt(((_section == null) ? "1" : _section));
 				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 				
 				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
@@ -72,7 +67,7 @@ public class BoardController extends HttpServlet {
 				map.put("section", section);
 				map.put("pageNum", pageNum);
 				request.setAttribute("map", map);
-*/ 				
+				 */ 				
 	
 				list = boardDao.selectAll(katNo);
 				request.setAttribute("list", list);
