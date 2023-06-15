@@ -68,7 +68,6 @@ a, a:hover {
 									<th style="background-color: #455A64; text-align: center;">글내용</th>
 									<th style="background-color: #455A64; text-align: center;">작성자</th>
 									<th style="background-color: #455A64; text-align: center;">작성일</th>
-									<th style="background-color: #455A64; text-align: center;">조회수</th>
 									<th style="background-color: #455A64; text-align: center;">추천수</th>
 								</tr>
 							</thead>
@@ -88,12 +87,13 @@ a, a:hover {
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
 												<td width="5%">${articleNum.count}</td>
-												<td width="10%">${item.title}</td>
+												<td width="10%"><a href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
 												<td width="50%">${item.content}</td>
-											<%-- 	<td width="7%">${articleNum.count}</td>
-												<td width="7%">${articleNum.count}</td>
-												<td width="7%">${articleNum.count}</td>
-												<td width="7%">${item.count}</td>  --%>
+												<td width="10%">${item.cnt}</td>
+												<td width="10%">${item.regDate}</td>
+												<td width="10%">${item.voteNo}</td>
+												
+												  
 										</c:forEach>
 									</c:when>
 								</c:choose>

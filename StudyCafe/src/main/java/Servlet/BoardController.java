@@ -114,7 +114,7 @@ public class BoardController extends HttpServlet {
 				boardDao.create(brd);
 				nextPage = "/board/list.do";
 			} else if(action.equals("/view.do")){
-				String no = request.getParameter("brdNO");
+				String no = request.getParameter("brdNo");
 				Board vo = boardDao.selectById(Integer.parseInt(no));
 				request.setAttribute("vo", vo);
 				nextPage = "/view/view.jsp";
