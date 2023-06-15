@@ -47,8 +47,24 @@ public class UserController extends HttpServlet {
 			
 		} else if (action.equals("/save.do")){
 			User vo = new User();
-			// 회원 가입 여기에 넣어주세요
-			
+			// 회원 가입
+			 String userID = request.getParameter("userID");
+		     String userPW = request.getParameter("userPW");
+		     String name = request.getParameter("name");
+		     String tel = request.getParameter("tel");
+		     String email = request.getParameter("email");
+		     String user_addr = request.getParameter("user_addr");
+		    
+		
+			User user = new User();
+			user.setUserId(userID);
+			user.setUserPwd(userPW);
+			user.setUserEmail(email);
+			user.setUserName(name);
+			user.setUserAddr(user_addr);
+			user.setUserCp(tel);
+		
+			dao.create(user);
 			
 			
 			//
