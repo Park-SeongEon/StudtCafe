@@ -43,6 +43,8 @@ a, a:hover {
 				        <form name="articleForm" method="post"   action="${contextPath}/board/add.do?katNo=${katTargetNo}"   enctype="multipart/form-data">
 				          <div class="row">
 				            <div class="col-md-6 mb-3">
+				            
+				 
 				              <label for="name">제목</label>
 				              <input type="text" class="form-control" id="name" placeholder="" value="" required>
  
@@ -52,7 +54,11 @@ a, a:hover {
 				
 				          <div class="mb-3">
 				            <label for="address2">글쓰기<span class="text-muted">&nbsp;(필수 아님)</span></label>
-				            <input size="100" type="text" class="form-control" id="address2" placeholder="게시판을 입력해주세요.">
+				            
+				            <tr>
+							<td><textarea class="form-control" placeholder="글 내용" name="bbsContent" maxlength="2048" ></textarea></td>					
+							</tr>
+				           
 				          </div>
 				
 				          <hr class="mb-4">
@@ -62,6 +68,9 @@ a, a:hover {
 				          
 				          <button class="btn btn-success pull-right"  type="submit">작성</button>
 				  		  <input type="hidden" size="67"  maxlength="500" name="katNo" value="${katTargetNo}" />
+				  		  
+				  		  <button class="btn btn-success pull-right"  type="button">목록보기</button>
+				  		  <input type="hidden" size="67"  maxlength="500" name="katNo" value="${katTargetNo}" onClick="backToList(this.form)" />
 				        	
 				        </form>
 				      </div>
