@@ -17,7 +17,7 @@ public class SeatDao extends SuperDao{
 
 	}
 
-	public List<Seat> selectAll(int katNo) {
+	public List<Seat> selectAll() {
 
 		List<Seat> list = new ArrayList<>();
 
@@ -32,7 +32,6 @@ public class SeatDao extends SuperDao{
 					+ "	INNER JOIN seat_comment c ON(s.seat_comment = c.seat_comment)";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, katNo);
 			ResultSet re = stmt.executeQuery();
 			while (re.next()) {
 				Seat vo = new Seat();

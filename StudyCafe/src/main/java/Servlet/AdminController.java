@@ -53,6 +53,8 @@ public class AdminController extends HttpServlet {
 		List<Kategorie> katlist  = katDao.selectAll();
 		request.setAttribute("katlist", katlist);
 
+		
+		
 		try {
 			List<Board> list = null;
 			

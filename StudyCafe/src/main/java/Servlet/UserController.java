@@ -47,7 +47,7 @@ public class UserController extends HttpServlet {
 			
 		} else if (action.equals("/save.do")){
 			User vo = new User();
-			// 회원 가입
+			// 회원 가입 여기에 넣어주세요
 			
 			
 			
@@ -60,7 +60,7 @@ public class UserController extends HttpServlet {
 
 //			dao.update(vo);
 			nextPage = "/member/list.do";			
-		} else if(action.equals("/del.do")) {
+		} else if(action.equals("/del.do")) { // 회원 삭제부분 여기에 추가
 			String id = request.getParameter("id");
 			User vo = dao.selectById(id);
 
@@ -74,8 +74,8 @@ public class UserController extends HttpServlet {
 	        
 	        if (isAuthenticated) {
 	            // 로그인 성공
-	            request.getSession().setAttribute("userID", userID);
-	            response.sendRedirect(request.getContextPath() + "/main/main.do");
+	            request.getSession().setAttribute("userId", userID);
+	            //response.sendRedirect(request.getContextPath() + "/main/main.do");
 	            nextPage="/main/main.do";
 
 	        } else {

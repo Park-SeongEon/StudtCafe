@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%><%@ taglib prefix="fmt"
-	uri="http://java.sun.com/jsp/jstl/fmt"%><%@ taglib prefix="c"
-	uri="http://java.sun.com/jsp/jstl/core"%><c:set var="contextPath"
-	value="${pageContext.request.contextPath}" />
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -110,11 +111,10 @@
 			}
 		}
 	}
-
 </script>
 </head>
 <body>
-	<form name="joinForm" method="post" action="/member/save.do">
+	<form name="joinForm" method="post" action="${contextPath}/member/save.do">
 		<input type="hidden" name="checkID" value="no" />
 		<!--중복검사를 위한 위해 checkID변수에 no라는 값을 입력-->
 		<div class="joinBox">
@@ -161,7 +161,6 @@
 					<td><input type="text" name="email" size="30" maxlength="40" /></td>
 				</tr>
 			</table>
-			</table>
 			<div class="btnZone">
 				<input type="button" onClick="verify(this.form);" class="btnOk"
 					value="확인"> <input type="button" onClick="history.go(-1);"
@@ -171,4 +170,3 @@
 	</form>
 </body>
 </html>
-​

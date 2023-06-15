@@ -37,7 +37,7 @@
 				</c:otherwise>
 			</c:choose>
 			<c:choose>
-				<c:when test="${1 eq katTargetNo}">
+				<c:when test="${2 eq katTargetNo}">
 					<li class="active"><a href="${contextPath}/admin/memberlist.do??katNo=2">유저목록</a></li>
 				</c:when>
 				<c:otherwise>

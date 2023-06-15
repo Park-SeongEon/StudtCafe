@@ -17,21 +17,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dao.BoardDao;
 import dao.KateDao;
+import dao.SeatDao;
 import model.Board;
 import model.Kategorie;
+import model.Seat;
+import service.MainService;
 
 @WebServlet("/main/*")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String ARTICEL_IMAGE_REPO = "D:\\file_repo";
 	
-	BoardDao boardDao;
-	KateDao katDao;
-
+	private MainService mainService;
 	
 	public void init(ServletConfig config) throws ServletException {
-		boardDao = new BoardDao();
-		katDao = new KateDao();
+		mainService = new MainService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
@@ -50,15 +50,22 @@ public class MainController extends HttpServlet {
 		String action = request.getPathInfo();
 
 		
-		List<Kategorie> katlist  = katDao.selectAll();
-		request.setAttribute("katlist", katlist);
+		List<Kategorie> katlist  = mainService.getMenu();
+		request.setAttribute("katlist", katlist);		
+
+		request.setAttribute("katTargetNo", 0);
+
 		
-		try {
+		try {			
 			if(action == null){
+				
+				List<Seat> list = mainService.getSeatList();
+				request.setAttribute("list", list);
 				nextPage = "/view/main.jsp";
-			
 			}
-			if("/main.do".equals(action)) {
+			else if("/main.do".equals(action)) {
+				List<Seat> list = mainService.getSeatList();
+				request.setAttribute("list", list);
 				nextPage = "/view/main.jsp";
 			} 
 

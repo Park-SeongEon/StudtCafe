@@ -26,28 +26,28 @@
 				<div class="wrapper" style="text-align:center;margin-top: 10px;">
 					<table style="width:80%">
 						<tr>
-						<c:forEach begin="0" end="8" varStatus="stat">
+						<c:forEach items="${list}" var="item" begin="0" end="8" varStatus="stat">
 							<td>
 								<div class="card">
 									<div class="card-head">
-										<p>좌석 ${stat.count}</p>
+										<p>${item.seatTypeName} ${item.seatNo}</p>
 									</div>
 									<div class="card-main">
-										<p>빈자리</p>
+										<p>${item.seatCommentData}</p>
 									</div>
 								</div>
 							</td>
 						</c:forEach>
 						</tr>
 						<tr>
-						<c:forEach begin="9" end="17" varStatus="stat">
+						<c:forEach items="${list}" var="item" begin="9" end="17" varStatus="stat">
 							<td>
 								<div class="card">
 									<div class="card-head">
-										<p>좌석 ${stat.count}</p>
+										<p>${item.seatTypeName} ${item.seatNo}</p>
 									</div>
 									<div class="card-main">
-										<p>빈자리</p>
+										<p>${item.seatCommentData}</p>
 									</div>
 								</div>
 							</td>
@@ -56,14 +56,14 @@
 					</table>
 					<table style="width:80%">
 						<tr>
-							<c:forEach begin="1" end="3" varStatus="stat">
+							<c:forEach items="${list}" var="item" begin="18" end="21" varStatus="stat">
 								<td>
 									<div class="room">
 										<div class="room-head">
-											<p>룸 ${stat.count}</p>
+											<p>${item.seatTypeName} ${item.seatNo}</p>
 										</div>
 										<div class="room-main">
-											<p>빈자리</p>
+											<p>${item.seatCommentData}</p>
 										</div>
 									</div>
 								</td>

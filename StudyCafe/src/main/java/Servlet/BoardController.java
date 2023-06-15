@@ -117,20 +117,20 @@ public class BoardController extends HttpServlet {
 				Board vo = boardDao.selectById(Integer.parseInt(no));
 				request.setAttribute("vo", vo);
 				nextPage = "/view/view.jsp";
-			} else if(action.equals("/mod.do")) {
+			} else if(action.equals("/mod.do")) {// 글 수정 부분 여기에 추가해 주세요
 
 
 				return;
-			} else if(action.equals("/remove.do")){
+			} else if(action.equals("/remove.do")){ // 글 삭제 부분 여기에 추가해 주세요
 				
 				
 				String str = request.getParameter("brdNo");
 				int brdNo = Integer.parseInt(str);
 				boardDao.delete(brdNo);
 				return;
-			} else if (action.equals("/replyForm.do")) {
+			} else if (action.equals("/replyForm.do")) {// 댓글 쓰는 기능 여기에 추가해 주세요
 				
-			} else if (action.equals("/addReply.do")) {
+			} else if (action.equals("/addReply.do")) {	//댓글 추가 부분 여기에 추가해주세요
 				return;
 			}
 
