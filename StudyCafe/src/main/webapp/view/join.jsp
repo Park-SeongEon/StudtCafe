@@ -12,7 +12,39 @@
 <meta name="Description" content="">
 <title>회원가입</title>
 <link rel="stylesheet" href="../css/join.css" />
-<script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function execDaumPostcode() {
+            daum.postcode.load(function () {
+                new daum.Postcode({
+                    oncomplete: function (data) {
+                        var fullAddr = data.address; // 최종 주소 변수
+                        var extraAddr = ''; // 조합형 주소 변수
+
+                        // 기본 주소와 조합형 주소를 동일하게 설정
+                        document.getElementById("user_addr").value = fullAddr;
+
+                        // 기본 주소가 도로명 타입일 때 조합형 주소 설정
+                        if (data.addressType === 'R') {
+                            // 법정동명이 있을 경우 추가
+                            if (data.bname !== '') {
+                                extraAddr += data.bname;
+                            }
+                            // 건물명이 있을 경우 추가
+                            if (data.buildingName !== '') {
+                                extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                            }
+                            // 조합형 주소를 추가
+                            fullAddr += ' (' + extraAddr + ')';
+                        }
+
+                        // 주소 정보 입력 필드에 값 설정
+                        document.getElementById("user_addr").value = fullAddr;
+                    }
+                }).open();
+            });
+        }
+
 	function join() {
 		var form = document.joinForm;
 
@@ -52,11 +84,6 @@
 			return;
 		}
 		
-		if (form.checkID.value === "no") {
-			alert("아이디 중복 검사를 진행해주세요.");
-			form.userID.focus();
-			return;
-		}
 
 		form.submit();
 	}
@@ -142,8 +169,11 @@
 					<td><input type="text" name="email" size="30" maxlength="40" /></td>
 				</tr>
 				<tr>
-					<th>주소</th>
-					<td><input type="text" name="user_addr" size="30" maxlength="40" /></td>
+					 <th>주소</th>
+                <td>
+                    <input type="text" id="user_addr" placeholder="주소" size="60">
+                    <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                </td>
 				</tr>
 			</table>
 			<div class="btnZone">
