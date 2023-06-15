@@ -15,6 +15,4 @@ public class Seat {
 	String seatTypeName;
 
 	String UserId;
-	
-	
 }
