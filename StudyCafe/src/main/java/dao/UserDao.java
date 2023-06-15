@@ -27,7 +27,7 @@ public class UserDao extends SuperDao{
 			while (re.next()) {
 				User vo = new User();
 				vo.setUserId(re.getString("user_id"));
-				vo.setUserPwd(re.getString("user_pw"));
+				vo.setUserPwd(re.getString("user_pwd"));
 				vo.setUserName(re.getString("user_name"));
 				vo.setUserEmail(re.getString("user_email"));
 				vo.setUserCp(re.getString("user_cp"));
@@ -64,7 +64,7 @@ public class UserDao extends SuperDao{
 			while (re.next()) {
 				vo = new User();
 				vo.setUserId(re.getString("user_id"));
-				vo.setUserPwd(re.getString("user_pw"));
+				vo.setUserPwd(re.getString("user_pwd"));
 				vo.setUserName(re.getString("user_name"));
 				vo.setUserEmail(re.getString("user_email"));
 				vo.setUserCp(re.getString("user_cp"));
@@ -91,7 +91,7 @@ public class UserDao extends SuperDao{
 
 		try {
 			Connection conn = getConnection();
-			String sql = "insert into user(user_id,user_name,user_pw,user_addr,user_DAddr,user_cp) values(?,?,?,?,?,?)";
+			String sql = "insert into user(user_id,user_name,user_pwd,user_addr,user_DAddr,user_cp) values(?,?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -118,7 +118,7 @@ public class UserDao extends SuperDao{
 			Connection conn = getConnection();
 			
 
-			String sql = "update user set  user_name = ?,user_pw = ?, user_addr = ?,user_DAddr = ?, user_cp= ?, user_grade = ? where user_id=? ";
+			String sql = "update user set  user_name = ?,user_pwd = ?, user_addr = ?,user_DAddr = ?, user_cp= ?, user_grade = ? where user_id=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getUserName());
@@ -187,7 +187,7 @@ public class UserDao extends SuperDao{
 	    
 	    try {
 	        Connection conn = getConnection();
-	        String sql = "SELECT * FROM user WHERE user_id = ? AND user_pw = ?";
+	        String sql = "SELECT * FROM user WHERE user_id = ? AND user_pwd = ?";
 	        
 	        PreparedStatement stmt = conn.prepareStatement(sql);
 	        stmt.setString(1, userId);
