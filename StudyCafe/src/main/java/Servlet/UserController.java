@@ -39,27 +39,17 @@ public class UserController extends HttpServlet {
 
 		String action = request.getPathInfo();		
 		
-		if(action == null || "login.do".equals(action))
+		if(action == null || "list.do".equals(action))
 		{
 			List<User> memList = dao.selectAll();
 			request.setAttribute("memList", memList);
-			nextPage = "/view/member.jsp";
+			nextPage = "/view/login.jsp";
 			
-		} else if (action.equals("/add.do")){
+		} else if (action.equals("/save.do")){
 			User vo = new User();
-
-			
-
-			nextPage = "/member/list.do";
-			
-		} else if(action.equals("/memberForm.do")) {
-			nextPage = "/view/memberForm.jsp";
-			
-		}else if(action.equals("/modForm.do")) {
-			String id = request.getParameter("id");
-			User vo = dao.selectById(id);
-			request.setAttribute("info", vo);
-			nextPage = "/view/modMemberForm.jsp";
+			nextPage = "/main/main.do";
+		}else if(action.equals("/join.do")) {
+			nextPage = "/view/join.jsp";
 		} else if(action.equals("/mod.do")) {
 			User vo = new User();
 
