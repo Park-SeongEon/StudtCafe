@@ -53,7 +53,7 @@ public class UserController extends HttpServlet {
 		     String name = request.getParameter("name");
 		     String tel = request.getParameter("tel");
 		     String email = request.getParameter("email");
-		     String user_addr = request.getParameter("user_addr");
+		     String address = request.getParameter("address");
 		    
 		
 			User user = new User();
@@ -61,7 +61,7 @@ public class UserController extends HttpServlet {
 			user.setUserPwd(userPW);
 			user.setUserEmail(email);
 			user.setUserName(name);
-			user.setUserAddr(user_addr);
+			user.setUserAddr(address);
 			user.setUserCp(tel);
 		
 			dao.create(user);
