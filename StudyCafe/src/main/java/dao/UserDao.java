@@ -211,7 +211,32 @@ public class UserDao extends SuperDao{
 	    return isAuthenticated;
 	}
 
-	
-	
+	public boolean idCheck(String userId) {
+	    boolean isAuthenticated = false;
+	    
+	    try {
+	        Connection conn = getConnection();
+	        String sql = "SELECT * FROM user WHERE user_id = ?";
+	        
+	        PreparedStatement stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, userId);
+	        
+	        ResultSet rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            // 해당 사용자가 존재하고 비밀번호가 일치하는 경우
+	            isAuthenticated = true;
+	        }
+	        
+	        rs.close();
+	        stmt.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        close();
+	    }
+	    
+	    return isAuthenticated;
+	}
 
 }

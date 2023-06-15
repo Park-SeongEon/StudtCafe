@@ -4,9 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-
+${session.userId}
 		<c:choose>
-			<c:when test="${empty session.userId }">
+			<c:when test="${empty userId }">
 				<nav class="navbar navbar-default">
 					<div class="container-fluid">
 						<ul class="nav navbar-nav navbar-right">
@@ -17,12 +17,12 @@
 					</div>
 				</nav>
 			</c:when>
-			<c:when test="${!empty session.userId }">
+			<c:when test="${!empty userId }">
 				<nav class="navbar navbar-default">
 					<div class="container-fluid">
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="#"><i class="zmdi zmdi-notifications text-danger"></i> </a></li>
-							<li><a href="#">${session.userId}</a></li>
+							<li><a href="#">${userId}</a></li>
 						</ul>
 					</div>
 				</nav>

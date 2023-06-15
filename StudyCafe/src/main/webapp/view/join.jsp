@@ -33,9 +33,9 @@
 		}
 
 		// 비밀번호 유효성 검사 로직 추가
-		var passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		var passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
 		if (!passwordRegex.test(form.userPW.value)) {
-			alert("비밀번호는 8자리 이상이어야 하며, 대문자/소문자/숫자/특수문자 모두 포함해야 합니다.");
+			alert("비밀번호는 8자리 이상이어야 하며, 영문/숫자 모두 포함해야 합니다.");
 			form.userPW.focus();
 			return;
 		}
@@ -63,29 +63,40 @@
 
 	function CheckDup() {
 		var form = document.joinForm;
+
 		if (!form.userID.value) {
 			alert("아이디를 입력해주세요.");
 			form.userID.focus();
 			return;
 		}
 
-		var xhr = new XMLHttpRequest();
-		xhr.open("GET", "${contextPath}/checkId?id=" + form.userID.value, true);
-		xhr.send();
-
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-				var result = xhr.responseText.trim();
-				alert(result);
-				if (result === "사용 가능한 아이디입니다.") {
-					form.checkID.value = "yes";
-					form.userID.readOnly = true;
-				} else {
-					form.checkID.value = "no";
-					form.userID.readOnly = false;
+		$.ajax({
+			url:"/member/checkId.do",		// servlet 
+			type: "post",
+			datatype:"text",
+			data: {"userId" : form.userID.value},
+			success:function(data){
+				//alert("s");
+				//int, string, 다수의 데이터
+				
+				//var data = JSON.parse(obj);
+				//console.log(data.id);
+				//alert(json.str);
+				/* var data = JSON.parse(json.map);
+				alert(data); */
+				//alert(json.map.title);
+				if(data === 'success'){
+					$('input[name=checkID]').val("ok");
+					alert("사용 가능한 아이디입니다.")
 				}
+				else {
+					alert("사용 불가능한 아이디입니다.")					
+				}
+			},
+			error:function(){
+				alert("error");
 			}
-		};
+		})
 	}
 </script>
 </head>
@@ -111,7 +122,7 @@
 				<tr>
 					<th><span class="blet">*</span> 비밀번호</th>
 					<td><input type="password" name="userPW" size="20" maxlength="16" />
-						<span class="f12 fC666">※ 8~16글자의 영어 또는 숫자 혼용</span>
+						<span class="f12 fC666">※ 8~16글자의 영어, 숫자 혼용</span>
 					</td>
 				</tr>
 				<tr>
@@ -141,5 +152,8 @@
 			</div>
 		</div>
 	</form>
+	
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="../js/bootstrap.js"></script>
 </body>
 </html>

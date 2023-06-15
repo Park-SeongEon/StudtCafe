@@ -1,11 +1,7 @@
 package Servlet;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -15,10 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import dao.BoardDao;
-import dao.KateDao;
-import dao.SeatDao;
-import model.Board;
+
 import model.Kategorie;
 import model.Seat;
 import service.MainService;
@@ -50,6 +43,7 @@ public class MainController extends HttpServlet {
 		String action = request.getPathInfo();
 
 		
+		
 		List<Kategorie> katlist  = mainService.getMenu();
 		request.setAttribute("katlist", katlist);		
 
@@ -62,12 +56,13 @@ public class MainController extends HttpServlet {
 				List<Seat> list = mainService.getSeatList();
 				request.setAttribute("list", list);
 				nextPage = "/view/main.jsp";
-			}
-			else if("/main.do".equals(action)) {
+			} else if("/main.do".equals(action)) {
 				List<Seat> list = mainService.getSeatList();
 				request.setAttribute("list", list);
 				nextPage = "/view/main.jsp";
-			} 
+			} else if(action.equals("/change.do")){
+				
+			}
 
 			RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 			dis.forward(request, response);

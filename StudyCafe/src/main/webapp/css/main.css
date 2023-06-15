@@ -8,6 +8,11 @@
     margin-right: 10px; 
     margin-bottom: 10px;
 }
+
+.card.active{
+	background-color: #cccccc;
+}
+
 .card-head{
 	text-align:center;
 	height: 80%;

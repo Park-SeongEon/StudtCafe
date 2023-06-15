@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -133,7 +132,6 @@ public class CommentDao extends SuperDao{
 		try {
 			Connection conn = getConnection();
 			
-
 			String sql = "delete from board where com_no=?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -146,8 +144,6 @@ public class CommentDao extends SuperDao{
 		}finally {
 			close();
 		}
-
-		
 	}
 
 	
