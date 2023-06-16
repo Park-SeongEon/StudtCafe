@@ -115,9 +115,15 @@
 				if(data === 'success'){
 					$('input[name=checkID]').val("ok");
 					alert("사용 가능한 아이디입니다.")
+					$('#message').text('사용할 수 있는 ID입니다.')   
+					$('#message').css('color','green')
+					
 				}
 				else {
-					alert("사용 불가능한 아이디입니다.")					
+					alert("사용 불가능한 아이디입니다.")
+					$('#message').text('이미 사용 중인 아이디입니다.')
+					$('#message').css('color','red')
+					
 				}
 			},
 			error:function(){
@@ -133,7 +139,7 @@
 		<div class="joinBox">
 			<h1 class="tit">회원가입</h1>
 			<div class="AlignRight MAT30">
-					<span class="blet">* </span>표시는 필수입니다.
+				<span class="blet">* </span>표시는 필수입니다.
 			</div>
 			<table class="table_row W100P MAT10">
 				<colgroup>
@@ -142,8 +148,10 @@
 				</colgroup>
 				<tr>
 					<th><span class="blet">*</span> 아이디</th>
-					<td><input type="text" name="userID" size="20" maxlength="16" />
+					<td>
+						<input type="text" name="userID" size="20" maxlength="16" />
 						<input type="button" value="중복 검사" onClick="CheckDup();" class="btnDup">
+						<div id='message'></div>	
 					</td>
 				</tr>
 				<tr>
@@ -172,7 +180,7 @@
 					 <th>주소</th>
                 <td>
                     <input type="text" id="user_addr" placeholder="주소" size="60">
-                    <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                    <input type="button" onclick="execDaumPostcode()" value="주소 찾기"><br>
                 </td>
 				</tr>
 			</table>

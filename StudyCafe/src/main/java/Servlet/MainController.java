@@ -62,6 +62,11 @@ public class MainController extends HttpServlet {
 				nextPage = "/view/main.jsp";
 			} else if(action.equals("/change.do")){
 				
+				int katNo = Integer.parseInt(request.getParameter("userId"));
+				request.setAttribute("katTargetNo", katNo);
+
+				
+				return;
 			}
 
 			RequestDispatcher dis = request.getRequestDispatcher(nextPage);

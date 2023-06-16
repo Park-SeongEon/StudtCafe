@@ -12,10 +12,10 @@
 		<ul class="nav">
 			<c:choose>
 				<c:when test="${0 eq katTargetNo}">
-					<li class="active"><a href="${contextPath}/main/main.do"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
+					<li class="active"><a class="eng" href="${contextPath}/main/main.do"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="${contextPath}/main/main.do"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
+					<li><a class="eng" href="${contextPath}/main/main.do"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
 				</c:otherwise>
 			</c:choose>
 			<c:forEach var="item" items="${katlist}">

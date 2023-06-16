@@ -1,84 +1,113 @@
 @charset "UTF-8";
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+@import
+	url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
 
+@font-face { /* 애플산돌고딕 폰트 적용 */
+	font-family: "Montothic2";
+	src: url("../fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+	font-weight: normal;
+} /* 이후 "SDGothic"으로 폰트 적용 가능 */
+@font-face { /* 애플산돌고딕 폰트 적용 */
+	font-family: "	";
+	src: url("../fonts/D2CodingBold-Ver1.3.2-20180524-ligature.ttf")
+		format("truetype");
+	font-weight: normal;
+} /* 이후 "SDGothic"으로 폰트 적용 가능 */
 body {
-  overflow-x: hidden;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+	overflow-x: hidden;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
 }
 
 /* Toggle Styles */
-
 #viewport {
-  padding-left: 250px;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+	padding-left: 250px;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
 
 #content {
-  width: 100%;
-  position: relative;
-  margin-right: 0;
+	width: 100%;
+	position: relative;
+	margin-right: 0;
 }
 
 /* Sidebar Styles */
-
 #sidebar {
-  z-index: 1000;
-  position: fixed;
-  left: 250px;
-  width: 250px;
-  height: 100%;
-  margin-left: -250px;
-  overflow-y: auto;
-  background: #37474F;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+	z-index: 1000;
+	position: fixed;
+	left: 250px;
+	width: 250px;
+	height: 100%;
+	margin-left: -250px;
+	overflow-y: auto;
+	background: #d25c78;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
 
 #sidebar header {
-  background-color: #263238;
-  font-size: 20px;
-  line-height: 52px;
-  text-align: center;
+	background-color: #be3455;
+	font-size: 20px;
+	line-height: 52px;
+	text-align: center;
 }
 
 #sidebar header a {
-  color: #fff;
-  display: block;
-  text-decoration: none;
+	color: #fff;
+	display: block;
+	text-decoration: none;
+	font-family: 'Montothic2', serif;
 }
 
 #sidebar header a:hover {
-  color: #fff;
-}
-#sidebar .nav li.active{
-	background-color: #597381;
-  	color: #fff;
-
-}
-#sidebar .nav li.active a{
-	color : #fff;
+	color: #fff;
 }
 
-#sidebar .nav a{
-  background: none;
-  border-bottom: 1px solid #455A64;
-  color: #CFD8DC;
-  font-size: 14px;
-  padding: 16px 24px;
+#sidebar .nav li.active {
+	background-color: #b0425c;
+	color: #fff;
 }
 
-#sidebar .nav a:hover{
-  background: none;
-  color: #ECEFF1;
+#sidebar .nav li.active a {
+	color: #fff;
 }
 
-#sidebar .nav a i{
-  margin-right: 16px;
+#sidebar .nav li.active a.eng {
+	color: #fff;
+	font-family: 'Montothic2', serif;
+}
+
+
+#sidebar .nav a {
+	background: none;
+	border-bottom: 1px solid #455A64;
+	color: #fff;
+	font-size: 14px;
+	padding: 16px 24px;
+}
+
+#sidebar .nav a.eng {
+	background: none;
+	border-bottom: 1px solid #455A64;
+	color: #fff;
+	font-size: 14px;
+	padding: 16px 24px;
+	font-family: 'Montothic2', serif;
+}
+
+#sidebar .n
+
+#sidebar .nav a:hover {
+	background: none;
+	color: #ECEFF1;
+}
+
+#sidebar .nav a i {
+	margin-right: 16px;
 }

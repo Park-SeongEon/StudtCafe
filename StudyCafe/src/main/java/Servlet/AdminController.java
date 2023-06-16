@@ -78,12 +78,8 @@ public class AdminController extends HttpServlet {
 				request.setAttribute("vo", vo);
 				nextPage = "/view/view.jsp";
 			} else if(action.equals("/mod.do")) {
-
-
 				return;
 			} else if(action.equals("/remove.do")){
-				
-				
 				String str = request.getParameter("brdNo");
 				int brdNo = Integer.parseInt(str);
 				boardDao.delete(brdNo);

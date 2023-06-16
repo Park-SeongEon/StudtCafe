@@ -30,7 +30,7 @@ a, a:hover {
 			<jsp:include page="top.jsp"></jsp:include>
 			<div class="main_back">
 				<div class="container">
-					<h1>게시판</h1>
+					<h1 style="font-family: namum">게시판</h1>
 					<div >
 						<form method="post" name="search">
 							<table class="pull-right">
@@ -59,12 +59,12 @@ a, a:hover {
 							style="text-align: center; border: 1px solid #dddddd">
 							<thead>
 								<tr>
-									<th style="background-color: #455A64;color:#CFD8DC;text-align: center;">번호</th>
-									<th style="background-color: #455A64;color:#CFD8DC ;text-align: center;">제목</th>
-									<th style="background-color: #455A64;color:#CFD8DC ;text-align: center;">글내용</th>
-									<th style="background-color: #455A64;color:#CFD8DC ;text-align: center;">작성자</th>
-									<th style="background-color: #455A64;color:#CFD8DC ;text-align: center;">작성일</th>
-									<th style="background-color: #455A64;color:#CFD8DC ;text-align: center;">추천수</th>
+									<th style="background-color: #36464E;color:#fff; text-align: center;">번호</th>
+									<th style="background-color: #36464E;color:#fff; text-align: center;">제목</th>
+									<th style="background-color: #36464E;color:#fff; text-align: center;">글내용</th>
+									<th style="background-color: #36464E;color:#fff; text-align: center;">작성자</th>
+									<th style="background-color: #36464E;color:#fff; text-align: center;">작성일</th>
+									<th style="background-color: #36464E;color:#fff; text-align: center;">추천수</th>
 								</tr>
 							</thead>
 							<tbody>

@@ -74,6 +74,7 @@
 					
 				</div>
 			</div>
+			<input type="hidden" name="userId" value="${userId}">
 		</div><!-- Content End  -->
 	</div>
 
