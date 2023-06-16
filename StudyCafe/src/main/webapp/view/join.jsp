@@ -175,6 +175,12 @@
                     <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
                 </td>
 				</tr>
+					<tr>
+					 <th>상세주소</th>
+                <td>
+                    <input type="text" id="user_addr2" placeholder="상세주소" size="20">
+                </td>
+					</tr>
 			</table>
 			<div class="btnZone">
 				<input type="button" onClick="join();" class="btnOk" value="확인">

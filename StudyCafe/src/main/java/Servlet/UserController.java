@@ -2,6 +2,9 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -79,7 +82,10 @@ public class UserController extends HttpServlet {
 		} else if ("/login.do".equals(action)) {
 			String userID = request.getParameter("userID");
 			String userPW = request.getParameter("userPW");
-
+			
+			 // 패스워드를 SHA-256 해시 값으로 변환
+            String hashedPassword = sha256Hash(userPW);
+			
 			// 로그인 처리
 			boolean isAuthenticated = dao.authenticateUser(userID, userPW);
 
@@ -116,7 +122,8 @@ public class UserController extends HttpServlet {
 			nextPage = "/view/member.jsp";
 
 		}
-
+		
+		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
 
@@ -127,4 +134,27 @@ public class UserController extends HttpServlet {
 		doGet(request, response);
 	}
 
+
+	public static String sha256Hash(String input) {
+	    try {
+	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	        byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
+	
+	        // 해시 값을 16진수 문자열로 변환
+	        StringBuilder hexString = new StringBuilder();
+	        for (byte b : hash) {
+	            String hex = Integer.toHexString(0xff & b);
+	            if (hex.length() == 1) {
+	                hexString.append('0');
+	            }
+	            hexString.append(hex);
+	        }
+	
+	        return hexString.toString();
+	    } catch (NoSuchAlgorithmException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 }
+
