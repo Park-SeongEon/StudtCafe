@@ -1,0 +1,35 @@
+
+  /* 모달 배경 */
+  .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  /* 모달 창 */
+  .modal-content {
+    background-color: #fff;
+    border-radius: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* 모달 헤더 */
+  .modal-header {
+    background-color: #2e8b57;
+    color: #fff;
+    padding: 10px;
+  }
+
+  /* 모달 제목 */
+  .modal-title {
+    margin: 0;
+  }
+
+  /* 모달 내용 */
+  .modal-body {
+    padding: 10px;
+  }
+
+  /* 모달 푸터 */
+  .modal-footer {
+    background-color: #f7f7f7;
+    padding: 10px;
+  }
