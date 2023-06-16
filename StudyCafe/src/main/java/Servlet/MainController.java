@@ -53,8 +53,8 @@ public class MainController extends HttpServlet {
 		try {			
 			if(action == null){
 				
-			//	List<Seat> list = mainService.getSeatList();
-			//	request.setAttribute("list", list);
+				List<Seat> list = mainService.getSeatList();
+				request.setAttribute("list", list);
 				nextPage = "/view/main.jsp";
 			} else if("/main.do".equals(action)) {
 				List<Seat> list = mainService.getSeatList();
