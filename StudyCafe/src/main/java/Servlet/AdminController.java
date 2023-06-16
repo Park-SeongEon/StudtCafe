@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dao.BoardDao;
 import dao.KateDao;
+import dao.UserDao;
 import model.Board;
 import model.Kategorie;
+import model.User;
 
 @WebServlet("/admin/*")
 public class AdminController extends HttpServlet {
@@ -27,11 +29,13 @@ public class AdminController extends HttpServlet {
 	
 	BoardDao boardDao;
 	KateDao katDao;
+	UserDao dao; 
 
 	
 	public void init(ServletConfig config) throws ServletException {
 		boardDao = new BoardDao();
 		katDao = new KateDao();
+		dao = new UserDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
@@ -54,19 +58,31 @@ public class AdminController extends HttpServlet {
 		request.setAttribute("katlist", katlist);
 
 		
-		
+		int katNo = Integer.parseInt(request.getParameter("katNo"));
+		request.setAttribute("katTargetNo", katNo);
+
 		try {
 			List<Board> list = null;
+			List<User> userlist = null;
+
 			
 			if(action == null) {
+				list = boardDao.selectAll(katNo);
+				request.setAttribute("list", list);
 				
 				nextPage = "/view/list.jsp";
-			} else if("/main.do".equals(action)) {
+			} else if("/list.do".equals(action)) {            // 공지사항
 
-;
+				list = boardDao.selectAll(katNo);
+				request.setAttribute("list", list);
 
-				nextPage = "/view/list.jsp";
+				nextPage = "/view/admin_list.jsp";
 
+			} else if(action.equals("/memberlist.do")) {      // 회원목록
+				userlist = dao.selectAll();
+				request.setAttribute("list", list);
+				nextPage = "/view/listMembers.jsp";
+				
 			} else if(action.equals("/Form.do")) {
 				nextPage = "/view/Form.jsp";
 				
@@ -77,17 +93,23 @@ public class AdminController extends HttpServlet {
 				Board vo = boardDao.selectById(Integer.parseInt(no));
 				request.setAttribute("vo", vo);
 				nextPage = "/view/view.jsp";
+				
 			} else if(action.equals("/mod.do")) {
 
 
 				return;
-			} else if(action.equals("/remove.do")){
+			} else if(action.equals("/remove.do")){            // 회원 삭제
+				String str = request.getParameter("id");
+				dao.delete(str);
+				request.setAttribute("msg", "delete");
+				nextPage="/admin/memberlist.do";
 				
-				
-				String str = request.getParameter("brdNo");
-				int brdNo = Integer.parseInt(str);
+			} else if(action.equals("/remove2.do")){            // 공지사항 삭제
+				String no = request.getParameter("brd_no");
+				int brdNo= Integer.parseInt(no);
 				boardDao.delete(brdNo);
-				return;
+				nextPage="/admin/list.do";
+				
 			} else if (action.equals("/replyForm.do")) {
 				
 			} else if (action.equals("/addReply.do")) {
