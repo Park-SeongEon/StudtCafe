@@ -72,10 +72,17 @@ a, a:hover {
 				  		  <button class="btn btn-success pull-right"  type="button">목록보기</button>
 				  		  <input type="hidden" size="67"  maxlength="500" name="katNo" value="${katTargetNo}" onClick="backToList(this.form)" />
 				        	
+					
 				        </form>
 				      </div>
 				    </div>
 				    <footer class="my-3 text-center text-small">
+						<form action="replyForm.do" method="post">
+							<input type="hidden" name="postId" value="<%= postId %>">
+							<textarea name="replyContent" rows="4" cols="50" placeholder="Write your reply here"></textarea>
+							<br>
+							<input type="submit" value="Submit">
+						</form>
 				      <p class="mb-1">&copy; 2023 YD</p>
 				    </footer>
 				  </div>
