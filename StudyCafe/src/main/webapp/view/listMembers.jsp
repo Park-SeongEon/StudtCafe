@@ -98,15 +98,15 @@ a, a:hover {
 										<c:forEach var="item" items="${list }" varStatus="articleNum">
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
-												<td width="10%">${articleNum.count}</td>
-												<td width="10%">${item.userId}</td>
-												<td width="20%">${item.userName}</td>
-												<td width="10%">${item.userEmail}</td>
-												<td width="20%">${item.userCp}</td>
+												<td width="5%">${articleNum.count}</td>
+												<td width="20%">${item.userId}</td>
+												<td width="15%">${item.userName}</td>
+												<td width="20%">${item.userEmail}</td>
+												<td width="10%">${item.userCp}</td>
 												<td width="10%">${item.regDate}</td>
 												<td width="10%">${item.joinDate}</td>
-												<td width="10%">${item.userGrade}</td>
-												<td colspan="2" ><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove.do?id=${item.userId}'"></td>
+												<td width="5%">${item.userGrade}</td>
+												<td width="5%" colspan="2"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove.do?id=${item.userId}'"></td>
 										</c:forEach>
 									</c:when>
 								</c:choose>

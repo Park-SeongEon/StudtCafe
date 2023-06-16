@@ -38,10 +38,18 @@
 			</c:choose>
 			<c:choose>
 				<c:when test="${2 eq katTargetNo}">
-					<li class="active"><a href="${contextPath}/admin/memberlist.do??katNo=2">유저목록</a></li>
+					<li class="active"><a href="${contextPath}/admin/memberlist.do?katNo=2">회원목록</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="${contextPath}/admin/memberlist.do??katNo=2">유저목록</a></li>
+					<li><a href="${contextPath}/admin/memberlist.do?katNo=2">회원목록</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${100 eq katTargetNo}">
+					<li class="active"><a href="${contextPath}/admin/kate.do?katNo=100">카테고리</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${contextPath}/admin/kate.do?katNo=100">카테고리</a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

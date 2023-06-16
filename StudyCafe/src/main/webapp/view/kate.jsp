@@ -12,13 +12,9 @@
 <link rel="stylesheet" href="../css/bootstrap.css">
 
 <link rel="stylesheet" href="../css/sidebar.css">
-<script>
-$(document).ready(function(){
-    $("#myBtn").click(function(){
-        $("#myModal").modal();
-    });
-});
-</script>
+
+
+
 
 <link rel="stylesheet" href="../css/custom.css">
 
@@ -40,37 +36,9 @@ a, a:hover {
 		<div id="content">
 			<jsp:include page="top.jsp"></jsp:include>
 			<div class="container-fluid">
-				<h1>공지사항</h1>
-				<div class="container">
-					<div class="row">
-						<form method="post" name="search" >
-							<table class="pull-right">
-								<tr>
-									<td>
-										<select class="form-control" name="searchField">
-											<option value="0">선택</option>
-											<option value="bbsTitle">제목</option>
-											<option value="userID">작성자</option>
-										</select>
-									</td>
-									<td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
-									<td><button type="submit" class="btn btn-success">검색</button></td>
-									<td>
-									<!-- modal 구동 버튼 (trigger) -->
-										<button id="myBtn" type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">	
-											<a href="${contextPath}/board/Form.do?katNo=${katTargetNo}" class="btn btn-success pull-right">글쓰기</a>
-										</button>
-									</td>	
-								</tr>
-							</table>
-						</form>				
-					</div>
-				</div>				
+				<h1>카테고리</h1>
+				
 				<br>
-				
-		
-				
-				
 				<div class="container">
 					<div class="row">
 						<table class="active table table-striped"
@@ -78,10 +46,7 @@ a, a:hover {
 							<thead>
 								<tr>
 									<th style="background-color: #2e8b57; text-align: center;">번호</th>
-									<th style="background-color: #2e8b57; text-align: center;">제목</th>
-									<th style="background-color: #2e8b57; text-align: center;">글내용</th>
-									<th style="background-color: #2e8b57; text-align: center;">작성일</th>
-									<th style="background-color: #2e8b57; text-align: center;">조회수</th>
+									<th style="background-color: #2e8b57; text-align: center;">카테고리명</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -100,10 +65,7 @@ a, a:hover {
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
 												<td width="5%">${articleNum.count}</td>
-												<td width="10%">${item.title}</td>
-												<td width="50%">${item.content}</td>
-												<td width="10%">${item.regdate}</td>
-												<td width="10%">${item.cnt}</td>
+												<td width="10%">${item.kateName}</td>
 												<td colspan="2" ><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove2.do?brd_no=${articleNum.count}'"></td>
 										</c:forEach>
 									</c:when>
@@ -113,6 +75,7 @@ a, a:hover {
 					</div>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 

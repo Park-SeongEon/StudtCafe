@@ -83,7 +83,12 @@ public class AdminController extends HttpServlet {
 				request.setAttribute("list", list);
 				nextPage = "/view/listMembers.jsp";
 				
-			} else if(action.equals("/Form.do")) {
+			} else if(action.equals("/kate.do")) {            // 카테고리
+				katlist = katDao.selectAll();
+				request.setAttribute("list", list);
+				nextPage = "/view/kate.jsp";
+				
+			}else if(action.equals("/Form.do")) {
 				nextPage = "/view/Form.jsp";
 				
 			} else if (action.equals("/add.do")){
