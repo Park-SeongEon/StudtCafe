@@ -14,6 +14,17 @@
 <link rel="stylesheet" href="../css/custom.css">
 <link rel="stylesheet" href="../css/list.css">
 
+<script>
+
+$.ajax({
+	url:"/board/list.do?katNo=3",		// servlet 
+	type: "get",
+	
+})
+
+
+</script>
+
 <title>JSP 게시판 웹 사이트</title>
 <style type="text/css">
 a, a:hover {
@@ -31,7 +42,7 @@ a, a:hover {
 			<div class="main_back">
 				<div class="container">
 					<h1>게시판</h1>
-					<div >
+					<div>
 						<form method="post" name="search">
 							<table class="pull-right">
 								<tr>
@@ -45,14 +56,58 @@ a, a:hover {
 									</td>
 									<td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
 									<td><button type="button" class="btn btn-white btn-dark">검색</button></td>
+
+
+
+
 									<td>
-										<a href="${contextPath}/board/Form.do?katNo=${katTargetNo}"  class="btn btn-success pull-right">글쓰기</a>
+										<%-- <a href="${contextPath}/board/Form.do?katNo=${katTargetNo}" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">모달 열기</a> --%>
+										<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 									</td>
 									
 								</tr>
 							</table>
 						</form>
 					</div>
+					
+	
+
+<div class="modal fade" id="myModal" role="dialog">
+<form action="/board/add.do" method="get">
+    <div class="modal-dialog">
+ 
+        <!-- Modal content-->
+        
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modal-title" class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tr>
+                        <td>제목</td>
+                        <td><input class="form-control" id="userName" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>내용</td>
+                        <td><textarea class="form-control" id="contents" rows="10"></textarea></td>
+                    </tr>                    
+                </table>
+            </div>
+            <div class="modal-footer">
+               <!--  <button id="modalSubmit" type="button" class="btn btn-success">Submit</button> -->
+                <button class="btn btn-success pull-right"  type="submit">작성</button>
+				 <input type="hidden" size="67"  maxlength="500" name="katNo" value="${katTargetNo}" />
+				 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+					
 					<br>
 					<div >
 						<table class="active table table-striped"

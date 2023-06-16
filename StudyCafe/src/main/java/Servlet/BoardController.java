@@ -98,7 +98,7 @@ public class BoardController extends HttpServlet {
 				nextPage = "/view/list.jsp";
 
 			} else if(action.equals("/Form.do")) {
-				nextPage = "/view/articleForm.jsp";
+				nextPage = "/view/modaltest.jsp";
 				
 			} else if (action.equals("/add.do")){
 				String title = request.getParameter("title");
