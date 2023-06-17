@@ -122,27 +122,40 @@ public class BoardController extends HttpServlet {
 			} else if(action.equals("/mod.do")) {// 글 수정 부분 여기에 추가해 주세요
 				String title = request.getParameter("title");
 				String content = request.getParameter("content");
-				Board vo = new Board vo(title, content);
-				boardDao.modBoard(boardVO);
+				
+				Board fix =new Board();
+				fix.setTitle(title);
+				fix.setContent(content);
+				boardDao.update(fix);
+				
 				request.setAttribute("msg", "modified");
-				nextPage = "/view/article.jsp";
-				if (title == null || content == null) {
-			        // Handle missing parameters
-			        response.sendRedirect("error.jsp");
+				nextPage = "/view/articleForm.jsp";
+				
 				
 				return;
 			
 			} else if(action.equals("/remove.do")){ // 글 삭제 부분 여기에 추가해 주세요
-				String str = request.getParameter("content");
-				int content = Integer.parseInt(str);
-				boardDao.delete(brdNo);
+				boardDao.delete(katNo);
+				
+				request.setAttribute("msg", "deleted");
 				nextPage = "/view/list.jsp";
+				
 				return;
 			} else if (action.equals("/replyForm.do")) {// 댓글 쓰는 기능 여기에 추가해 주세요
-				action = new CommentInAction();
+				String commenUpdate = request.getParameter("title");
 				
+				Board comment =new Board();
+				comment.setcnt(comment);
+				
+				boardDao.commentUpadate(commenUpdate);
+				
+				nextPage = "/view/articleForm.jsp";
 			} else if (action.equals("/addReply.do")) {	//댓글 추가 부분 여기에 추가해주세요
-				action = new ReCommentInAction();
+				String comment = request.getParameter("comment");
+				
+				
+				
+				nextPage = "/view/articleForm.jsp";
 				return;
 			}
 

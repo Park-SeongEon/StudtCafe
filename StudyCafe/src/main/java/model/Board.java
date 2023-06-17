@@ -23,5 +23,7 @@ public class Board {
 	private int voteNo;
 
 	private int cnt;
+	
+	private String comment;
 
 }

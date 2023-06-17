@@ -7,6 +7,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<c:when test=${msg=="addlist" } >
+	<script>
+	window.onload = function () {
+		alert("글 동록했습니다.")
+	}
+	</script>
+	</c:when>
+	
+	<c:when test=${msg=="modlist" } >
+	<script>
+	window.onload = function () {
+		alert("글 수정했습니다.")
+	}
+	</script>
+	</c:when>
+	
+	<c:when test=${msg=="modlist" } >
+	<script>
+	window.onload = function () {
+		alert("글 삭제했습니다.")
+	}
+	</script>
+	</c:when>
+
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 <link rel="stylesheet" href="../css/bootstrap.css">
@@ -14,16 +40,7 @@
 <link rel="stylesheet" href="../css/custom.css">
 <link rel="stylesheet" href="../css/list.css">
 
-<script>
 
-$.ajax({
-	url:"/board/list.do?katNo=3",		// servlet 
-	type: "get",
-	
-})
-
-
-</script>
 
 <title>JSP 게시판 웹 사이트</title>
 <style type="text/css">
@@ -41,13 +58,13 @@ a, a:hover {
 			<jsp:include page="top.jsp"></jsp:include>
 			<div class="main_back">
 				<div class="container">
-<<<<<<< HEAD
+
 					<h1 style="font-family: namum">게시판</h1>
 					<div >
-=======
+
 					<h1>게시판</h1>
 					<div>
->>>>>>> master
+
 						<form method="post" name="search">
 							<table class="pull-right">
 								<tr>
@@ -125,6 +142,8 @@ a, a:hover {
 									<th style="background-color: #36464E;color:#fff; text-align: center;">작성자</th>
 									<th style="background-color: #36464E;color:#fff; text-align: center;">작성일</th>
 									<th style="background-color: #36464E;color:#fff; text-align: center;">추천수</th>
+									<th style="background-color: #36464E;color:#fff; text-align: center;">수정</th>
+									<th style="background-color: #36464E;color:#fff; text-align: center;">삭제</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -149,6 +168,8 @@ a, a:hover {
 												<td width="10%">${item.cnt}</td>
 												<td width="10%">${item.regDate}</td>
 												<td width="10%">${item.voteNo}</td>
+												<td width="10%"><a href="${contextPath}/board/mod.do?brdNo=${item.brdNo}">수정</a></td>
+												<td width="10%"><a href="${contextPath}/board/remove.do?brdNo=${item.brdNo}">삭제</a></td>
 										</c:forEach>
 									</c:when>
 								</c:choose>

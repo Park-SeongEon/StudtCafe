@@ -40,13 +40,13 @@ a, a:hover {
 				    <div class="input-form-backgroud row">
 				      <div class="input-form col-md-12 mx-auto">
 				        <h4 class="mb-3">게시판</h4>
-				        <form name="articleForm" method="post"   action="${contextPath}/board/add.do?katNo=${katTargetNo}"   enctype="multipart/form-data">
+				        <form name="articleForm" method="post"   action="${contextPath}/board/mod.do?brdNo=${item.brdNo}"   enctype="multipart/form-data">
 				          <div class="row">
 				            <div class="col-md-6 mb-3">
 				            
 				 
 				              <label for="name">제목</label>
-				              <input type="text" class="form-control" id="name" placeholder="" value="" required>
+				              <input type="text" class="form-control" id="name" placeholder="" value="${item.brdNo}" required>
  
 				            </div>
 				            
@@ -56,7 +56,7 @@ a, a:hover {
 				            <label for="address2">글쓰기<span class="text-muted">&nbsp;(필수 아님)</span></label>
 				            
 				            <tr>
-							<td><textarea class="form-control" placeholder="글 내용" name="bbsContent" maxlength="2048" ></textarea></td>					
+							<td><input class="form-control" placeholder="글 내용" name="bbsContent" maxlength="2048" value="${item.brdNo}" ></td>					
 							</tr>
 				           
 				          </div>
@@ -78,7 +78,7 @@ a, a:hover {
 				    </div>
 				    <footer class="my-3 text-center text-small">
 						<form action="replyForm.do" method="post">
-							<input type="hidden" name="postId" value="<%= postId %>">
+							<%-- <input type="hidden" name="postId" value="<%= postId %>"> --%>
 							<textarea name="replyContent" rows="4" cols="50" placeholder="Write your reply here"></textarea>
 							<br>
 							<input type="submit" value="Submit">
