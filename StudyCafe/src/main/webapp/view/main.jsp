@@ -32,28 +32,26 @@
 							<tr> 
 							<c:forEach items="${list}" var="item" begin="0" end="8" varStatus="stat">
 								<td>
-									<c:choose>
-										<c:when test="${item.seatComment eq '02'} ">
-											<div class="card active">
-												<div class="card-head">
-													<p>${item.seatTypeName} ${item.seatNo}</p>
-												</div>
-												<div class="card-main">
-													<p>${item.seatCommentData}</p>
-												</div>
+									<c:if test="${item.seatComment =='02'}">
+										<div class="card active">
+											<div class="card-head">
+												<p>${item.seatTypeName}  ${item.seatNo}</p>
 											</div>
-										</c:when>
-										<c:otherwise>
-											<div class="card">
-												<div class="card-head">
-													<p>${item.seatTypeName} ${item.seatNo}</p>
-												</div>
-												<div class="card-main">
-													<p>${item.seatCommentData}</p>
-												</div>
-											</div>									
-										</c:otherwise>
-									</c:choose>
+											<div class="card-main">
+												<p>${item.seatCommentData}</p>
+											</div>
+										</div>		
+									</c:if>
+									<c:if test="${item.seatComment =='01'}">
+										<div class="card">
+											<div class="card-head">
+												<p>${item.seatTypeName}  ${item.seatNo}</p>
+											</div>
+											<div class="card-main">
+												<p>${item.seatCommentData}</p>
+											</div>
+										</div>		
+									</c:if>									
 								</td>
 							</c:forEach>
 							</tr>
@@ -91,7 +89,6 @@
 						<%-- 통계영역 --%>
 						
 					</div>
-					<div class="stats-area">
 					<input type="hidden" name="userId" value="${userId}">
 					<div class="stats" style="margin-bottom: 50px;">
 						<table>
@@ -113,7 +110,7 @@
 					</div>
 					<%-- 공지사항 --%>
 				 	<div class="notice">
-						<p class="title">공지사항, 최신글</p>
+						<p class="title">최신글</p>
 						<a href="${contextPath}/board/list.do?katNo=1" class="btn">더보기</a>
 						<table class="notice-list">
 							<tbody>
