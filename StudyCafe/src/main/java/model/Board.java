@@ -28,5 +28,7 @@ public class Board {
 
 	private int totalCount;
 
+	private int rownum;
+
 	
 }

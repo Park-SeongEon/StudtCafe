@@ -1,7 +1,9 @@
 package Servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,27 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.BoardDao;
-import dao.KateDao;
-import dao.UserDao;
 import model.Board;
 import model.Kategorie;
 import model.User;
+import service.AdminService;
 
 @WebServlet("/admin/*")
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String ARTICEL_IMAGE_REPO = "D:\\file_repo";
-	
-	BoardDao boardDao;
-	KateDao katDao;
-	UserDao dao; 
 
+	AdminService adminService;
 	
 	public void init(ServletConfig config) throws ServletException {
-		boardDao = new BoardDao();
-		katDao = new KateDao();
-		dao = new UserDao();
+		adminService = new AdminService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
@@ -51,46 +46,69 @@ public class AdminController extends HttpServlet {
 		String action = request.getPathInfo();
 		
 		
-		List<Kategorie> katlist  = katDao.selectAll();
+		List<Kategorie> katlist  = adminService.getMenu();
 		request.setAttribute("katlist", katlist);
 
-		int katNo = Integer.parseInt(request.getParameter("katNo"));
-		request.setAttribute("katTargetNo", katNo);
 		
-<<<<<<< Updated upstream
 		int katNo = Integer.parseInt(request.getParameter("katNo"));
 		request.setAttribute("katTargetNo", katNo);
+		String KatName = katNo == 1 ? "공지사항" : "회원목록";
+		request.setAttribute("katTargetName", KatName);
 
-=======
-		for(Kategorie kat : katlist)
-			if(katNo == kat.getKateNo())
-				request.setAttribute("katTargetName", kat.getKateName());
-
-				
->>>>>>> Stashed changes
+		
 		try {
 			List<Board> list = null;
 			List<User> userlist = null;
 
 			
 			if(action == null) {
-				list = boardDao.selectAll(katNo);
+				String _section = request.getParameter("setion");
+				String _pageNum = request.getParameter("pageNum");
+				
+				//페이징처리
+				int section = Integer.parseInt(((_section == null) ? "1" : _section));
+				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+				
+				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
+				pagingMap.put("section", section);
+				pagingMap.put("pageNum", pageNum);
+
+				list  = adminService.getBoardList(pagingMap);
+
+				request.setAttribute("section", section);
+				request.setAttribute("pageNum", pageNum);
 				request.setAttribute("list", list);
+			
 				nextPage = "/view/list.jsp";
 			} else if("/list.do".equals(action)) {            // 공지사항
 
-				list = boardDao.selectAll(katNo);
+				String _section = request.getParameter("setion");
+				String _pageNum = request.getParameter("pageNum");
+				
+				//페이징처리
+				int section = Integer.parseInt(((_section == null) ? "1" : _section));
+				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+				
+				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
+				pagingMap.put("section", section);
+				pagingMap.put("pageNum", pageNum);
+				pagingMap.put("katNo", katNo);
+				
+				list  = adminService.getBoardList(pagingMap);
+
+				request.setAttribute("section", section);
+				request.setAttribute("pageNum", pageNum);
 				request.setAttribute("list", list);
 
 				nextPage = "/view/admin_list.jsp";
 
 			} else if(action.equals("/memberlist.do")) {      // 회원목록
-				userlist = dao.selectAll();
-				request.setAttribute("list", list);
+				userlist = adminService.getUserList();
+				request.setAttribute("list", userlist);
 				nextPage = "/view/listMembers.jsp";
 				
 			} else if(action.equals("/kate.do")) {            // 카테고리
-				katlist = katDao.selectAll();
+				katlist = adminService.getKateList();
 				request.setAttribute("list", list);
 				nextPage = "/view/kate.jsp";
 				
@@ -101,7 +119,7 @@ public class AdminController extends HttpServlet {
 				
 			} else if(action.equals("/view.do")){
 				String no = request.getParameter("brdNO");
-				Board vo = boardDao.selectById(Integer.parseInt(no));
+				Board vo = adminService.getBoardView(Integer.parseInt(no));
 				request.setAttribute("vo", vo);
 				nextPage = "/view/view.jsp";
 				
@@ -111,7 +129,7 @@ public class AdminController extends HttpServlet {
 				String str = request.getParameter("brdNo");
 				int brdNo = Integer.parseInt(str);
 
-				boardDao.delete(brdNo);
+				adminService.removeBoard(brdNo);
 				nextPage="/admin/list.do";
 				
 			} else if (action.equals("/replyForm.do")) {

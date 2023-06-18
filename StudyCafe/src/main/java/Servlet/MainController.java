@@ -19,7 +19,6 @@ import service.MainService;
 @WebServlet("/main/*")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String ARTICEL_IMAGE_REPO = "D:\\file_repo";
 	
 	private MainService mainService;
 	

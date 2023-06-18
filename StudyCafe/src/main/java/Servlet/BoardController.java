@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.KateDao;
 import model.Board;
 import model.Kategorie;
 import service.BoardService;
@@ -71,6 +70,7 @@ public class BoardController extends HttpServlet {
 				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
+				pagingMap.put("katNo", katNo);
 
 				list  = brdService.getBoardList(pagingMap);
 
@@ -157,13 +157,9 @@ public class BoardController extends HttpServlet {
 				String commenUpdate = request.getParameter("title");
 				
 				Board comment =new Board();
-<<<<<<< Updated upstream
-				;
-=======
 		//		comment.setcnt(comment);
 				
 			//	boardDao.commentUpadate(commenUpdate);
->>>>>>> Stashed changes
 				
 				nextPage = "/view/articleForm.jsp";
 			} else if (action.equals("/addReply.do")) {	//댓글 추가 부분 여기에 추가해주세요

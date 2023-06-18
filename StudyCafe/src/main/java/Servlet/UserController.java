@@ -76,7 +76,7 @@ public class UserController extends HttpServlet {
 			nextPage = "/member/list.do";
 		} else if (action.equals("/del.do")) { // 회원 삭제부분 여기에 추가
 			String id = request.getParameter("id");
-			User vo = dao.selectById(id);
+//			User vo = dao.selectById(id);
 
 			nextPage = "/member/main.do";
 		} else if ("/login.do".equals(action)) {

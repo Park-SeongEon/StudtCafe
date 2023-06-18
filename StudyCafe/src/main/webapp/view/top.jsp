@@ -17,11 +17,7 @@
 				</nav>
 			</c:when>
 			<c:when test="${!empty userId }">
-<<<<<<< Updated upstream
-	s		<nav class="navbar navbar-default">
-=======
 				<nav>
->>>>>>> Stashed changes
 					<div class="container-fluid">
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="#"><i class="zmdi zmdi-notifications text-danger"></i> </a></li>

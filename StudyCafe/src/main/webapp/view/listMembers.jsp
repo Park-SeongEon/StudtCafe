@@ -9,15 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
-<link rel="stylesheet" href="../css/bootstrap.css">
-
-<link rel="stylesheet" href="../css/sidebar.css">
-
-
-
-
-<link rel="stylesheet" href="../css/custom.css">
-
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/sidebar.css">
+	<link rel="stylesheet" href="../css/list.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>JSP 게시판 웹 사이트</title>
 <style type="text/css">
 a, a:hover {
@@ -36,60 +31,57 @@ a, a:hover {
 </style>
 </head>
 <body>
-
-
 	<div id="viewport">
-
 		<jsp:include page="sidebar.jsp"></jsp:include>
 		<!-- Content -->
 		<div id="content">
 			<jsp:include page="top.jsp"></jsp:include>
-			<div class="container-fluid">
-				<h1>List</h1>
+			<div class="main_back">
 				<div class="container">
-					<div class="row">
-						<form method="post" name="search" >
-							<table class="pull-right">
-								<tr>
-									<td>
-										<select class="form-control" name="searchField">
-											<option value="0">선택</option>
-											<option value="user_name">이름</option>
-											<option value="userID">아이디</option>
-										</select>
-									</td>
-									<td><input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
-									<td><button type="submit" class="btn btn-success">검색</button></td>
-								</tr>
-							</table>
-						</form>
-					</div>
-				</div>
-				<br>
-				<div class="container">
-					<div class="row">
-						<table class="active table table-striped"
-							style="text-align: center; border: 1px solid #dddddd">
+					<h1 style="font-family: Namum">게시판</h1>
+					<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
+					<form method="post" name="search">
+						<table class="pull-right">
+							<tr>
+								<td>
+									<select class="form-control" name="searchField">
+										<option value="0">선택</option>
+										<option value="bbsTitle">제목</option>
+										<option value="userID">작성자</option>
+									</select>
+								</td>
+								<td>
+									<input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
+								<td><button type="button" class="btn btn-white btn-dark">검색</button></td>
+								<td>
+									<%-- <a href="${contextPath}/board/Form.do?katNo=${katTargetNo}" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">모달 열기</a> --%>
+									<a href="#" data-toggle="modal" data-target="#myModal"  class="btn back-blue btn-success pull-right">글쓰기</a>
+								</td>
+							</tr>
+						</table>
+					</form>
+					<div style="width:100%; height:70%; overflow:auto">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="active table table1" style=" border: 1px solid #dddddd">
 							<thead>
 								<tr>
-									<th style="background-color: #2e8b57; text-align: center;">번호</th>
-									<th style="background-color: #2e8b57; text-align: center;">아이디</th>
-									<th style="background-color: #2e8b57; text-align: center;">이름</th>
-									<th style="background-color: #2e8b57; text-align: center;">Email</th>
-									<th style="background-color: #2e8b57; text-align: center;">연락처</th>
-									<th style="background-color: #2e8b57; text-align: center;">가입일</th>
-									<th style="background-color: #2e8b57; text-align: center;">최근접속일</th>
-									<th style="background-color: #2e8b57; text-align: center;">회원등급</th>
-									<th style="background-color: #2e8b57; text-align: center;">삭제</th>
+									<th style="text-align: center; vertical-align:middle;">번호</th>
+									<th style="text-align: center; vertical-align:middle;">아이디</th>
+									<th style="text-align: center; vertical-align:middle;">이름</th>
+									<th style="text-align: center; vertical-align:middle;">Email</th>
+									<th style="text-align: center; vertical-align:middle;">연락처</th>
+									<th style="text-align: center; vertical-align:middle;">가입일</th>
+									<th style="text-align: center; vertical-align:middle;">최근접속일</th>
+									<th style="text-align: center; vertical-align:middle;">회원등급</th>
+									<th style="text-align: center; vertical-align:middle;">삭제</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:choose>
 									<c:when test="${list ==null }">
 										<tr height="10">
-											<td colspan="4">
+											<td colspan="6">
 												<p align="center">
-													<b><span style="font-size: 9pt;">등록된 회원이 없습니다.</span></b>
+													<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
 												</p>
 											</td>
 										</tr>
@@ -113,12 +105,49 @@ a, a:hover {
 							</tbody>
 						</table>
 					</div>
+					<div class="text-center">
+						<c:if test="${tot != null }">
+							<ul class="pagination">
+								<c:choose>
+									<c:when test="${tot > 100 }">
+										<c:forEach var="page" begin="1" end="10" step="1">
+											<c:if test="${section > 1 && page==1 }">
+												<li><a class="no-uline" href="/board/list.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp; prev </a></li>
+											</c:if>
+											<li><a class="no-uline" href="/board/list.do?section=${section}&pageNum=${page}">${(section-1)*10 +page }</a></li>
+												
+											<c:if test="${page ==10 }">
+												<li><a class="no-uline" href="/board/list.do?section=${section+1}&pageNum=${section*10+1}">&nbsp;next</a></li>
+											</c:if>
+										</c:forEach>
+									</c:when>
+									<c:when test="${tot == 100 }">
+										<c:forEach var="page" begin="1" end="10" step="1">
+											<li><a class="no-uline" href="#">${page} </a><li>
+										</c:forEach>
+									</c:when>
+						
+									<c:when test="${tot< 100 }">
+										<c:forEach var="page" begin="1" end="${tot/10 +1}" step="1">
+											<c:choose>
+												<c:when test="${page== pageNum }">
+													<li><a class="sel-page" href="/board/list.do?section=${section}&pageNum=${page}">${page } </a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a class="no-uline" href="/board/list.do?section=${section}&pageNum=${page}">${page } </a></li>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</c:when>
+								</c:choose>
+							</ul>
+						</c:if>
+					</div>
 				</div>
-			</div>	
+			</div>
 		</div>
 	</div>
 
-	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
 </body>
 </html>

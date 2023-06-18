@@ -54,6 +54,7 @@ public class BoardDao extends SuperDao{
 				vo.setVoteNo(re.getInt("vote_no"));
 				vo.setCnt(re.getInt("cnt"));
 				vo.setTotalCount(re.getInt("totalCount"));
+				vo.setRownum(re.getInt("rownum"));
 
 				list.add(vo);
 			}

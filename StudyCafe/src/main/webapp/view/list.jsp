@@ -7,16 +7,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< Updated upstream
-	
-=======
->>>>>>> Stashed changes
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
 	<link rel="stylesheet" href="../css/bootstrap.css">
 	<link rel="stylesheet" href="../css/sidebar.css">
-	<link rel="stylesheet" href="../css/custom.css">
 	<link rel="stylesheet" href="../css/list.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
@@ -85,7 +79,7 @@ a, a:hover {
 										<c:forEach var="item" items="${list }" varStatus="articleNum">
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
-												<td width="4%">${articleNum.count}</td>
+												<td width="4%">${item.rownum}</td>
 												<td width="20%"><a href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
 												<td width="10%">${item.cnt}</td>
 												<td width="30%">${item.regDate}</td>
