@@ -1,11 +1,7 @@
 package Servlet;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -15,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import dao.BoardDao;
 import dao.KateDao;
 import dao.UserDao;
@@ -57,10 +54,20 @@ public class AdminController extends HttpServlet {
 		List<Kategorie> katlist  = katDao.selectAll();
 		request.setAttribute("katlist", katlist);
 
+		int katNo = Integer.parseInt(request.getParameter("katNo"));
+		request.setAttribute("katTargetNo", katNo);
 		
+<<<<<<< Updated upstream
 		int katNo = Integer.parseInt(request.getParameter("katNo"));
 		request.setAttribute("katTargetNo", katNo);
 
+=======
+		for(Kategorie kat : katlist)
+			if(katNo == kat.getKateNo())
+				request.setAttribute("katTargetName", kat.getKateName());
+
+				
+>>>>>>> Stashed changes
 		try {
 			List<Board> list = null;
 			List<User> userlist = null;

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import model.Board;
 
@@ -14,16 +15,33 @@ public class BoardDao extends SuperDao{
 
 	}
 
-	public List<Board> selectAll(int katNo) {
+	public List<Board> selectAll(Map<String,Integer> map) {
 
 		List<Board> list = new ArrayList<>();
 
+		int katNo = (Integer) map.get("katNo");
+		int section = (Integer) map.get("section");
+		int pageNum = (Integer) map.get("pageNum");
 		try {
 			Connection conn = getConnection();
-			String sql = "select * from board where kate_no=? order by regDate desc";
+			String sql = "SELECT * FROM ( "
+					+ "SELECT  "
+					+ "	* "
+					+ "	,ROW_NUMBER() over(ORDER BY regDate) AS rownum"
+					+ "	,count(1) over() AS totalCount "
+					+ "from board  "
+					+ "where kate_no=? "
+					+ "order by regDate DESC "
+					+ ") c "
+					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, katNo);
+			stmt.setInt(2, section);
+			stmt.setInt(3, pageNum);
+			stmt.setInt(4, section);
+			stmt.setInt(5, pageNum);
+			
 			ResultSet re = stmt.executeQuery();
 			while (re.next()) {
 				Board vo = new Board();
@@ -35,6 +53,8 @@ public class BoardDao extends SuperDao{
 				vo.setKateNo(re.getInt("kate_no"));
 				vo.setVoteNo(re.getInt("vote_no"));
 				vo.setCnt(re.getInt("cnt"));
+				vo.setTotalCount(re.getInt("totalCount"));
+
 				list.add(vo);
 			}
 			re.close();

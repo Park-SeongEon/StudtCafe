@@ -22,59 +22,64 @@
 		<div id="content">
 			<!--Top  -->
 			<jsp:include page="top.jsp"></jsp:include>
-			<div class="container-fluid">
-				<div class="wrapper" style="text-align:center;margin-top: 10px;">
-					<table style="width:80%">
-						<tr>
-						<c:forEach items="${list}" var="item" begin="0" end="8" varStatus="stat">
-							<td>
-								<div class="card">
-									<div class="card-head">
-										<p>${item.seatTypeName} ${item.seatNo}</p>
-									</div>
-									<div class="card-main">
-										<p>${item.seatCommentData}</p>
-									</div>
-								</div>
-							</td>
-						</c:forEach>
-						</tr>
-						<tr>
-						<c:forEach items="${list}" var="item" begin="9" end="17" varStatus="stat">
-							<td>
-								<div class="card">
-									<div class="card-head">
-										<p>${item.seatTypeName} ${item.seatNo}</p>
-									</div>
-									<div class="card-main">
-										<p>${item.seatCommentData}</p>
-									</div>
-								</div>
-							</td>
-						</c:forEach>
-						</tr>
-					</table>
-					<table style="width:80%">
-						<tr>
-							<c:forEach items="${list}" var="item" begin="18" end="21" varStatus="stat">
+			<div class="main_back">			
+				<div class="container">
+					<h1 style="font-family: Namum; text-align: center;">좌석배치</h1>
+					<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
+					<br>
+					<div class="wrapper" style="text-align:center;margin-top: 10px;">
+						<table style="text-align:center;width:80%;">
+							<tr> 
+							<c:forEach items="${list}" var="item" begin="0" end="8" varStatus="stat">
 								<td>
-									<div class="room">
-										<div class="room-head">
+									<div class="card">
+										<div class="card-head">
 											<p>${item.seatTypeName} ${item.seatNo}</p>
 										</div>
-										<div class="room-main">
+										<div class="card-main">
 											<p>${item.seatCommentData}</p>
 										</div>
 									</div>
 								</td>
 							</c:forEach>
-						<tr>
-					</table>
-					<%-- 통계영역 --%>
-					
+							</tr>
+							<tr>
+							<c:forEach items="${list}" var="item" begin="9" end="17" varStatus="stat">
+								<td>
+									<div class="card">
+										<div class="card-head">
+											<p>${item.seatTypeName} ${item.seatNo}</p>
+										</div>
+										<div class="card-main">
+											<p>${item.seatCommentData}</p>
+										</div>
+									</div>
+								</td>
+							</c:forEach>
+							</tr>
+						</table>
+						<table style="width:80%">
+							<tr>
+								<c:forEach items="${list}" var="item" begin="18" end="21" varStatus="stat">
+									<td>
+										<div class="room">
+											<div class="room-head">
+												<p>${item.seatTypeName} ${item.seatNo}</p>
+											</div>
+											<div class="room-main">
+												<p>${item.seatCommentData}</p>
+											</div>
+										</div>
+									</td>
+								</c:forEach>
+							<tr>
+						</table>
+						<%-- 통계영역 --%>
+						
+					</div>
+					<input type="hidden" name="userId" value="${userId}">
 				</div>
 			</div>
-			<input type="hidden" name="userId" value="${userId}">
 		</div><!-- Content End  -->
 	</div>
 

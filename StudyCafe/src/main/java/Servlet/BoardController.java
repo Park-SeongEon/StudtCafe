@@ -1,7 +1,9 @@
 package Servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -12,22 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.BoardDao;
 import dao.KateDao;
 import model.Board;
 import model.Kategorie;
+import service.BoardService;
 
 @WebServlet("/board/*")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String ARTICEL_IMAGE_REPO = "D:\\file_repo";
+
 	
-	BoardDao boardDao;
-	KateDao katDao;
+	BoardService brdService;
 	
 	public void init(ServletConfig config) throws ServletException {
-		boardDao = new BoardDao();
-		katDao = new KateDao();
+		brdService = new BoardService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
@@ -45,56 +46,64 @@ public class BoardController extends HttpServlet {
 		HttpSession session;
 		String action = request.getPathInfo();
 		
-		List<Kategorie> katlist  = katDao.selectAll();
+		List<Kategorie> katlist  = brdService.getMenu();
 		request.setAttribute("katlist", katlist);
 
 		int katNo = Integer.parseInt(request.getParameter("katNo"));
 		request.setAttribute("katTargetNo", katNo);
 		
+		for(Kategorie kat : katlist)
+			if(katNo == kat.getKateNo())
+				request.setAttribute("katTargetName", kat.getKateName());
+
+		
 		try {
 			List<Board> list = null;
 			
 			if(action == null) {
+				String _section = request.getParameter("setion");
+				String _pageNum = request.getParameter("pageNum");
 				
-				/*페이징처리
+				//페이징처리
 				int section = Integer.parseInt(((_section == null) ? "1" : _section));
 				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 				
 				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
-				Map<String,Object> map = boardService.listArticleVO(pagingMap);
-				map.put("section", section);
-				map.put("pageNum", pageNum);
-				request.setAttribute("map", map);
-				 */ 				
-	
-				list = boardDao.selectAll(katNo);
-				request.setAttribute("list", list);
 
+				list  = brdService.getBoardList(pagingMap);
+
+				request.setAttribute("section", section);
+				request.setAttribute("pageNum", pageNum);
+				request.setAttribute("list", list);
+				 			
 				nextPage = "/view/list.jsp";
 			} else if("/list.do".equals(action)) {
 
 				String _section = request.getParameter("setion");
 				String _pageNum = request.getParameter("pageNum");
-
-
-				/*
+				
+				//페이징처리
 				int section = Integer.parseInt(((_section == null) ? "1" : _section));
 				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 				
 				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
-				Map<String,Object> map = boardService.listArticleVO(pagingMap);
-				map.put("section", section);
-				map.put("pageNum", pageNum);				
-				request.setAttribute("map", map);
-				*/
-				list = boardDao.selectAll(katNo);
+				pagingMap.put("katNo", katNo);
+
 				
+				list  = brdService.getBoardList(pagingMap);
+
+				request.setAttribute("section", section);
+				request.setAttribute("pageNum", pageNum);
 				request.setAttribute("list", list);
-				
+
+				if(list.size() > 0)
+					request.setAttribute("tot", list.get(0).getTotalCount());
+
+
 				nextPage = "/view/list.jsp";
 
 			} else if(action.equals("/Form.do")) {
@@ -103,7 +112,7 @@ public class BoardController extends HttpServlet {
 			} else if (action.equals("/add.do")){
 				String title = request.getParameter("title");
 				String content = request.getParameter("content");
-				String imageFileName = request.getParameter("imageFileName");
+				//String imageFileName = request.getParameter("imageFileName");
 				System.out.println(title + "," + content);
 
 				Board brd =new Board();
@@ -111,22 +120,25 @@ public class BoardController extends HttpServlet {
 				brd.setContent(content);
 				brd.setKateNo(katNo);
 				
-				boardDao.create(brd);
+				brdService.save(brd);
 				nextPage = "/board/list.do";
 			} else if(action.equals("/view.do")){
 				String no = request.getParameter("brdNo");
-				Board vo = boardDao.selectById(Integer.parseInt(no));
+				Board vo = brdService.getBoardView(Integer.parseInt(no));
 				request.setAttribute("vo", vo);
 				nextPage = "/view/view.jsp";
 				
 			} else if(action.equals("/mod.do")) {// 글 수정 부분 여기에 추가해 주세요
 				String title = request.getParameter("title");
 				String content = request.getParameter("content");
+				String brdNo = request.getParameter("brdNo");
+
 				
 				Board fix =new Board();
+				fix.setBrdNo(Integer.parseInt(brdNo));
 				fix.setTitle(title);
 				fix.setContent(content);
-				boardDao.update(fix);
+				brdService.save(fix);
 				
 				request.setAttribute("msg", "modified");
 				nextPage = "/view/articleForm.jsp";
@@ -135,7 +147,7 @@ public class BoardController extends HttpServlet {
 				return;
 			
 			} else if(action.equals("/remove.do")){ // 글 삭제 부분 여기에 추가해 주세요
-				boardDao.delete(katNo);
+				brdService.removeBoard(katNo);
 				
 				request.setAttribute("msg", "deleted");
 				nextPage = "/view/list.jsp";
@@ -145,7 +157,13 @@ public class BoardController extends HttpServlet {
 				String commenUpdate = request.getParameter("title");
 				
 				Board comment =new Board();
+<<<<<<< Updated upstream
 				;
+=======
+		//		comment.setcnt(comment);
+				
+			//	boardDao.commentUpadate(commenUpdate);
+>>>>>>> Stashed changes
 				
 				nextPage = "/view/articleForm.jsp";
 			} else if (action.equals("/addReply.do")) {	//댓글 추가 부분 여기에 추가해주세요

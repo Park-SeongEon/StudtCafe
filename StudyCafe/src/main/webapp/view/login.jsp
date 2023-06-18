@@ -17,7 +17,7 @@
 				<h2 class="active">로그인</h2>
 				<!-- Login Form -->
 				<form action="${contextPath}/member/login.do" method="post">
-					<in]put type="text" id="login" class="fadeIn second" name="userID" placeholder="아이디"> 
+					<input type="text" id="login" class="fadeIn second" name="userID" placeholder="아이디"> 
 					<input type="password" id="password" class="fadeIn third" name="userPW" placeholder="비밀번호"> 
 					<input type="submit" class="fadeIn fourth" value="로그인">
 				</form>

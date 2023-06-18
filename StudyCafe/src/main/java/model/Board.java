@@ -8,7 +8,7 @@ import lombok.Data;
 public class Board {
 	
 
-	private int brdNo;
+	private int brdNo = 0;
 	
 	private String title;
 
@@ -26,4 +26,7 @@ public class Board {
 	
 	private String comment;
 
+	private int totalCount;
+
+	
 }
