@@ -69,7 +69,6 @@ public class AdminController extends HttpServlet {
 			if(action == null) {
 				list = boardDao.selectAll(katNo);
 				request.setAttribute("list", list);
-				
 				nextPage = "/view/list.jsp";
 			} else if("/list.do".equals(action)) {            // 공지사항
 
@@ -101,21 +100,10 @@ public class AdminController extends HttpServlet {
 				
 			} else if(action.equals("/mod.do")) {
 				return;
-<<<<<<< HEAD
 			} else if(action.equals("/remove.do")){
 				String str = request.getParameter("brdNo");
 				int brdNo = Integer.parseInt(str);
-=======
-			} else if(action.equals("/remove.do")){            // 회원 삭제
-				String str = request.getParameter("id");
-				dao.delete(str);
-				request.setAttribute("msg", "delete");
-				nextPage="/admin/memberlist.do";
-				
-			} else if(action.equals("/remove2.do")){            // 공지사항 삭제
-				String no = request.getParameter("brd_no");
-				int brdNo= Integer.parseInt(no);
->>>>>>> adb
+
 				boardDao.delete(brdNo);
 				nextPage="/admin/list.do";
 				
