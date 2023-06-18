@@ -89,6 +89,7 @@
 						<%-- 통계영역 --%>
 						
 					</div>
+					<div class="stats-area">
 					<input type="hidden" name="userId" value="${userId}">
 					<div class="stats" style="margin-bottom: 50px;">
 						<table>
@@ -110,7 +111,7 @@
 					</div>
 					<%-- 공지사항 --%>
 				 	<div class="notice">
-						<p class="title">최신글</p>
+						<p class="title">공지사항, 최신글</p>
 						<a href="${contextPath}/board/list.do?katNo=1" class="btn">더보기</a>
 						<table class="notice-list">
 							<tbody>
