@@ -20,7 +20,7 @@ public class UserDao extends SuperDao{
 
 		try {
 			Connection conn = getConnection();
-			String sql = "select * from user  order by regDate desc";
+			String sql = "select * from user";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet re = stmt.executeQuery();
@@ -162,17 +162,13 @@ public class UserDao extends SuperDao{
 	}
 
 
-	public void delete(User vo) {
+	public void delete(String vo) {
 
 		try {
 			Connection conn = getConnection();
-			
-
-			String sql = "delete from user where user_id=? and user_pw=?";
-
+			String sql = "delete from user where user_id=?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, vo.getUserId());
-			stmt.setString(2, vo.getUserPwd());
+			stmt.setString(1, vo);
 			stmt.executeUpdate();
 			stmt.close();
 
@@ -240,3 +236,5 @@ public class UserDao extends SuperDao{
 	}
 
 }
+
+
