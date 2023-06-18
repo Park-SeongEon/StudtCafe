@@ -113,18 +113,17 @@ public class SeatDao extends SuperDao{
 		return false;
 	}
 
-	public void update(Board vo) {
+	public void update(Seat vo) {
 		try {
 			Connection conn = getConnection();
 			
 
-			String sql = "update board set title = ?,content = ?, file_name = ? where brd_no=? ";
+			String sql = "update seat set seat_comment = ?,user_id = ? where seat_no=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, vo.getTitle());
-			stmt.setString(2, vo.getContent());
-			stmt.setString(3, vo.getFilename());
-			stmt.setInt(4, vo.getBrdNo());
+			stmt.setString(1, vo.getSeatComment());
+			stmt.setString(2, vo.getUserId());
+			stmt.setString(3, vo.getSeatNo());
 
 			stmt.executeUpdate();
 			stmt.close();

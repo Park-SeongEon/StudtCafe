@@ -33,7 +33,7 @@ a, a:hover {
 			<jsp:include page="top.jsp"></jsp:include>
 			<div class="container-fluid">
 				<h1>글쓰기</h1>
-								<div class="container">
+				<div class="container">
 				    <div class="input-form-backgroud row">
 				      <div class="input-form col-md-12 mx-auto">
 				        <h4 class="mb-3">게시판</h4>

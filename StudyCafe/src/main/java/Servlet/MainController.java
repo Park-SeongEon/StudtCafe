@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -62,10 +63,16 @@ public class MainController extends HttpServlet {
 				nextPage = "/view/main.jsp";
 			} else if(action.equals("/change.do")){
 				
-				int katNo = Integer.parseInt(request.getParameter("userId"));
-				request.setAttribute("katTargetNo", katNo);
+				PrintWriter out = response.getWriter();
 
+				Seat seat = new Seat();
 				
+				String userId = request.getParameter("userId");
+				seat.setUserId(userId);
+				seat.setSeatComment("02");
+
+				mainService.SeatUpdate(seat);
+				out.print("success");
 				return;
 			}
 

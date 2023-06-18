@@ -18,8 +18,7 @@ public class MainService {
 		katDao = new KateDao();
 
 	}
-	
-	
+
 	public List<Kategorie> getMenu() {
 		return katDao.selectAll();
 	}
@@ -30,6 +29,9 @@ public class MainService {
 		
 	}
 	
+	public void SeatUpdate(Seat vo){
+		seatDao.update(vo);
+	}
 	
 	
 

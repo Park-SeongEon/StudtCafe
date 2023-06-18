@@ -7,7 +7,6 @@
 		
 		if(confirm('이 좌석을 선택하시겠습니까.'))
 		{
-			$(this).addClass('active');			
 			
 			var SeatNo = $(this).children(".card-head").children("p").text();
 
@@ -30,16 +29,9 @@
 				alert(data); */
 				//alert(json.map.title);
 				if(data === 'success'){
-					$('input[name=checkID]').val("ok");
-					alert("사용 가능한 아이디입니다.")
-					$('#message').text('사용할 수 있는 ID입니다.')   
-					$('#message').css('color','green')
-					
+					$(this).addClass('active');
 				}
 				else {
-					alert("사용 불가능한 아이디입니다.")
-					$('#message').text('이미 사용 중인 아이디입니다.')
-					$('#message').css('color','red')					
 				}
 			},
 			error:function(){
