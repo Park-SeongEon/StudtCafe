@@ -18,7 +18,7 @@ ${session.userId}
 				</nav>
 			</c:when>
 			<c:when test="${!empty userId }">
-				<nav class="navbar navbar-default">
+	s		<nav class="navbar navbar-default">
 					<div class="container-fluid">
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="#"><i class="zmdi zmdi-notifications text-danger"></i> </a></li>

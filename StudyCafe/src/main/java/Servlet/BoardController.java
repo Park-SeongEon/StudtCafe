@@ -145,9 +145,7 @@ public class BoardController extends HttpServlet {
 				String commenUpdate = request.getParameter("title");
 				
 				Board comment =new Board();
-				comment.setcnt(comment);
-				
-				boardDao.commentUpadate(commenUpdate);
+				;
 				
 				nextPage = "/view/articleForm.jsp";
 			} else if (action.equals("/addReply.do")) {	//댓글 추가 부분 여기에 추가해주세요

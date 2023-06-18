@@ -7,31 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:when test=${msg=="addlist" } >
-	<script>
-	window.onload = function () {
-		alert("글 동록했습니다.")
-	}
-	</script>
-	</c:when>
 	
-	<c:when test=${msg=="modlist" } >
-	<script>
-	window.onload = function () {
-		alert("글 수정했습니다.")
-	}
-	</script>
-	</c:when>
-	
-	<c:when test=${msg=="modlist" } >
-	<script>
-	window.onload = function () {
-		alert("글 삭제했습니다.")
-	}
-	</script>
-	</c:when>
-
-
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
