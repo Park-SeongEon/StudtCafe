@@ -25,4 +25,5 @@ public class User {
 	private Date joinDate;
 
 	private String userGrade;
+
 }

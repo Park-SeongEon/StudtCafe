@@ -55,16 +55,41 @@ public class UserController extends HttpServlet {
 			String tel = request.getParameter("tel");
 			String email = request.getParameter("email");
 			String user_addr = request.getParameter("user_addr");
+			
+			String hashedPassword = sha256Hash(userPW);
 
 			User user = new User();
 			user.setUserId(userID);
-			user.setUserPwd(userPW);
+			user.setUserPwd(hashedPassword);
 			user.setUserEmail(email);
 			user.setUserName(name);
 			user.setUserAddr(user_addr);
 			user.setUserCp(tel);
 
 			dao.create(user);
+			
+
+			nextPage = "/member/main.do";
+		} else if (action.equals("/update.do")) {
+			// 회원정보수정
+			String userPW = request.getParameter("userPW");
+			String name = request.getParameter("name");
+			String tel = request.getParameter("tel");
+			String email = request.getParameter("email");
+			String user_addr = request.getParameter("user_addr");
+			
+			String hashedPassword = sha256Hash(userPW);
+
+			User user = new User();
+
+			user.setUserPwd(hashedPassword);
+			user.setUserEmail(email);
+			user.setUserName(name);
+			user.setUserAddr(user_addr);
+			user.setUserCp(tel);
+
+			dao.update(user);
+			
 
 			nextPage = "/member/main.do";
 		} else if (action.equals("/join.do")) {
@@ -83,8 +108,7 @@ public class UserController extends HttpServlet {
 			String userID = request.getParameter("userID");
 			String userPW = request.getParameter("userPW");
 			
-			 // 패스워드를 SHA-256 해시 값으로 변환
-            String hashedPassword = sha256Hash(userPW);
+			 
 			
 			// 로그인 처리
 			boolean isAuthenticated = dao.authenticateUser(userID, userPW);
@@ -97,12 +121,13 @@ public class UserController extends HttpServlet {
 
 			} else {
 				// 로그인 실패
-				request.setAttribute("error", "아이디 또는 비밀번호가 올바르지 않습니다.");
+				PrintWriter out = response.getWriter();				
+				out.print("<script>" 
+				+ "  alert('아이디 또는 비밀번호가 올바르지 않습니다.');"   // 알림창 
+				+ " location.href='" + request.getContextPath() + "/member/main.do';"  // 전체글 보기 페이지로 이동
+				+ "</script>");
 
-				PrintWriter pw = response.getWriter();
-				pw.print("<script> alert('아이디 또는 비밀번호가 올바르지 않습니다.')  </script>");
-
-				nextPage = "/view/login.jsp";
+				return;
 			}
 		} else if ("/checkId.do".equals(action)) {
 			PrintWriter out = response.getWriter();

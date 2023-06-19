@@ -11,7 +11,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="#"><i class="zmdi zmdi-notifications text-danger"></i> </a></li>
 							<li><a href="/member/main.do">로그인</a></li>
-							<li><a href="/member/main.do">회원가입</a></li>
+							<li><a href="/member/join.do">회원가입</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -22,6 +22,8 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="#"><i class="zmdi zmdi-notifications text-danger"></i> </a></li>
 							<li><a href="#">${userId}</a></li>
+							<li><a href="/view/update.jsp">회원정보수정</a></li>
+							<li><a href="/member/main.do">로그아웃</a></li>
 						</ul>
 					</div>
 				</nav>
