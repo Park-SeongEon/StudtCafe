@@ -8,11 +8,11 @@
 		if(confirm('이 좌석을 선택하시겠습니까.'))
 		{
 			
-			var SeatNo = $(this).children(".card-head").children("p").text();
-
+			var thics=$(this);
+			var SeatNo = $(this).children(".card-head").children("p").children("span").text();
 			var userId = $("#userId").val();
+						
 			
-			console.log(SeatNo + ", " + userId );
 			$.ajax({
 			url:"/main/change.do",		// servlet 
 			type: "post",
@@ -28,10 +28,10 @@
 				/* var data = JSON.parse(json.map);
 				alert(data); */
 				//alert(json.map.title);
+
 				if(data === 'success'){
-					$(this).addClass('active');
-				}
-				else {
+					thics.addClass('active');
+				 	thics.children(".card-main").children("p").text("사용중");
 				}
 			},
 			error:function(){

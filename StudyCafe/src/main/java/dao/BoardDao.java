@@ -68,6 +68,59 @@ public class BoardDao extends SuperDao{
 
 		return list;
 	}
+	
+	public List<Board> selectMainViewList() {
+		List<Board> list = new ArrayList<>();
+
+		try {
+			Connection conn = getConnection();
+			String sql = "SELECT "
+					+ "	t1.* "
+					+ "FROM "
+					+ "("
+					+ "    SELECT *"
+					+ "	 FROM board"
+					+ "	 WHERE kate_no = 1"
+					+ "	 ORDER BY regDate desc"
+					+ "	 LIMIT 2"
+					+ ") AS t1 "
+					+ "UNION ALL "
+					+ "SELECT "
+					+ "	t2.* "
+					+ "FROM ( "
+					+ "    SELECT * "
+					+ "	 FROM board "
+					+ "	 ORDER BY regDate desc"
+					+ "	 LIMIT 3 "
+					+ ") AS t2";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			ResultSet re = stmt.executeQuery();
+			while (re.next()) {
+				Board vo = new Board();
+				vo.setBrdNo(re.getInt("brd_no"));
+				vo.setTitle(re.getString("title"));
+				vo.setContent(re.getString("content"));
+				vo.setFilename(re.getString("file_name"));
+				vo.setRegDate(re.getDate("regdate"));
+				vo.setKateNo(re.getInt("kate_no"));
+				vo.setVoteNo(re.getInt("vote_no"));
+				vo.setCnt(re.getInt("cnt"));
+
+				list.add(vo);
+			}
+			re.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+
+		return list;
+	}
+	
 
 	public Board selectById(int brdNo) {
 		
@@ -99,8 +152,6 @@ public class BoardDao extends SuperDao{
 		}finally {
 			close();
 		}
-
-		
 
 		return vo;
 	}
@@ -222,6 +273,5 @@ public class BoardDao extends SuperDao{
 			close();
 		}
 
-		
 	}
 }

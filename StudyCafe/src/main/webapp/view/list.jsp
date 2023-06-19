@@ -45,8 +45,9 @@ a, a:hover {
 									</select>
 								</td>
 								<td>
-									<input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
-								<td><button type="button" class="btn btn-white btn-dark">검색</button></td>
+									<input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100">
+								</td>
+								<td><button type="button" id="searchbtn" class="btn btn-white btn-dark">검색</button></td>
 								<td>
 									<%-- <a href="${contextPath}/board/Form.do?katNo=${katTargetNo}" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">모달 열기</a> --%>
 									<a href="#" data-toggle="modal" data-target="#myModal"  class="btn back-blue btn-success pull-right">글쓰기</a>
@@ -54,8 +55,8 @@ a, a:hover {
 							</tr>
 						</table>
 					</form>
-					<div style="width:100%; height:70%; overflow:auto">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="active table table1" style=" border: 1px solid #dddddd">
+					<div id="listtable" style="width:100%; height:70%; overflow:auto">
+						<table  width="100%" border="0" cellspacing="0" cellpadding="0" class="active table table1" style=" border: 1px solid #dddddd">
 							<thead>
 								<tr>
 									<th style="text-align: center; vertical-align:middle;">번호</th>

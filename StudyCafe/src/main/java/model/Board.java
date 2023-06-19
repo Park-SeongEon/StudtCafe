@@ -26,6 +26,8 @@ public class Board {
 	
 	private String comment;
 
+	private String userId;
+
 	private int totalCount;
 
 	private int rownum;
