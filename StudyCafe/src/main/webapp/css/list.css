@@ -26,7 +26,11 @@
 .table1 tr{
 	height: 50px;
 	
+}
 
+
+.table1 tbody tr td a:hover{
+	text-decoration: underline;	
 }
 
 

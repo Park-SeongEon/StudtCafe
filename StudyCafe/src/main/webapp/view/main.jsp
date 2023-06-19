@@ -26,7 +26,6 @@
 				<div class="container">
 					<h1 style="font-family: Namum; text-align: center;">좌석배치</h1>
 					<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
-					<br>
 					<div class="wrapper" style="text-align:center;margin-top: 10px;">
 						<table style="width:80%;margin-left: auto;margin-right: auto;">
 							<tr> 
@@ -35,7 +34,7 @@
 									<c:if test="${item.seatComment =='02'}">
 										<div class="card active">
 											<div class="card-head">
-												<p>${item.seatTypeName}  ${item.seatNo}</p>
+												<p>${item.seatTypeName} <span>${item.seatNo}</span> </p> 
 											</div>
 											<div class="card-main">
 												<p>${item.seatCommentData}</p>
@@ -45,7 +44,7 @@
 									<c:if test="${item.seatComment =='01'}">
 										<div class="card">
 											<div class="card-head">
-												<p>${item.seatTypeName}  ${item.seatNo}</p>
+												<p>${item.seatTypeName} <span>${item.seatNo}</span> </p> 
 											</div>
 											<div class="card-main">
 												<p>${item.seatCommentData}</p>
@@ -58,15 +57,26 @@
 							<tr>
 							<c:forEach items="${list}" var="item" begin="9" end="17" varStatus="stat">
 								<td>
-									<div class="card">
-										<div class="card-head">
-											<p>${item.seatTypeName} ${item.seatNo}</p>
-										</div>
-										<div class="card-main">
-											<p>${item.seatCommentData}</p>
-										</div>
-									</div>
-								</td>
+									<c:if test="${item.seatComment =='02'}">
+										<div class="card active">
+											<div class="card-head">
+												<p>${item.seatTypeName} <span>${item.seatNo}</span> </p> 
+											</div>
+											<div class="card-main">
+												<p>${item.seatCommentData}</p>
+											</div>
+										</div>		
+									</c:if>
+									<c:if test="${item.seatComment =='01'}">
+										<div class="card">
+											<div class="card-head">
+												<p>${item.seatTypeName} <span>${item.seatNo}</span> </p> 
+											</div>
+											<div class="card-main">
+												<p>${item.seatCommentData}</p>
+											</div>
+										</div>		
+									</c:if>								</td>
 							</c:forEach>
 							</tr>
 						</table>
@@ -89,51 +99,60 @@
 						<%-- 통계영역 --%>
 						
 					</div>
-					<div class="stats-area">
-					<input type="hidden" name="userId" value="${userId}">
-					<div class="stats" style="margin-bottom: 50px;">
-						<table>
-							<tbody>
-								<tr>
-									<td class="enf" title="">
-										<div class="sub-wrapper">
-											<p class="title left-2"></p>
-											<p class="title-1">남은좌석수</p>
-											<p class="value-1"><fmt:formatNumber value="19" type="number"/></p>
-											<p class="title-2">좌석수</p>
-											<p class="value-2"><fmt:formatNumber value="21" type="number"/></p>
+					<table style="width:85%;margin-left: auto;margin-right: auto;">
+						<colgroup>
+							<col width="30%" />
+							<col width="70%" />
+						</colgroup>						
+						<tbody>
+							<tr>
+								<td>
+									<div class="statis">
+									 	<div class="statis-head">
+									    	<h4 class="statis-title" style="font-family: Namum;">좌석 현황</h4>
 										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					</div>
+									 	<div class="statis-body">
+											<p class="title-1">남은좌석수</p>
+											<p class="value-1">
+												<fmt:formatNumber value="19" type="number" />
+											</p>
+											<p class="title-2">좌석수</p>
+											<p class="value-2">
+												<fmt:formatNumber value="21" type="number" />
+											</p>
+									  	</div>
+									</div>								
+								</td>
+								<td>
+									<div class="notice">
+										<p class="title">최신글보기</p>
+										<a href="${contextPath}/board/list.do?katNo=1" class="btn">더보기</a>
+										<table class="notice-list">
+											<tbody>
+												<c:forEach var="item" items="${viewlist}" varStatus="rows">
+													<tr>
+														<td class="subject">
+															<a href="${contextPath}/board/view.do" title="게시글 상세보기">${item.title}</a>
+														</td>
+														<td class="date">${item.userId}</td>
+														<td class="date">${item.regDate}</td>
+														<td class="date">${item.cnt}</td>
+
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 					<%-- 공지사항 --%>
-				 	<div class="notice">
-						<p class="title">공지사항, 최신글</p>
-						<a href="${contextPath}/board/list.do?katNo=1" class="btn">더보기</a>
-						<table class="notice-list">
-							<tbody>
-								<c:forEach var="item" items="${noticeList}" varStatus="rows">
-								<tr>
-									<td class="subject">
-										<c:if test="${item.new_yn eq 'Y'}">
-											<img alt="신규 글" src="../img/main/icon_n.png" /> 
-										</c:if>
-										<a href="../board/view.do?brdNo=1&menuCd=060302&amp;pageIndex=1&amp;brdCtsNo=${item.brd_cts_no}" title="공지사항 상세보기">${item.subject}</a> 
-									</td>
-									<td class="date">${item.reg_date}</td>
-								</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
 				</div>
 			</div>
 		</div><!-- Content End  -->
+		<input type="hidden" id="userId" name="userId" value="${userId}">
 	</div>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
 	<script src="../js/sidebar.js"></script>

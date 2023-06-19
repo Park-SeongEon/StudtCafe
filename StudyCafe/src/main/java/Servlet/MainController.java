@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Board;
 import model.Kategorie;
 import model.Seat;
 import service.MainService;
@@ -49,17 +50,23 @@ public class MainController extends HttpServlet {
 		request.setAttribute("katTargetNo", 0);
 		request.setAttribute("katTargetName", "dashBoard");
 
-
-		
 		try {			
 			if(action == null){
 				
 				List<Seat> list = mainService.getSeatList();
 				request.setAttribute("list", list);
+
+				List<Board> viewlist = mainService.getBoardViewList();
+				request.setAttribute("viewlist", viewlist);
+
 				nextPage = "/view/main.jsp";
 			} else if("/main.do".equals(action)) {
 				List<Seat> list = mainService.getSeatList();
 				request.setAttribute("list", list);
+
+				List<Board> viewlist = mainService.getBoardViewList();
+				request.setAttribute("viewlist", viewlist);
+
 				nextPage = "/view/main.jsp";
 			} else if(action.equals("/change.do")){
 				
@@ -69,11 +76,11 @@ public class MainController extends HttpServlet {
 				
 				String userId = request.getParameter("userId");
 				seat.setUserId(userId);
+				seat.setSeatNo(request.getParameter("SeatNo"));
 				seat.setSeatComment("02");
 
 				mainService.SeatUpdate(seat);
 				out.print("success");
-				return;
 			}
 
 			RequestDispatcher dis = request.getRequestDispatcher(nextPage);

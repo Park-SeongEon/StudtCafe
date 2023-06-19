@@ -112,30 +112,47 @@
 }
 
 
-/* 통계 영역 */
-.stats-area																							{ padding:40px 150px 0px 150px; width: 79%; height: 265px; }
-.stats-area .stats-sub-area																			{ min-height: 210px; display:inline-block; overflow: hidden; width: 100%; position: relative; }
-.stats-area .stats-sub-area	.enf-success-stats														{ width: 320px; height: 200px; left: 130px; position: absolute; background-color: #FF8A8A; }
-.stats-area .stats-sub-area	.enf-cancel-stats														{ width: 320px; height: 200px; left: 535px; position: absolute; background-color: #66CCCC; }
-.stats-area .stats-sub-area	.tro-stats																{ width: 320px; height: 200px; left: 940px; position: absolute; background-color: #FFC082; }
-.stats-area .stats-sub-area	.stats-top																{ overflow: hidden; height: 90px; }
-.stats-area .stats-sub-area	.stats-bottom															{ overflow: hidden; height: 90px; margin-top: 10px; }
 
-.stats-area .stats-sub-area	.enf-success-stats .enf-success-txt-1									{ position: relative; left: 35px; color: #FFFFFF; font-weight: bold; font-size: 20px; }
-.stats-area .stats-sub-area	.enf-success-stats .enf-success-txt-2									{ position: relative; left: -4px; top: 29px; color: #FFFFFF; }
-.stats-area .stats-sub-area	.enf-success-stats .enf-success-txt-3									{ position: relative; top:25px; left:130px; color: #FFFFFF; font-size: 16px; }
-.stats-area .stats-sub-area	.enf-success-stats .enf-success-day-cnt									{ position: relative; top: 25px; left:5px; color: #FFFFFF; font-weight: bold; font-size: 48px; }
-.stats-area .stats-sub-area	.enf-success-stats .enf-success-month-cnt								{ position: relative; top:28px; left:145px; color: #FFFFFF; font-size: 28px; }
+.statis{
+    border: 2px solid rgba(0, 0, 0, .1);
+    flex-direction: column;
+    position: relative;
+    margin : 10px 10px 10px 10px; 
+	background-color: #90c2ff;
 
-.stats-area .stats-sub-area	.enf-cancel-stats .enf-cancel-txt-1										{ position: relative; left: 35px; color: #FFFFFF; font-weight: bold; font-size: 20px; }	
-.stats-area .stats-sub-area	.enf-cancel-stats .enf-cancel-txt-2										{ position: relative; left: -4px; top: 29px; color: #FFFFFF; }
-.stats-area .stats-sub-area	.enf-cancel-stats .enf-cancel-txt-3										{ position: relative; top:25px; left:91px; color: #FFFFFF; font-size: 16px; }
-.stats-area .stats-sub-area	.enf-cancel-stats .enf-cancel-day-cnt									{ position: relative; top: 23px; left:5px;  color: #FFFFFF ; font-weight: bold; font-size: 48px; }
-.stats-area .stats-sub-area	.enf-cancel-stats .enf-cancel-month-cnt									{ position: relative; top:28px; left:101px; color: #FFFFFF; font-size: 28px; }
+}
 
-.stats-area .stats-sub-area	.tro-stats .tro-txt-1													{ position: relative; left: 35px; color: #FFFFFF; font-weight: bold; font-size: 20px; }	
-.stats-area .stats-sub-area	.tro-stats .tro-txt-2													{ position: relative; left: -1px; top: 29px; color: #FFFFFF; }
-.stats-area .stats-sub-area	.tro-stats .tro-txt-3													{ position: relative; top:25px; left:98px; color: #FFFFFF; font-size: 16px; }
-.stats-area .stats-sub-area	.tro-stats .tro-day-cnt													{ position: relative; top: 23px; left:5px; color: #FFFFFF; font-weight: bold; font-size: 48px; }
-.stats-area .stats-sub-area	.tro-stats .tro-month-cnt												{ position: relative; top:28px; left:110px; color: #FFFFFF; font-size: 28px; }
+
+.statis-head{
+	text-align:center;
+	height: 80%;
+ 	vertical-align : middle;
+	position: relative;
+	font-size: 14px;
+}
+.statis-head p{
+	padding: 12px;
+	position: relative; 
+	left: 35px; 
+	color: #FFFFFF; 
+	font-weight: bold; 
+	font-size: 20px;
+}
+.statis-body{
+	font-size: 14px;
+}
+.statis-body p {
+	padding: 3px 3px 3px;
+	position: relative;
+	font-weight: bold; 
+	font-size: 20px;
+
+}
+
+.statis-footer{
+	text-align:center;
+	top: 20%;
+	font-size: 14px;
+	padding-bottom: 10px
+}
 
