@@ -69,6 +69,8 @@ a, a:hover {
 									<th style="text-align: center; vertical-align:middle;">제목</th>
 									<th style="text-align: center; vertical-align:middle;">작성자</th>
 									<th style="text-align: center; vertical-align:middle;">작성일</th>
+									<th style="text-align: center; vertical-align:middle;">조회수</th>
+									<th style="text-align: center; vertical-align:middle;">추천수</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -87,9 +89,11 @@ a, a:hover {
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
 												<td width="4%">${item.rownum}</td>
-												<td width="20%"><a href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
+												<td width="56%"><a href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
 												<td width="10%">${item.cnt}</td>
-												<td width="30%">${item.regDate}</td>
+												<td width="10%">${item.regDate}</td>
+												<td width="10%">${item.cnt}</td>
+												<td width="10%">${item.voteNo}</td>
 										</c:forEach>
 									</c:when>
 								</c:choose>
@@ -151,11 +155,11 @@ a, a:hover {
 						<table class="table">
 							<tr>
 								<td>제목</td>
-								<td><input class="form-control" id="userName" type="text"></td>
+								<td><input class="form-control" name="title" type="text"></td>
 							</tr>
 							<tr>
 								<td>내용</td>
-								<td><textarea class="form-control" id="contents" rows="10"></textarea></td>
+								<td><textarea class="form-control" name="content" rows="10"></textarea></td>
 							</tr>
 						</table>
 					</div>
