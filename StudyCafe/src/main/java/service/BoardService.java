@@ -4,20 +4,22 @@ import java.util.List;
 import java.util.Map;
 
 import dao.BoardDao;
+import dao.CommentDao;
 import dao.KateDao;
 import model.Board;
+import model.Comment;
 import model.Kategorie;
 
 public class BoardService {
 
 	KateDao katDao;
 	BoardDao brdDao;
-
+	CommentDao comDao;
 	
 	public BoardService() {
 		brdDao = new BoardDao();
 		katDao = new KateDao();
-
+		comDao = new CommentDao();
 	}
 	
 	
@@ -48,7 +50,22 @@ public class BoardService {
 	public Board getBoardView(int brdNo) {
 		return brdDao.selectById(brdNo);
 	}
+
 	
+	public void saveComment(Comment com) {
+		comDao.create(com);
+	}
+
+	
+	
+	public List<Comment> getCommentList(int brdNo) {
+		return comDao.selectById(brdNo);
+	}
+
+	
+	
+	
+
 	
 
 }

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Board;
+import model.Comment;
 import model.Kategorie;
 import service.BoardService;
 
@@ -54,9 +55,14 @@ public class BoardController extends HttpServlet {
 		List<Kategorie> katlist  = brdService.getMenu();
 		request.setAttribute("katlist", katlist);
 
-		int katNo = Integer.parseInt(request.getParameter("katNo"));
-		request.setAttribute("katTargetNo", katNo);
 		
+		String strKatNo = request.getParameter("katNo");
+		int katNo = 0;
+		if(strKatNo != null) {
+			katNo = Integer.parseInt(strKatNo);
+			request.setAttribute("katTargetNo", katNo);
+		}
+			
 		for(Kategorie kat : katlist)
 			if(katNo == kat.getKateNo())
 				request.setAttribute("katTargetName", kat.getKateName());
@@ -132,6 +138,12 @@ public class BoardController extends HttpServlet {
 				String no = request.getParameter("brdNo");
 				Board vo = brdService.getBoardView(Integer.parseInt(no));
 				request.setAttribute("info", vo);
+				
+				List<Comment> comlist= brdService.getCommentList(Integer.parseInt(no));
+
+				
+				request.setAttribute("list", comlist);
+
 				nextPage = "/view/view.jsp";
 				
 			} else if(action.equals("/mod.do")) {// 글 수정 부분 여기에 추가해 주세요
@@ -160,33 +172,25 @@ public class BoardController extends HttpServlet {
 				
 				return;
 			} else if (action.equals("/replyForm.do")) {// 댓글 쓰는 기능 여기에 추가해 주세요
-				int parentNO = Integer.parseInt(request.getParameter("parentNO"));
-				session = request.getSession();
-				session.setAttribute("parentNO", parentNO);
 				
 				
-				nextPage = "/view/articleForm.jsp";
+				
+				nextPage = "/board/view.do";
 			} else if (action.equals("/addReply.do")) {	//댓글 추가 부분 여기에 추가해주세요
-				session = request.getSession();
-				
-				session.removeAttribute("parentNO");
-				
-				
-				
-				String content = request.getParameter("comContent");
-				//String imageFileName = request.getParameter("imageFileName");
-				System.out.println(content);
+				int brdNo = Integer.parseInt(request.getParameter("brdNo"));
+				String content = request.getParameter("content");
 
+				Comment comment = new Comment();
 				
+				comment.setBrdNo(brdNo);
+				comment.setComContent(content);
+				comment.setUserId((String)request.getSession().getAttribute("userId"));
+
+				brdService.saveComment(comment);
 				
+				request.setAttribute("brdNo", brdNo);
 				
-			
-				String comment = request.getParameter("comment");
-				
-				
-				
-				nextPage = "/view/articleForm.jsp";
-				return;
+				nextPage = "/board/view.do";
 			}
 
 			RequestDispatcher dis = request.getRequestDispatcher(nextPage);

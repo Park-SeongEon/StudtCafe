@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -84,13 +85,20 @@ public class UserController extends HttpServlet {
 			String addr = request.getParameter("addr");
 			String addr2 = request.getParameter("addr2");
 			
-			String hashedPassword = sha256Hash(userPW);
 
 			User user = new User();
 			
 			user.setUserId((String)	request.getSession().getAttribute("userId"));
+
+			if(userPW == null)
+			{
+				User user2=userDao.selectById(user.getUserId());
+				user.setUserPwd(user2.getUserPwd());				
+			} else {
+				String hashedPassword = sha256Hash(userPW);
+				user.setUserPwd(hashedPassword);								
+			}
 			
-			user.setUserPwd(hashedPassword);
 			user.setUserEmail(email);
 			user.setUserName(name);
 			user.setUserAddr(addr);
@@ -118,7 +126,6 @@ public class UserController extends HttpServlet {
 			String userPW = request.getParameter("userPW");
 			
 			String hashedPassword = sha256Hash(userPW);
-
 			
 			// 로그인 처리
 			boolean isAuthenticated = userDao.authenticateUser(userID, hashedPassword);
@@ -126,6 +133,11 @@ public class UserController extends HttpServlet {
 			if (isAuthenticated) {
 				// 로그인 성공
 				request.getSession().setAttribute("userId", userID);
+				
+				Date utilDate = new Date();
+				java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());				
+				userDao.joinDateUpdate(userID, sqlDate);
+
 				// response.sendRedirect(request.getContextPath() + "/main/main.do");
 				nextPage = "/main/main.do";
 

@@ -46,26 +46,27 @@ public class CommentDao extends SuperDao{
 		return list;
 	}
 
-	public Comment selectById(int brdNo) {
+	public List<Comment> selectById(int brdNo) {
 		
-		Comment vo = null;
+		List<Comment> list = new ArrayList<Comment>();
 
 		try {
 			Connection conn = getConnection();
-			String sql = "select * from board_comment where brd_no=?";
+			String sql = "select * from board_comment where parent_no=?";
 
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, brdNo);
 			ResultSet re = stmt.executeQuery();
 			while (re.next()) {
-				vo = new Comment();
+				Comment vo = new Comment();
 				vo.setParentNo(re.getInt("parent_no"));
 				vo.setComNo(re.getInt("com_no"));
-				vo.setBrdNo(re.getInt("brd_no"));
 				vo.setComContent(re.getString("com_content"));
-				vo.setRegDate(re.getDate("regdate"));
-				vo.setModDate(re.getDate("moddate"));
+				vo.setRegDate(re.getDate("regData"));
+				vo.setModDate(re.getDate("modData"));
+				vo.setUserId(re.getString("user_id"));
+				list.add(vo);
 			}
 			re.close();
 			stmt.close();
@@ -77,7 +78,7 @@ public class CommentDao extends SuperDao{
 
 		
 
-		return vo;
+		return list;
 	}
 
 	public boolean create(Comment vo) {
@@ -85,13 +86,13 @@ public class CommentDao extends SuperDao{
 
 		try {
 			Connection conn = getConnection();
-			String sql = "insert into board_comment(parent_no,brd_no,com_content) values(?,?,?)";
+			String sql = "insert into board_comment(parent_no,com_content,user_id) values(?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
-			stmt.setInt(1, vo.getParentNo());
-			stmt.setInt(2, vo.getBrdNo());
-			stmt.setString(3, vo.getComContent());
+			stmt.setInt(1, vo.getBrdNo());
+			stmt.setString(2, vo.getComContent());
+			stmt.setString(3, vo.getUserId());
 
 			stmt.executeUpdate(); // 여기서 에러
 			stmt.close();

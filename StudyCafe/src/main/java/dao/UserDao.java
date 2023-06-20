@@ -119,20 +119,26 @@ public class UserDao extends SuperDao{
 			Connection conn = getConnection();
 			
 
-			String sql = "update user set  user_name = ?,user_pwd = ?, user_addr = ?,user_DAddr = ?, user_email = ?, user_cp= ?, user_grade = ? where user_id=? ";
+			String sql = "update user set  user_name = ?, user_addr = ?,user_DAddr = ?, user_email = ?, user_cp= ?, user_grade = ?,user_pwd = ? where user_id=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getUserName());
-			stmt.setString(2, vo.getUserPwd());
-			stmt.setString(3, vo.getUserAddr());
-			stmt.setString(4, vo.getUserDaddr());
-			stmt.setString(5, vo.getUserEmail());
-			stmt.setString(6, vo.getUserCp());
-			stmt.setString(7, vo.getUserGrade());
+			stmt.setString(2, vo.getUserAddr());
+			stmt.setString(3, vo.getUserDaddr());
+			stmt.setString(4, vo.getUserEmail());
+			stmt.setString(5, vo.getUserCp());
+			stmt.setString(6, vo.getUserGrade());
 
-//			stmt.setDate(8, join);
-			stmt.setString(8, vo.getUserId());
+			if(vo.getUserPwd() != null) {
+				stmt.setString(7, vo.getUserPwd());
+				stmt.setString(8, vo.getUserId());				
+			}
+			else {
+				stmt.setString(7, vo.getUserPwd());
+				stmt.setString(8, vo.getUserId());				
+			}				
 
+			
 			stmt.executeUpdate();
 			stmt.close();
 
@@ -161,6 +167,28 @@ public class UserDao extends SuperDao{
 		}
 
 	}
+	
+	public void joinDateUpdate(String userid, Date date) {
+		try {
+			
+			Connection conn = getConnection();
+			
+			String sql = "update user set joinDate = ? where user_id=? ";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setDate(1, date);
+			stmt.setString(2, userid);
+
+			stmt.executeUpdate();
+			stmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 
 	public void delete(String vo) {

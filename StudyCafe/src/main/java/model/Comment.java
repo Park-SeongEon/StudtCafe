@@ -18,6 +18,6 @@ public class Comment {
 	private Date regDate;
 
 	private Date modDate;
-
-
+	
+	private String userId;
 }

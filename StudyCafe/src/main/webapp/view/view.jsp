@@ -46,6 +46,33 @@
     	  form.submit();
       }
       
+      
+	function fn_reply_form(url, brdNo){
+		 var form = document.createElement("form");
+			 form.setAttribute("method", "post");
+			 form.setAttribute("action", url);
+		     var parentNOInput = document.createElement("input");
+		     parentNOInput.setAttribute("type","hidden");
+		     parentNOInput.setAttribute("name","brdNo");
+		     parentNOInput.setAttribute("value", brdNo);
+		     var parentNOInput2 = document.createElement("input");			
+
+		     parentNOInput2.setAttribute("type","hidden");
+		     parentNOInput2.setAttribute("name","content");
+
+		     parentNOInput2.setAttribute("value", $("#comment").val());
+		     
+		     form.appendChild(parentNOInput);
+		     form.appendChild(parentNOInput2);
+
+		     
+		     console.log(form);
+
+		     document.body.appendChild(form);
+	    	 form.submit();
+		     
+		 }
+      
    </script>
 </head>
 <body>
@@ -72,7 +99,7 @@
 					<form id="message-form" action="#" method="post" name="frmArticle"
 						enctype="multipart/form-data">
 						<div class="group">
-							<input type="text1" value="${brdNo.content }" name="content"
+							<input type="text" value="${brdNo.content }" name="content"
 								id="i_content" required> <span class="highlight"></span>
 							<span class="bar"></span>
 						</div>
@@ -89,15 +116,15 @@
 
 						<div id="messages">Connecting...</div>
 						<div class="group">
-							<input type="text" placeholder="Write your message here..." name="content" id="messages" required> 
+							<input type="text" id="comment" placeholder="Write your message here..." name="content" id="messages"> 
 							<span class="highlight"></span> 
 							<span class="bar"></span> 
-							<input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${Comment.comNo})">
+							<input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/addReply.do', ${info.brdNo})">
 
 							<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
 
 							<c:choose>
-								<c:when test="${list ==null }">
+								<c:when test="${list == null }">
 									<tr height="10">
 										<td colspan="6">
 											<p align="center">
@@ -106,13 +133,12 @@
 										</td>
 									</tr>
 								</c:when>
-								<c:when test="${comment !=null }">
-									<c:forEach var="item" items="${comment }" varStatus="articleNum">
+								<c:when test="${list !=null }">
+									<c:forEach var="item" items="${list }" varStatus="articleNum">
 										<tr align="center">
 											<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
-											<td width="4%">${userId}</td>
+											<td width="4%">${item.userId}</td>
 											<td width="20%">${item.comContent}</td>
-											<td width="10%">${item.cnt}</td>
 											<td width="10%">${item.regDate}</td>
 									</c:forEach>
 								</c:when>
@@ -120,9 +146,9 @@
 						</div>
 					</form>
 				</div>
+			<input type="hidden" name="userId" value="${userId}">
 
 			</div>
-			<input type="hidden" name="userId" value="${userId}">
 		</div>
 	</div>
 
