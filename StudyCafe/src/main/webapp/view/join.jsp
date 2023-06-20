@@ -22,7 +22,7 @@
                         var extraAddr = ''; // 조합형 주소 변수
 
                         // 기본 주소와 조합형 주소를 동일하게 설정
-                        document.getElementById("user_addr").value = fullAddr;
+                        document.getElementById("addr").value = fullAddr;
 
                         // 기본 주소가 도로명 타입일 때 조합형 주소 설정
                         if (data.addressType === 'R') {
@@ -39,7 +39,7 @@
                         }
 
                         // 주소 정보 입력 필드에 값 설정
-                        document.getElementById("user_addr").value = fullAddr;
+                        document.getElementById("addr").value = fullAddr;
                     }
                 }).open();
             });
@@ -174,19 +174,19 @@
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><input type="text" name="email" size="30" maxlength="40" /></td>
+					<td><input type="email" name="email" size="30" maxlength="40" /></td>
 				</tr>
 				<tr>
 					 <th>주소</th>
                 <td>
-                    <input type="text" id="user_addr" placeholder="주소" size="60">
+                    <input type="text" id="addr" name="addr" placeholder="주소" size="60">
                     <input type="button" onclick="execDaumPostcode()" value="주소 찾기"><br>
                 </td>
 				</tr>
 					<tr>
 					 <th>상세주소</th>
                 <td>
-                    <input type="text" id="user_addr2" placeholder="상세주소" size="20">
+                    <input type="text" id="user_addr2" name="addr2" placeholder="상세주소" size="20">
                 </td>
 					</tr>
 			</table>

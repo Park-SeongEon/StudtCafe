@@ -28,7 +28,7 @@
                         var extraAddr = ''; // 조합형 주소 변수
 
                         // 기본 주소와 조합형 주소를 동일하게 설정
-                        document.getElementById("user_addr").value = fullAddr;
+                        document.getElementById("addr").value = fullAddr;
 
                         // 기본 주소가 도로명 타입일 때 조합형 주소 설정
                         if (data.addressType === 'R') {
@@ -45,7 +45,7 @@
                         }
 
                         // 주소 정보 입력 필드에 값 설정
-                        document.getElementById("user_addr").value = fullAddr;
+                        document.getElementById("addr").value = fullAddr;
                     }
                 }).open();
             });
@@ -54,25 +54,7 @@
 	function update() {
 		var form = document.updateForm;
 
-		if (!form.userPW.value) {
-			alert("비밀번호를 입력해주세요.");
-			form.userPW.focus();
-			return;
-		}
 
-		// 비밀번호 유효성 검사 로직 추가
-		var passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
-		if (!passwordRegex.test(form.userPW.value)) {
-			alert("비밀번호는 8자리 이상이어야 하며, 영문/숫자 모두 포함해야 합니다.");
-			form.userPW.focus();
-			return;
-		}
-
-		if (form.userPW.value !== form.userPW2.value) {
-			alert("비밀번호를 확인해주세요.");
-			form.userPW2.focus();
-			return;
-		}
 
 		if (!form.name.value) {
 			alert("이름을 입력해주세요.");
@@ -102,38 +84,38 @@
 									<col style="">
 								</colgroup>
 								<tr>
-									<th><span class="blet">*</span> 비밀번호</th>
+									<th><span class="blet"></span> 비밀번호</th>
 									<td><input type="password" name="userPW" size="20" maxlength="16" />
 										<span class="f12 fC666">※ 8~16글자의 영어, 숫자 혼용</span>
 									</td>
 								</tr>
 								<tr>
-									<th><span class="blet">*</span> 비밀번호 확인</th>
+									<th><span class="blet"></span> 비밀번호 확인</th>
 									<td><input type="password" name="userPW2" size="20" maxlength="16" /></td>
 								</tr>
 								<tr>
-									<th><span class="blet">*</span> 이름</th>
-									<td><input type="text" name="name" size="15" maxlength="6" /></td>
+									<th><span class="blet"></span> 이름</th>
+									<td><input type="text" name="name" size="15" maxlength="6" value="${user.userName}"/></td>
 								</tr>
 								<tr>
 									<th>전화</th>
-									<td><input type="text" name="tel" size="15" maxlength="15" /></td>
+									<td><input type="text" name="tel" size="15" maxlength="15" value="${user.userCp}" /></td>
 								</tr>
 								<tr>
 									<th>이메일</th>
-									<td><input type="text" name="email" size="30" maxlength="40" /></td>
+									<td><input type="text" name="email" size="30" maxlength="40" value="${user.userEmail}" /></td>
 								</tr>
 								<tr>
 									 <th>주소</th>
 				                <td>
-				                    <input type="text" id="user_addr" placeholder="주소" size="60">
+				                    <input type="text" id="addr" name="addr" placeholder="주소" size="60" value="${user.userAddr}" >
 				                    <input type="button" onclick="execDaumPostcode()" value="주소 찾기"><br>
 				                </td>
 								</tr>
 									<tr>
 									 <th>상세주소</th>
 				                <td>
-				                    <input type="text" id="user_addr2" placeholder="상세주소" size="20">
+				                    <input type="text" id="addr2" name="addr2" placeholder="상세주소" size="20" value="${user.userDaddr}" >
 				                </td>
 									</tr>
 							</table>

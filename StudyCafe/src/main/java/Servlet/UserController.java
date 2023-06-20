@@ -57,7 +57,8 @@ public class UserController extends HttpServlet {
 			String name = request.getParameter("name");
 			String tel = request.getParameter("tel");
 			String email = request.getParameter("email");
-			String user_addr = request.getParameter("user_addr");
+			String addr = request.getParameter("addr");
+			String addr2 = request.getParameter("addr2");
 			
 			String hashedPassword = sha256Hash(userPW);
 
@@ -66,7 +67,8 @@ public class UserController extends HttpServlet {
 			user.setUserPwd(hashedPassword);
 			user.setUserEmail(email);
 			user.setUserName(name);
-			user.setUserAddr(user_addr);
+			user.setUserAddr(addr);
+			user.setUserDaddr(addr2);
 			user.setUserCp(tel);
 
 			userDao.create(user);
@@ -79,22 +81,26 @@ public class UserController extends HttpServlet {
 			String name = request.getParameter("name");
 			String tel = request.getParameter("tel");
 			String email = request.getParameter("email");
-			String user_addr = request.getParameter("user_addr");
+			String addr = request.getParameter("addr");
+			String addr2 = request.getParameter("addr2");
 			
 			String hashedPassword = sha256Hash(userPW);
 
 			User user = new User();
-
+			
+			user.setUserId((String)	request.getSession().getAttribute("userId"));
+			
 			user.setUserPwd(hashedPassword);
 			user.setUserEmail(email);
 			user.setUserName(name);
-			user.setUserAddr(user_addr);
+			user.setUserAddr(addr);
+			user.setUserDaddr(addr2);
 			user.setUserCp(tel);
 
 			userDao.update(user);
 			
 
-			nextPage = "/member/main.do";
+			nextPage = "/main/main.do";
 		} else if (action.equals("/join.do")) {
 			nextPage = "/view/join.jsp";
 		} else if (action.equals("/mod.do")) {
