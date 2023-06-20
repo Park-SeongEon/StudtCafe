@@ -24,10 +24,28 @@
 
 <script type="text/javascript">
       function backToList(obj){
-	    obj.action="${contextPath}/board/listArticles.do";
+	    obj.action="${contextPath}/board/list.do?katNo=3";
 	    obj.submit();
 	  }
    
+      function fn_modify_artlce(obj) {
+    	  obj.action= "${contextPath}/board/mod.do?brdNo=0";
+    	  obj.submit();
+      }
+      
+      function fn_remove_article(url,brdNo) {
+    	  var form = document.createElement("form");
+    	  form.setAttribute("method", "post");
+    	  form.setAttribute("action", url);
+    	  var brdNoInput = document.createElement("input");
+    	  brdNoInput.setAttribute("type","hidden");
+    	  brdNoInput.setAttribute("name","brdNo");
+    	  brdNoInput.setAttribute("value","brdNo");
+    	  form.appendChild(brdNoInput);
+    	  document.body.appendChild(form);
+    	  form.submit();
+      }
+      
    </script>
 </head>
 <body>
@@ -38,11 +56,13 @@
 		<div id="content">
 			<!--Top  -->
 			<jsp:include page="top.jsp"></jsp:include>
-				<span>글번호</span> <br> <span>유저</span> <br> <span>등록일자</span>
-
+				<span>글번호:${info.brdNo}</span>
+					<div class='pull-right'>유저:${userId}&nbsp</div>
+					<div class='pull-right'>등록일자:${info.regDate}</div>
 					<!-- Content -->
 					<div id="content2">
 						<div class="group">
+						
 							<input type="text" value="${brdNo.title }" id="i_title" required>
 							<span class="highlight"></span> <span class="bar"></span>
 						</div>
@@ -52,15 +72,15 @@
 					<form id="message-form" action="#" method="post" name="frmArticle"
 						enctype="multipart/form-data">
 						<div class="group">
-							<input type="text" value="${brdNo.content }" name="content"
+							<input type="text1" value="${brdNo.content }" name="content"
 								id="i_content" required> <span class="highlight"></span>
 							<span class="bar"></span>
 						</div>
 
 						<input type=button value="수정하기"
-							onClick="update_article('${contextPath}/board/mod.do', ${BoardService.update})">
+							onClick="fn_modify_artlce(this.form)">
 						<input type=button value="삭제하기"
-							onClick="fn_remove_article('${contextPath}/board/remove.do', ${BoardService.delete})">
+							onClick="fn_remove_article('${contextPath}/board/remove.do', ${deleted.brdNo})">
 						<input type=button value="리스트로 돌아가기"
 							onClick="backToList(this.form)">
 
@@ -72,7 +92,7 @@
 							<input type="text" placeholder="Write your message here..." name="content" id="messages" required> 
 							<span class="highlight"></span> 
 							<span class="bar"></span> 
-							<input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
+							<input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${Comment.comNo})">
 
 							<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
 
@@ -86,15 +106,14 @@
 										</td>
 									</tr>
 								</c:when>
-								<c:when test="${list !=null }">
-									<c:forEach var="item" items="${list }" varStatus="articleNum">
+								<c:when test="${comment !=null }">
+									<c:forEach var="item" items="${comment }" varStatus="articleNum">
 										<tr align="center">
 											<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
-											<td width="4%">${item.rownum}</td>
-											<td width="20%"><a
-												href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
+											<td width="4%">${userId}</td>
+											<td width="20%">${item.comContent}</td>
 											<td width="10%">${item.cnt}</td>
-											<td width="30%">${item.regDate}</td>
+											<td width="10%">${item.regDate}</td>
 									</c:forEach>
 								</c:when>
 							</c:choose>

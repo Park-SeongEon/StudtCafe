@@ -131,7 +131,7 @@ public class BoardController extends HttpServlet {
 			} else if(action.equals("/view.do")){
 				String no = request.getParameter("brdNo");
 				Board vo = brdService.getBoardView(Integer.parseInt(no));
-				request.setAttribute("vo", vo);
+				request.setAttribute("info", vo);
 				nextPage = "/view/view.jsp";
 				
 			} else if(action.equals("/mod.do")) {// 글 수정 부분 여기에 추가해 주세요
@@ -146,7 +146,7 @@ public class BoardController extends HttpServlet {
 				fix.setContent(content);
 				brdService.save(fix);
 				
-				request.setAttribute("msg", "modified");
+				request.setAttribute("msg", fix);
 				nextPage = "/view/articleForm.jsp";
 				
 				
@@ -160,15 +160,27 @@ public class BoardController extends HttpServlet {
 				
 				return;
 			} else if (action.equals("/replyForm.do")) {// 댓글 쓰는 기능 여기에 추가해 주세요
-				String commenUpdate = request.getParameter("title");
+				int parentNO = Integer.parseInt(request.getParameter("parentNO"));
+				session = request.getSession();
+				session.setAttribute("parentNO", parentNO);
 				
-				Board comment =new Board();
-		//		comment.setcnt(comment);
-				
-			//	boardDao.commentUpadate(commenUpdate);
 				
 				nextPage = "/view/articleForm.jsp";
 			} else if (action.equals("/addReply.do")) {	//댓글 추가 부분 여기에 추가해주세요
+				session = request.getSession();
+				
+				session.removeAttribute("parentNO");
+				
+				
+				
+				String content = request.getParameter("comContent");
+				//String imageFileName = request.getParameter("imageFileName");
+				System.out.println(content);
+
+				
+				
+				
+			
 				String comment = request.getParameter("comment");
 				
 				

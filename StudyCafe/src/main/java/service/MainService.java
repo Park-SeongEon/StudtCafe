@@ -47,8 +47,4 @@ public class MainService {
 	public Map<String,Integer> getSeatCount() {
 		return seatDao.selectSeatCount();
 	}
-
-
-	
-
 }
