@@ -3,6 +3,7 @@ package Servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -48,7 +49,7 @@ public class MainController extends HttpServlet {
 		List<Kategorie> katlist  = mainService.getMenu();
 		request.setAttribute("katlist", katlist);		
 		request.setAttribute("katTargetNo", 0);
-		request.setAttribute("katTargetName", "dashBoard");
+		request.setAttribute("katTargetName", "Dashboard");
 
 		try {			
 			if(action == null){
@@ -67,6 +68,10 @@ public class MainController extends HttpServlet {
 				List<Board> viewlist = mainService.getBoardViewList();
 				request.setAttribute("viewlist", viewlist);
 
+				Map<String,Integer> statis = mainService.getSeatCount();
+				request.setAttribute("statis", statis);
+
+				
 				nextPage = "/view/main.jsp";
 			} else if(action.equals("/change.do")){
 				

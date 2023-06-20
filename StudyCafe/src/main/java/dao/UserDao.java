@@ -128,8 +128,8 @@ public class UserDao extends SuperDao{
 			stmt.setString(5, vo.getUserEmail());
 			stmt.setString(6, vo.getUserCp());
 			stmt.setString(7, vo.getUserGrade());
-			Date join = new Date(vo.getJoinDate().getTime());
-			stmt.setDate(8, join);
+
+//			stmt.setDate(8, join);
 			stmt.setString(9, vo.getUserId());
 
 			stmt.executeUpdate();

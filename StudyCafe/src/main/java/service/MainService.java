@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import dao.BoardDao;
 import dao.KateDao;
@@ -43,6 +44,10 @@ public class MainService {
 		return brdDao.selectMainViewList();
 	}
 	
+	public Map<String,Integer> getSeatCount() {
+		return seatDao.selectSeatCount();
+	}
+
 
 	
 

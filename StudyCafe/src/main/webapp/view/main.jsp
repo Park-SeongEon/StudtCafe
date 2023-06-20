@@ -99,6 +99,9 @@
 						<%-- 통계영역 --%>
 						
 					</div>
+
+					<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
+
 					<table style="width:85%;margin-left: auto;margin-right: auto;">
 						<colgroup>
 							<col width="30%" />
@@ -109,16 +112,16 @@
 								<td>
 									<div class="statis">
 									 	<div class="statis-head">
-									    	<h4 class="statis-title" style="font-family: Namum;">좌석 현황</h4>
+									    	<h2 class="statis-title" style="font-family: Namum;">좌석 현황</h2>
 										</div>
 									 	<div class="statis-body">
 											<p class="title-1">남은좌석수</p>
 											<p class="value-1">
-												<fmt:formatNumber value="19" type="number" />
+												<fmt:formatNumber value="${statis.seatcnt}" type="number" />
 											</p>
 											<p class="title-2">좌석수</p>
 											<p class="value-2">
-												<fmt:formatNumber value="21" type="number" />
+												<fmt:formatNumber value="${statis.totalcnt}" type="number" />
 											</p>
 									  	</div>
 									</div>								
@@ -137,7 +140,6 @@
 														<td class="date">${item.userId}</td>
 														<td class="date">${item.regDate}</td>
 														<td class="date">${item.cnt}</td>
-
 													</tr>
 												</c:forEach>
 											</tbody>

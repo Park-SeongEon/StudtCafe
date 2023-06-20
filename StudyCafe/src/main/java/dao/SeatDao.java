@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.Board;
 import model.Seat;
@@ -52,6 +54,39 @@ public class SeatDao extends SuperDao{
 		return list;
 	}
 
+	
+	public Map<String,Integer> selectSeatCount(){
+
+		
+		Map<String,Integer> map = null;
+		
+		try {
+			Connection conn = getConnection();
+			String sql = "SELECT "
+					+ "	COUNT(*)  AS totalcnt "
+					+ "	, COUNT(*) - (select COUNT(*) FROM seat WHERE seat_comment != '01') AS seatcnt "
+					+ "FROM seat ";
+
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet re = stmt.executeQuery();
+			while (re.next()) {				
+				map = new HashMap<String,Integer>();
+				map.put("totalcnt", re.getInt("totalcnt"));
+				map.put("seatcnt", re.getInt("seatcnt"));
+			}
+			re.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+
+		return map;
+	}
+
+	
 	public Board selectById(int brdNo) {
 		
 		Board vo = null;

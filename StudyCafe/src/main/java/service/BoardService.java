@@ -48,4 +48,7 @@ public class BoardService {
 	public Board getBoardView(int brdNo) {
 		return brdDao.selectById(brdNo);
 	}
+	
+	
+
 }
