@@ -150,10 +150,7 @@ public class UserController extends HttpServlet {
 			String userId = (String) session.getAttribute("userId");
 			
 			User user= userDao.selectById(userId);
-
-			
 			request.setAttribute("user", user);
-
 			nextPage = "/view/update.jsp";
 		}
 		
