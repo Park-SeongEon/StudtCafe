@@ -38,8 +38,6 @@ public class MainService {
 		seatDao.update(vo);
 	}
 
-	
-	
 	public List<Board> getBoardViewList(){
 		return brdDao.selectMainViewList();
 	}

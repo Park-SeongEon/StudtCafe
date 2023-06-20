@@ -12,13 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.Board;
 import model.Kategorie;
 import model.User;
 import service.AdminService;
-import service.BoardService;
 
 @WebServlet("/admin/*")
 public class AdminController extends HttpServlet {

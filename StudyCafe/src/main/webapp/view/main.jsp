@@ -82,7 +82,8 @@
 												<p>${item.seatCommentData}</p>
 											</div>
 										</div>		
-									</c:if>								</td>
+									</c:if>								
+								</td>
 							</c:forEach>
 							</tr>
 						</table>

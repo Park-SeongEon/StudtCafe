@@ -137,6 +137,23 @@ body {
 }
 
 
+.main_back2 {
+    width: 100%;
+    background-color: #f3f3f3;
+    overflow: auto;
+    display: flex;
+}
+
+
+.main_back2 .container{
+    width: 1400px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0px 0px 13px #bbbbbb;
+    margin: 30px 20% 50px 20%;
+}
+
+
 
 .main_back .container{
     width: 1580px;

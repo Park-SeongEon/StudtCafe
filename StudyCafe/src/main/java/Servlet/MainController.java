@@ -50,8 +50,6 @@ public class MainController extends HttpServlet {
             return;
         }
 
-		
-		
 		List<Kategorie> katlist  = mainService.getMenu();
 		request.setAttribute("katlist", katlist);		
 		request.setAttribute("katTargetNo", 0);

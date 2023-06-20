@@ -104,16 +104,16 @@ public class BoardDao extends SuperDao{
 					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10";
 			else 
 				sql = "SELECT * FROM ( "
-						+ "SELECT  "
-						+ "	* "
-						+ "	,ROW_NUMBER() over(ORDER BY regDate) AS rownum"
-						+ "	,count(1) over() AS totalCount "
-						+ "from board  "
-						+ "where kate_no=? "
-						+ "and user_id=? "
-						+ "order by regDate DESC "
-						+ ") c "
-						+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10";
+					+ "SELECT  "
+					+ "	* "
+					+ "	,ROW_NUMBER() over(ORDER BY regDate) AS rownum"
+					+ "	,count(1) over() AS totalCount "
+					+ "from board  "
+					+ "where kate_no=? "
+					+ "and user_id=? "
+					+ "order by regDate DESC "
+					+ ") c "
+					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, katNo);

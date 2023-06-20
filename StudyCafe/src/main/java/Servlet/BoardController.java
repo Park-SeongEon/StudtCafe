@@ -82,8 +82,6 @@ public class BoardController extends HttpServlet {
 				int section = Integer.parseInt(((_section == null) ? "1" : _section));
 				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 
-				
-				
 				Map<String,Object> pagingMap = new HashMap<String,Object>();
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
@@ -187,7 +185,6 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("info", vo);
 				
 				List<Comment> comlist= brdService.getCommentList(Integer.parseInt(no));
-
 				
 				request.setAttribute("list", comlist);
 

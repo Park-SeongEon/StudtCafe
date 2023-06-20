@@ -81,7 +81,7 @@ input[type=button], input[type=submit], input[type=reset]  {
   background-color: #56baed;
   border: none;
   color: white;
-  padding: 15px 80px;
+  padding: 15px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -98,6 +98,14 @@ input[type=button], input[type=submit], input[type=reset]  {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
  
+}
+
+
+.center{
+	text-align: center;
+	margin-top :40px;
+	margin-bottom :40px;
+	
 }
 
 
@@ -197,6 +205,11 @@ input[type=password]:placeholder {
 }
 
 
+.notice
+{
+	font-size: 15px;
+	line-height: 1.6;
+}
 
 /* ANIMATIONS */
 

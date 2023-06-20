@@ -21,7 +21,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="../js/bootstrap.js"></script>
 <script src="../js/sidebar.js"></script>
-
+<script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
       function backToList(obj){
 	    obj.action="${contextPath}/board/list.do?katNo=3";
@@ -40,7 +40,7 @@
     	  var brdNoInput = document.createElement("input");
     	  brdNoInput.setAttribute("type","hidden");
     	  brdNoInput.setAttribute("name","brdNo");
-    	  brdNoInput.setAttribute("value","brdNo");
+    	  brdNoInput.setAttribute("value",brdNo);
     	  form.appendChild(brdNoInput);
     	  document.body.appendChild(form);
     	  form.submit();
@@ -65,20 +65,17 @@
 		     form.appendChild(parentNOInput);
 		     form.appendChild(parentNOInput2);
 
-		     
-		     console.log(form);
-
 		     document.body.appendChild(form);
 	    	 form.submit();
 		     
 		 }
       
    </script>
-   
-   <style>
-    button-align {
-        text-align: center;
-    }
+
+<style>
+button-align {
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -89,47 +86,48 @@
 		<div id="content">
 			<!--Top  -->
 			<jsp:include page="top.jsp"></jsp:include>
-				<span>유저:${userId}</span>
-					<div class='pull-right'> &nbsp 등록일자:${info.regDate} &nbsp 👍:${info.voteNo}</div>
-					<div class='pull-right'></div>
-					<div class='pull-right'></div>
-					<!-- Content -->
-					<div id="content2">
-						<div class="group">
-						
-							<input type="text" value="${brdNo.title }" id="i_title" required>
-							<span class="highlight"></span> <span class="bar"></span>
+			<div class="main_back2">
+				<div class="container">
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+<!-- 							<input type="text" value="${info.title}" name="title"
+								id="i_content" required>
+ -->
+							<h1 class="card-title">${info.title}</h1>
+ 			  				<p class="card-text"><i class="fa-solid fa-user"></i>${userId}</p>
+							<h6 class="card-subtitle mb-2 text-muted">등록일자:${info.regDate}  조회수:${info.cnt} </h6>
 						</div>
 					</div>
-					<div
-						style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
+
+
+					<div class='pull-right'>👍 : ${info.voteNo}</div>
+					
+					<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
+					
 					<form id="message-form" action="#" method="post" name="frmArticle"
 						enctype="multipart/form-data">
-						<div class="group">
-							<input type="text" value="${brdNo.content }" name="content"
-								id="i_content" required> <span class="highlight"></span>
+						<div class="group notice center">
+							<textarea rows="10" cols="100" name="content" id="i_content" disabled>${info.content}</textarea>
+							<span class="highlight"></span>
 							<span class="bar"></span>
 						</div>
 
-						
-						<input type=button value="수정하기"
-							onClick="fn_modify_artlce(this.form)">
-						<input type=button value="삭제하기"
-							onClick="fn_remove_article('${contextPath}/board/remove.do', ${deleted.brdNo})">
-						<input type=button value="리스트로 돌아가기"
-							onClick="backToList(this.form)">
-						<input type=button value="추천하기"
-							onClick="fn_modify_artlce(this.form)">
-						
+						<div class="center">
+							<input type=button value="수정하기" onClick="fn_modify_artlce(this.form)"> 
+							<input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/remove.do', ${deleted.brdNo})">
+							<input type=button value="리스트로 돌아가기" onClick="backToList(this.form)"> 
+							<input type=button value="추천하기" onClick="fn_modify_artlce(this.form)">
+						</div>
 
 						<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
 
-						<div id="messages">Connecting...</div>
+						<div id="messages">Comment...</div>
 						<div class="group">
-							<input type="text" id="comment" placeholder="Write your message here..." name="content" id="messages"> 
-							<span class="highlight"></span> 
-							<span class="bar"></span> 
-							<input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/addReply.do', ${info.brdNo})">
+							<input type="text" id="comment"
+								placeholder="Write your message here..." name="content"
+								id="messages"> <span class="highlight"></span> <span
+								class="bar"></span> <input type=button value="답글쓰기"
+								onClick="fn_reply_form('${contextPath}/board/addReply.do', ${info.brdNo})">
 
 							<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
 
@@ -145,19 +143,21 @@
 								</c:when>
 								<c:when test="${list !=null }">
 									<c:forEach var="item" items="${list }" varStatus="articleNum">
-										<tr align="center">
-											<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
-											<td width="4%">${item.userId}</td>
-											<td width="20%">${item.comContent}</td>
-											<td width="10%">${item.regDate}</td>
+										<div class="card" style="width: 18rem;">
+											<div class="card-body">
+												<h5 class="card-title">${item.userId}</h5>
+					 			  				<p class="card-text">${item.comContent}</p>
+												<h6 class="card-subtitle mb-2 text-muted">등록일자:${item.regDate}   </h6>
+											</div>
+										</div>										
+										<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
 									</c:forEach>
 								</c:when>
 							</c:choose>
 						</div>
 					</form>
 				</div>
-			<input type="hidden" name="userId" value="${userId}">
-
+				<input type="hidden" name="userId" value="${userId}">
 			</div>
 		</div>
 	</div>
