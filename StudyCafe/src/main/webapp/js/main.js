@@ -32,6 +32,7 @@
 				if(data === 'success'){
 					thics.addClass('active');
 				 	thics.children(".card-main").children("p").text("사용중");
+				 	location.href = '/main/main.do'
 				}
 			},
 			error:function(){
