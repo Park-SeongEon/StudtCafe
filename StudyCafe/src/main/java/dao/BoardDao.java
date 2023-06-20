@@ -15,13 +15,16 @@ public class BoardDao extends SuperDao{
 
 	}
 
-	public List<Board> selectAll(Map<String,Integer> map) {
+	public List<Board> selectAll(Map<String,Object> map) {
 
 		List<Board> list = new ArrayList<>();
 
 		int katNo = (Integer) map.get("katNo");
 		int section = (Integer) map.get("section");
 		int pageNum = (Integer) map.get("pageNum");
+
+		
+		
 		try {
 			Connection conn = getConnection();
 			String sql = "SELECT * FROM ( "
@@ -69,6 +72,85 @@ public class BoardDao extends SuperDao{
 		return list;
 	}
 	
+	
+	public List<Board> selectSearchAll(Map<String,Object> map) {
+
+		List<Board> list = new ArrayList<>();
+
+		int katNo = (Integer) map.get("katNo");
+		int section = (Integer) map.get("section");
+		int pageNum = (Integer) map.get("pageNum");
+		String searchId = (String) map.get("searchId");
+		String searchText = (String) map.get("searchText");
+
+		
+		
+		try {
+			Connection conn = getConnection();
+			String sql = null;
+			
+			
+			if(searchId != "title")
+				sql = "SELECT * FROM ( "
+					+ "SELECT  "
+					+ "	* "
+					+ "	,ROW_NUMBER() over(ORDER BY regDate) AS rownum"
+					+ "	,count(1) over() AS totalCount "
+					+ "from board  "
+					+ "where kate_no=? "
+					+ "and title=? "
+					+ "order by regDate DESC "
+					+ ") c "
+					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10";
+			else 
+				sql = "SELECT * FROM ( "
+						+ "SELECT  "
+						+ "	* "
+						+ "	,ROW_NUMBER() over(ORDER BY regDate) AS rownum"
+						+ "	,count(1) over() AS totalCount "
+						+ "from board  "
+						+ "where kate_no=? "
+						+ "and user_id=? "
+						+ "order by regDate DESC "
+						+ ") c "
+						+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, katNo);
+			stmt.setString(2, searchText);
+			stmt.setInt(3, section);
+			stmt.setInt(4, pageNum);
+			stmt.setInt(5, section);
+			stmt.setInt(6, pageNum);
+			System.out.println(stmt);
+			ResultSet re = stmt.executeQuery();
+			while (re.next()) {
+				Board vo = new Board();
+				vo.setBrdNo(re.getInt("brd_no"));
+				vo.setTitle(re.getString("title"));
+				vo.setContent(re.getString("content"));
+				vo.setFilename(re.getString("file_name"));
+				vo.setRegDate(re.getDate("regdate"));
+				vo.setKateNo(re.getInt("kate_no"));
+				vo.setVoteNo(re.getInt("vote_no"));
+				vo.setCnt(re.getInt("cnt"));
+				vo.setTotalCount(re.getInt("totalCount"));
+				vo.setRownum(re.getInt("rownum"));
+
+				list.add(vo);
+			}
+			re.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+
+		return list;
+	}
+
+	
 	public List<Board> selectMainViewList() {
 		List<Board> list = new ArrayList<>();
 
@@ -110,17 +192,19 @@ public class BoardDao extends SuperDao{
 
 				list.add(vo);
 			}
+			
+			
 			re.close();
 			stmt.close();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			close();
 		}
 
+	
 		return list;
 	}
-	
 
 	public Board selectById(int brdNo) {
 		

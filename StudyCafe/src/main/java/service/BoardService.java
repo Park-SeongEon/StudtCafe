@@ -28,8 +28,13 @@ public class BoardService {
 	}
 	
 	
-	public List<Board> getBoardList(Map<String,Integer> map){
+	public List<Board> getBoardList(Map<String,Object> map){
 		return brdDao.selectAll(map);
+	}
+
+	
+	public List<Board> getBoardSearchList(Map<String,Object> map){
+		return brdDao.selectSearchAll(map);
 	}
 
 

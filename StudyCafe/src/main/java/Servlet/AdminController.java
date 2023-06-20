@@ -75,7 +75,7 @@ public class AdminController extends HttpServlet {
 				int section = Integer.parseInt(((_section == null) ? "1" : _section));
 				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 				
-				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
+				Map<String,Object> pagingMap = new HashMap<String,Object>();
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
 
@@ -95,7 +95,7 @@ public class AdminController extends HttpServlet {
 				int section = Integer.parseInt(((_section == null) ? "1" : _section));
 				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 				
-				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
+				Map<String,Object> pagingMap = new HashMap<String,Object>();
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
 				pagingMap.put("katNo", katNo);

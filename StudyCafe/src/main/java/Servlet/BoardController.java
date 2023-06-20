@@ -57,7 +57,7 @@ public class BoardController extends HttpServlet {
 
 		
 		String strKatNo = request.getParameter("katNo");
-		int katNo = 0;
+		int katNo = -1;
 		if(strKatNo != null) {
 			katNo = Integer.parseInt(strKatNo);
 			request.setAttribute("katTargetNo", katNo);
@@ -74,39 +74,86 @@ public class BoardController extends HttpServlet {
 			if(action == null) {
 				String _section = request.getParameter("setion");
 				String _pageNum = request.getParameter("pageNum");
+				String searchId = request.getParameter("searchId");
+				String searchText = request.getParameter("searchText");
+
 				
 				//페이징처리
 				int section = Integer.parseInt(((_section == null) ? "1" : _section));
 				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+
 				
-				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
+				
+				Map<String,Object> pagingMap = new HashMap<String,Object>();
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
 				pagingMap.put("katNo", katNo);
+				pagingMap.put("searchId", searchId);
+				pagingMap.put("searchText", searchText);
 
-				list  = brdService.getBoardList(pagingMap);
+				if(searchId != null)
+					list  = brdService.getBoardSearchList(pagingMap);
+				else 
+					list  = brdService.getBoardList(pagingMap);
 
 				request.setAttribute("section", section);
 				request.setAttribute("pageNum", pageNum);
 				request.setAttribute("list", list);
 				 			
-				nextPage = "/view/list.jsp";
+				nextPage = "/view/board.jsp";
 			} else if("/list.do".equals(action)) {
 
 				String _section = request.getParameter("setion");
 				String _pageNum = request.getParameter("pageNum");
+				String searchId = request.getParameter("searchId");
+				String searchText = request.getParameter("searchText");
+
 				
 				//페이징처리
 				int section = Integer.parseInt(((_section == null) ? "1" : _section));
 				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 				
-				Map<String,Integer> pagingMap = new HashMap<String,Integer>();
+				Map<String,Object> pagingMap = new HashMap<String,Object>();
 				pagingMap.put("section", section);
 				pagingMap.put("pageNum", pageNum);
 				pagingMap.put("katNo", katNo);
+				pagingMap.put("searchId", searchId);
+				pagingMap.put("searchText", searchText);
 
 				
 				list  = brdService.getBoardList(pagingMap);
+
+				request.setAttribute("section", section);
+				request.setAttribute("pageNum", pageNum);
+				request.setAttribute("list", list);
+
+				if(list.size() > 0)
+					request.setAttribute("tot", list.get(0).getTotalCount());
+
+
+				nextPage = "/view/board.jsp";
+
+			} else if("/searchlist.do".equals(action)) {
+
+				String _section = request.getParameter("setion");
+				String _pageNum = request.getParameter("pageNum");
+				String searchId = request.getParameter("searchId");
+				String searchText = request.getParameter("searchText");
+
+				
+				//페이징처리
+				int section = Integer.parseInt(((_section == null) ? "1" : _section));
+				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+				
+				Map<String,Object> pagingMap = new HashMap<String,Object>();
+				pagingMap.put("section", section);
+				pagingMap.put("pageNum", pageNum);
+				pagingMap.put("katNo", katNo);
+				pagingMap.put("searchId", searchId);
+				pagingMap.put("searchText", searchText);
+
+				
+				list  = brdService.getBoardSearchList(pagingMap);
 
 				request.setAttribute("section", section);
 				request.setAttribute("pageNum", pageNum);
@@ -168,7 +215,7 @@ public class BoardController extends HttpServlet {
 				brdService.removeBoard(katNo);
 				
 				request.setAttribute("msg", "deleted");
-				nextPage = "/view/list.jsp";
+				nextPage = "/view/board.jsp";
 				
 				return;
 			} else if (action.equals("/replyForm.do")) {// 댓글 쓰는 기능 여기에 추가해 주세요

@@ -29,7 +29,7 @@ public class AdminService {
 	}
 	
 	
-	public List<Board> getBoardList(Map<String,Integer> map){
+	public List<Board> getBoardList(Map<String,Object> map){
 		return brdDao.selectAll(map);
 	}
 

@@ -23,8 +23,8 @@ public abstract class SuperDao {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-	//		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/studycafe","root","12345");
-			con = DriverManager.getConnection("jdbc:mysql://192.168.17.76:3306/studycafe","root","12345");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/studycafe","root","12345");
+	//		con = DriverManager.getConnection("jdbc:mysql://192.168.17.76:3306/studycafe","root","12345");
 
 		} catch (Exception e) {
 			e.printStackTrace();
