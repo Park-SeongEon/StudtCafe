@@ -35,9 +35,9 @@
 <jsp:include page="top.jsp"></jsp:include>
 <div class="wrapper fadeInDown">
 <tr>
-<td width="150" align="left" bgcolor="#FF9933">글번호</td>
+<td value="brdno"width="150" align="left" bgcolor="#FF9933">글번호</td>
 <br>
-<td width="150" align="left" bgcolor="#FF9933">유저</td>
+<td value="" width="150" align="left" bgcolor="#FF9933">유저</td>
 <br>
 <td width="150" align="left" bgcolor="#FF9933">등록일자</td>
 </tr>
@@ -46,26 +46,27 @@
 <div id="content">
 	<tr>
 		<td>
-		<div class="group">      
-			<input type="text" value="${article.title }"  id="i_title" required>
-				<span class="highlight"></span>
-					<span class="bar"></span>	 
-					  </div>
-						</td>
-				     		</tr>
+			<div class="group">      
+				<input type="text" value="${brdNo.title }"  id="i_title" required>
+					<span class="highlight"></span>
+						<span class="bar"></span>	 
+			</div>
+		</td>
+	</tr>
+</div>
  <!-- <div class="container"> -->
 <div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>		
-		<form id="message-form" action="#" method="post" name="frmArticle"
+	<form id="message-form" action="#" method="post" name="frmArticle"
 		enctype="multipart/form-data">		
-		<tr>
-		<td>
-		<div class="group"> 	
-		<input type="text"  value="${article.content }" name="content" id="i_content" required>
-			 <span class="highlight"></span>
-			<span class="bar"></span>	
-		</div>
-		</td>
-		</tr>		
+			<tr>
+				<td>
+					<div class="group"> 	
+						<input type="text"  value="${brdNo.content }" name="content" id="i_content" required>
+			 				<span class="highlight"></span>
+								<span class="bar"></span>	
+</div>
+				</td>
+			</tr>		
 		
 								 	 																			
 
@@ -79,7 +80,7 @@
 		</table>
 		
 					
-	
+<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
 		
 		<footer>
 		<div id="messages">Connecting...</div>
@@ -89,7 +90,32 @@
 		<input type="text" placeholder="Write your message here..." name="content" id="messages" action="#" required>
 		 <span class="highlight"></span>
 		<span class="bar"></span>
-		<input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})"> 
+		<input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
+		
+<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
+		
+		<c:choose>
+			<c:when test="${list ==null }">
+				<tr height="10">
+					<td colspan="6">
+						<p align="center">
+							<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
+												</p>
+											</td>
+										</tr>
+									</c:when>
+									<c:when test="${list !=null }">
+										<c:forEach var="item" items="${list }" varStatus="articleNum">
+											<tr align="center">
+												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
+												<td width="4%">${item.rownum}</td>
+												<td width="20%"><a href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
+												<td width="10%">${item.cnt}</td>
+												<td width="30%">${item.regDate}</td>
+										</c:forEach>
+									</c:when>
+								</c:choose> 
+		 
 		 
 		</div>
 		</td>
@@ -105,11 +131,6 @@
 				</div>
 			</div>
 		</div><!-- Content End  -->
-		
-		
 	
-
-
-
 </body>
 </html>
