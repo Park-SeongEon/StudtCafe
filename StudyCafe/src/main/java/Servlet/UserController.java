@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import model.User;
@@ -20,7 +21,7 @@ import model.User;
 @WebServlet("/member/*")
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	UserDao dao;
+	UserDao userDao;
 
 	public UserController() {
 		super();
@@ -29,7 +30,7 @@ public class UserController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 
-		dao = new UserDao();
+		userDao = new UserDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,6 +39,7 @@ public class UserController extends HttpServlet {
 		String nextPage = null;
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
+		HttpSession session;
 
 		String action = request.getPathInfo();
 
@@ -66,7 +68,7 @@ public class UserController extends HttpServlet {
 			user.setUserAddr(user_addr);
 			user.setUserCp(tel);
 
-			dao.create(user);
+			userDao.create(user);
 			
 
 			nextPage = "/member/main.do";
@@ -88,7 +90,7 @@ public class UserController extends HttpServlet {
 			user.setUserAddr(user_addr);
 			user.setUserCp(tel);
 
-			dao.update(user);
+			userDao.update(user);
 			
 
 			nextPage = "/member/main.do";
@@ -112,7 +114,7 @@ public class UserController extends HttpServlet {
 
 			
 			// 로그인 처리
-			boolean isAuthenticated = dao.authenticateUser(userID, hashedPassword);
+			boolean isAuthenticated = userDao.authenticateUser(userID, hashedPassword);
 
 			if (isAuthenticated) {
 				// 로그인 성공
@@ -135,15 +137,29 @@ public class UserController extends HttpServlet {
 
 			String userId = request.getParameter("userId");
 
-			boolean checkID = dao.idCheck(userId);
+			boolean checkID = userDao.idCheck(userId);
 			if (checkID)
 				out.print("fail");
 			else
 				out.print("success");
 
 			return;
-		} else {
-			List<User> memList = dao.selectAll();
+		}else if (action.equals("/updatefrom.do")) {
+			
+			session=request.getSession();
+			String userId = (String) session.getAttribute("userId");
+			
+			User user= userDao.selectById(userId);
+
+			
+			request.setAttribute("user", user);
+
+			nextPage = "/view/update.jsp";
+		}
+		
+		
+		else {
+			List<User> memList = userDao.selectAll();
 			request.setAttribute("memList", memList);
 			nextPage = "/view/member.jsp";
 
