@@ -45,6 +45,12 @@ public class MainController extends HttpServlet {
 		String action = request.getPathInfo();
 
 		
+        if(request.getSession().getAttribute("userId") == null) {
+            response.sendRedirect("/member/main.do");
+            return;
+        }
+
+		
 		
 		List<Kategorie> katlist  = mainService.getMenu();
 		request.setAttribute("katlist", katlist);		

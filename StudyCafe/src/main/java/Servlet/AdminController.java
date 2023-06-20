@@ -42,8 +42,13 @@ public class AdminController extends HttpServlet {
 		String nextPage = null;
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
-		HttpSession session;
 		String action = request.getPathInfo();
+		
+		
+        if(request.getSession().getAttribute("userId") == null) {
+            response.sendRedirect("/member/main.do");
+            return;
+        }
 		
 		
 		List<Kategorie> katlist  = adminService.getMenu();

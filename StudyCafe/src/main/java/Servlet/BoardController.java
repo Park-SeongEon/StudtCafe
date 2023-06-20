@@ -44,6 +44,12 @@ public class BoardController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session;
 		String action = request.getPathInfo();
+
+        if(request.getSession().getAttribute("userId") == null) {
+            response.sendRedirect("/member/main.do");
+            return;
+        }
+
 		
 		List<Kategorie> katlist  = brdService.getMenu();
 		request.setAttribute("katlist", katlist);

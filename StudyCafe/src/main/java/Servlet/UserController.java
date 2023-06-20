@@ -41,6 +41,7 @@ public class UserController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session;
 
+		
 		String action = request.getPathInfo();
 
 		if (action == null) {
