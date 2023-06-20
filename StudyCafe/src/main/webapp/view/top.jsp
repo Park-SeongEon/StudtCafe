@@ -39,7 +39,7 @@
 							class="zmdi zmdi-notifications text-danger"></i> </a></li>
 					<li><a href="#">${userId}</a></li>
 					<li><a href="/member/updatefrom.do">회원정보수정</a></li>
-					<li><a href="javascript:void(0);" onclick="toggleLogout()"><span
+					<li><a href="/member/logout.do" onclick="toggleLogout()"><span
 							id="logoutText">로그아웃</span></a></li>
 				</ul>
 			</div>

@@ -160,6 +160,15 @@ public class UserController extends HttpServlet {
 			request.setAttribute("user", user);
 			nextPage = "/view/update.jsp";
 		}
+		//로그아웃
+		else if (action.equals("/logout.do")) {
+		    session = request.getSession(false); // 세션 객체 생성하지 않고 기존 세션을 가져옴
+		    if (session != null) {
+		        session.removeAttribute("userId"); // 세션에서 userId 속성 제거
+		        session.invalidate(); // 세션 무효화
+		    }
+		    nextPage = "/member/main.do";
+		}
 		
 		
 		else {
