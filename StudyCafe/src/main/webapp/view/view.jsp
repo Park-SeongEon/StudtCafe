@@ -74,6 +74,12 @@
 		 }
       
    </script>
+   
+   <style>
+    button-align {
+        text-align: center;
+    }
+</style>
 </head>
 <body>
 	<div id="viewport">
@@ -83,9 +89,10 @@
 		<div id="content">
 			<!--Top  -->
 			<jsp:include page="top.jsp"></jsp:include>
-				<span>글번호:${info.brdNo}</span>
-					<div class='pull-right'>유저:${userId}&nbsp</div>
-					<div class='pull-right'>등록일자:${info.regDate}</div>
+				<span>유저:${userId}</span>
+					<div class='pull-right'> &nbsp 등록일자:${info.regDate} &nbsp 👍:${info.voteNo}</div>
+					<div class='pull-right'></div>
+					<div class='pull-right'></div>
 					<!-- Content -->
 					<div id="content2">
 						<div class="group">
@@ -104,15 +111,18 @@
 							<span class="bar"></span>
 						</div>
 
+						
 						<input type=button value="수정하기"
 							onClick="fn_modify_artlce(this.form)">
 						<input type=button value="삭제하기"
 							onClick="fn_remove_article('${contextPath}/board/remove.do', ${deleted.brdNo})">
 						<input type=button value="리스트로 돌아가기"
 							onClick="backToList(this.form)">
+						<input type=button value="추천하기"
+							onClick="fn_modify_artlce(this.form)">
+						
 
-						<div
-							style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
+						<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
 
 						<div id="messages">Connecting...</div>
 						<div class="group">
