@@ -23,18 +23,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
 	<script src="../js/sidebar.js"></script>
-<script>
-</script>
-
-<link rel="stylesheet" href="../css/custom.css">
-
-<title>JSP 게시판 웹 사이트</title>
 <style type="text/css">
 a, a:hover {
 	color: #000000;
 	text-decoration: none;
 }
 </style>
+	<title>JSP 게시판 웹 사이트</title>
+
 </head>
 <body>
 
@@ -45,7 +41,7 @@ a, a:hover {
 			<jsp:include page="top.jsp"></jsp:include>
 			<div class="main_back">
 				<div class="container">
-					<h1 style="font-family: Namum">게시판</h1>
+					<h1 style="font-family: Namum">공지사항</h1>
 					<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
 					<form method="post" name="search">
 						<table class="pull-right">
@@ -73,8 +69,10 @@ a, a:hover {
 								<tr>
 									<th style="text-align: center; vertical-align:middle;">번호</th>
 									<th style="text-align: center; vertical-align:middle;">제목</th>
-									<th style="text-align: center; vertical-align:middle;">작성자</th>
+									<th style="text-align: center; vertical-align:middle;">내용</th>
+									<th style="text-align: center; vertical-align:middle;">조회수</th>
 									<th style="text-align: center; vertical-align:middle;">작성일</th>
+									<th style="text-align: center; vertical-align:middle;">삭제</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -92,10 +90,12 @@ a, a:hover {
 										<c:forEach var="item" items="${list }" varStatus="articleNum">
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
-												<td width="4%">${item.rownum}</td>
-												<td width="20%"><a href="${contextPath}/admin/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
+												<td width="5%">${item.rownum}</td>
+												<td width="25%"><a href="${contextPath}/admin/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
+												<td width="45%"><a href="${contextPath}/admin/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.content}</a></td>
 												<td width="10%">${item.cnt}</td>
-												<td width="30%">${item.regDate}</td>
+												<td width="10%">${item.regDate}</td>
+												<td width="5%" colspan="2"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove.do?katNo=${item.rownum}&brdNo=${item.brdNo}'"></td>
 										</c:forEach>
 									</c:when>
 								</c:choose>
@@ -157,11 +157,11 @@ a, a:hover {
 						<table class="table">
 							<tr>
 								<td>제목</td>
-								<td><input class="form-control" id="userName" type="text"></td>
+								<td><input class="form-control" name="title" type="text"></td>
 							</tr>
 							<tr>
 								<td>내용</td>
-								<td><textarea class="form-control" id="contents" rows="10"></textarea></td>
+								<td><textarea class="form-control" name="content" rows="10"></textarea></td>
 							</tr>
 						</table>
 					</div>
@@ -175,6 +175,5 @@ a, a:hover {
 			</div>
 		</form>
 	</div>
-	<script src="../js/bootstrap.js"></script>
 </body>
 </html>

@@ -44,7 +44,7 @@ a, a:hover {
 			<jsp:include page="top.jsp"></jsp:include>
 			<div class="main_back">
 				<div class="container">
-					<h1 style="font-family: Namum">게시판</h1>
+					<h1 style="font-family: Namum">회원 목록</h1>
 					<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
 					<form method="post" name="search">
 						<table class="pull-right">
@@ -59,10 +59,6 @@ a, a:hover {
 								<td>
 									<input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
 								<td><button type="button" class="btn btn-white btn-dark">검색</button></td>
-								<td>
-									<%-- <a href="${contextPath}/board/Form.do?katNo=${katTargetNo}" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">모달 열기</a> --%>
-									<a href="#" data-toggle="modal" data-target="#myModal"  class="btn back-blue btn-success pull-right">글쓰기</a>
-								</td>
 							</tr>
 						</table>
 					</form>

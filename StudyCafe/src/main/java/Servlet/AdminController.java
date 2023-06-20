@@ -18,6 +18,7 @@ import model.Board;
 import model.Kategorie;
 import model.User;
 import service.AdminService;
+import service.BoardService;
 
 @WebServlet("/admin/*")
 public class AdminController extends HttpServlet {
@@ -114,14 +115,24 @@ public class AdminController extends HttpServlet {
 				
 			} else if(action.equals("/kate.do")) {            // 카테고리
 				katlist = adminService.getKateList();
-				request.setAttribute("list", list);
+				request.setAttribute("list", katlist);
 				nextPage = "/view/kate.jsp";
 				
 			}else if(action.equals("/Form.do")) {
 				nextPage = "/view/Form.jsp";
 				
-			} else if (action.equals("/add.do")){
+			} else if (action.equals("/add.do")){			  // 글 작성
+				String title = request.getParameter("title");
+				String content = request.getParameter("content");
 				
+				Board brd =new Board();
+				brd.setTitle(title);
+				brd.setContent(content);
+				brd.setKateNo(katNo);
+				
+				adminService.save(brd);
+				
+				nextPage = "/admin/list.do";
 			} else if(action.equals("/view.do")){
 				String no = request.getParameter("brdNO");
 				Board vo = adminService.getBoardView(Integer.parseInt(no));
@@ -130,14 +141,19 @@ public class AdminController extends HttpServlet {
 				
 			} else if(action.equals("/mod.do")) {
 				return;
-			} else if(action.equals("/remove.do")){
+			} else if(action.equals("/remove.do")){			   // 회원 삭제
 				String str = request.getParameter("brdNo");
 				int brdNo = Integer.parseInt(str);
-
 				adminService.removeBoard(brdNo);
 				nextPage="/admin/list.do";
 				
-			} else if (action.equals("/replyForm.do")) {
+			} else if(action.equals("/remove2.do")){			   // 카테고리 삭제
+				String str = request.getParameter("kateNo");
+				int kateNo = Integer.parseInt(str);
+				adminService.removeKategorie(kateNo);
+				nextPage="/admin/kate.do";
+				
+			}else if (action.equals("/replyForm.do")) {
 				
 			} else if (action.equals("/addReply.do")) {
 				return;

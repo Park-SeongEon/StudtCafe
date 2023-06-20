@@ -116,7 +116,7 @@ public class KateDao extends SuperDao{
 	}
 
 
-	public void delete(Kategorie vo) {
+	public void delete(int kateNo) {
 
 		try {
 			Connection conn = getConnection();
@@ -125,7 +125,7 @@ public class KateDao extends SuperDao{
 			String sql = "delete from Kategorie where kate_no=?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, vo.getKateNo());
+			stmt.setInt(1, kateNo);
 			stmt.executeUpdate();
 			stmt.close();
 

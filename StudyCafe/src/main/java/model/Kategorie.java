@@ -7,4 +7,5 @@ public class Kategorie {
 
 	private int kateNo;
 	private String kateName;
+	private String kateDetail;
 }

@@ -36,7 +36,7 @@ public class AdminService {
 
 	public void save(Board brd) {
 
-		if(brd.getBrdNo() != 0) {
+		if(brd.getBrdNo() == 0) {
 			brdDao.create(brd);
 		} else {
 			brdDao.update(brd);			
@@ -62,6 +62,9 @@ public class AdminService {
 		return katDao.selectAll();
 	}
 
+	public void removeKategorie(int kateNo) {
+		katDao.delete(kateNo);
+	}
 	
 	
 	
