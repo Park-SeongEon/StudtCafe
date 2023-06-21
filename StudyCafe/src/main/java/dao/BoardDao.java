@@ -30,13 +30,14 @@ public class BoardDao extends SuperDao{
 			String sql = "SELECT * FROM ( "
 					+ "SELECT  "
 					+ "	* "
-					+ "	,ROW_NUMBER() over(ORDER BY regDate) AS rownum"
+					+ "	,ROW_NUMBER() over(ORDER BY regDate desc) AS rownum"
 					+ "	,count(1) over() AS totalCount "
 					+ "from board  "
 					+ "where kate_no=? "
 					+ "order by regDate DESC "
 					+ ") c "
-					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10";
+					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10 "
+					+ "order by rownum";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, katNo);
@@ -58,6 +59,7 @@ public class BoardDao extends SuperDao{
 				vo.setCnt(re.getInt("cnt"));
 				vo.setTotalCount(re.getInt("totalCount"));
 				vo.setRownum(re.getInt("rownum"));
+				vo.setUserId(re.getString("user_id"));
 
 				list.add(vo);
 			}
@@ -94,30 +96,32 @@ public class BoardDao extends SuperDao{
 				sql = "SELECT * FROM ( "
 					+ "SELECT  "
 					+ "	* "
-					+ "	,ROW_NUMBER() over(ORDER BY regDate) AS rownum"
+					+ "	,ROW_NUMBER() over(ORDER BY regDate desc) AS rownum"
 					+ "	,count(1) over() AS totalCount "
 					+ "from board  "
 					+ "where kate_no=? "
-					+ "and title=? "
+					+ "and title like ? "
 					+ "order by regDate DESC "
 					+ ") c "
-					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10";
+					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10 "
+					+ "order by rownum";
 			else 
 				sql = "SELECT * FROM ( "
 					+ "SELECT  "
 					+ "	* "
-					+ "	,ROW_NUMBER() over(ORDER BY regDate) AS rownum"
+					+ "	,ROW_NUMBER() over(ORDER BY regDate desc) AS rownum"
 					+ "	,count(1) over() AS totalCount "
 					+ "from board  "
 					+ "where kate_no=? "
-					+ "and user_id=? "
+					+ "and user_id like? "
 					+ "order by regDate DESC "
 					+ ") c "
-					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10";
+					+ "WHERE rownum BETWEEN (?-1)*10*100+(?-1)*10+1 AND (?-1)*100+?*10 "
+					+ "order by rownum";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, katNo);
-			stmt.setString(2, searchText);
+			stmt.setString(2, "%" + searchText +"%");
 			stmt.setInt(3, section);
 			stmt.setInt(4, pageNum);
 			stmt.setInt(5, section);
@@ -134,6 +138,7 @@ public class BoardDao extends SuperDao{
 				vo.setKateNo(re.getInt("kate_no"));
 				vo.setVoteNo(re.getInt("vote_no"));
 				vo.setCnt(re.getInt("cnt"));
+				vo.setUserId(re.getString("user_id"));
 				vo.setTotalCount(re.getInt("totalCount"));
 				vo.setRownum(re.getInt("rownum"));
 
@@ -160,21 +165,22 @@ public class BoardDao extends SuperDao{
 					+ "	t1.* "
 					+ "FROM "
 					+ "("
-					+ "    SELECT *"
-					+ "	 FROM board"
-					+ "	 WHERE kate_no = 1"
-					+ "	 ORDER BY regDate desc"
-					+ "	 LIMIT 2"
+					+ "    SELECT b.brd_no, CONCAT('[공지]',title) AS title, b.content,b.file_name,b.regDate,b.kate_no,b.vote_no,b.cnt,b.user_id"
+					+ "	 FROM board b "
+					+ "	 WHERE kate_no = 1 "
+					+ "	 ORDER BY regDate asc "
+					+ "	 LIMIT 2 "
 					+ ") AS t1 "
-					+ "UNION ALL "
+					+ "UNION "
 					+ "SELECT "
 					+ "	t2.* "
-					+ "FROM ( "
+					+ "FROM ("
 					+ "    SELECT * "
 					+ "	 FROM board "
+					+ "	 WHERE kate_no != 1"
 					+ "	 ORDER BY regDate desc"
 					+ "	 LIMIT 3 "
-					+ ") AS t2";
+					+ ") AS t2 ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
@@ -189,6 +195,7 @@ public class BoardDao extends SuperDao{
 				vo.setKateNo(re.getInt("kate_no"));
 				vo.setVoteNo(re.getInt("vote_no"));
 				vo.setCnt(re.getInt("cnt"));
+				vo.setUserId(re.getString("user_id"));
 
 				list.add(vo);
 			}
@@ -228,6 +235,8 @@ public class BoardDao extends SuperDao{
 				vo.setKateNo(re.getInt("kate_no"));
 				vo.setVoteNo(re.getInt("vote_no"));
 				vo.setCnt(re.getInt("cnt"));
+				vo.setUserId(re.getString("user_id"));
+
 			}
 			re.close();
 			stmt.close();
@@ -245,16 +254,15 @@ public class BoardDao extends SuperDao{
 
 		try {
 			Connection conn = getConnection();
-			String sql = "insert into board(title,content,file_name,kate_no) values(?,?,?,?)";
+			String sql = "insert into board(title,content,file_name,user_id,kate_no) values(?,?,?,?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, vo.getTitle());
 			stmt.setString(2, vo.getContent());
 			stmt.setString(3, vo.getFilename());
-			stmt.setInt(4, vo.getKateNo());
-			
-			
+			stmt.setString(4, vo.getUserId());
+			stmt.setInt(5, vo.getKateNo());
 
 			stmt.executeUpdate(); // 여기서 에러
 			stmt.close();

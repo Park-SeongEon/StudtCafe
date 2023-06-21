@@ -88,14 +88,14 @@ button-align {
 			<jsp:include page="top.jsp"></jsp:include>
 			<div class="main_back2">
 				<div class="container">
-					<div class="card" style="width: 18rem;">
+					<div class="card" style="width: 100%;">
 						<div class="card-body">
 <!-- 							<input type="text" value="${info.title}" name="title"
 								id="i_content" required>
  -->
-							<h1 class="card-title">${info.title}</h1>
+							<h4 class="card-title">${info.title}</h4>
  			  				<p class="card-text"><i class="fa-solid fa-user"></i>${userId}</p>
-							<h6 class="card-subtitle mb-2 text-muted">등록일자:${info.regDate}  조회수:${info.cnt} </h6>
+							<h6 class="card-subtitle mb-2 text-muted">등록일자 : ${info.regDate}  조회수 : ${info.cnt} </h6>
 						</div>
 					</div>
 
@@ -124,7 +124,7 @@ button-align {
 						<div id="messages">Comment...</div>
 						<div class="group">
 							<input type="text" id="comment"
-								placeholder="Write your message here..." name="content"
+								placeholder="댓글을 남겨주세요" name="content"
 								id="messages"> <span class="highlight"></span> <span
 								class="bar"></span> <input type=button value="답글쓰기"
 								onClick="fn_reply_form('${contextPath}/board/addReply.do', ${info.brdNo})">

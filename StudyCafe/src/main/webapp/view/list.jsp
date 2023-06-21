@@ -7,12 +7,22 @@
 <div style="width: 100%; height: 70%; overflow: auto">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0"
 		class="active table table1" style="border: 1px solid #dddddd">
+		<colgroup>
+			<col width="5%" />
+			<col width="20%" />
+			<col width="15%" />
+			<col width="20%" />
+			<col width="10%" />
+		</colgroup>
 		<thead>
+
 			<tr>
-				<th style="text-align: center; vertical-align: middle;">번호</th>
+				<th style="text-align: center; vertical-align: middle;"></th>
 				<th style="text-align: center; vertical-align: middle;">제목</th>
 				<th style="text-align: center; vertical-align: middle;">작성자</th>
 				<th style="text-align: center; vertical-align: middle;">작성일</th>
+				<th style="text-align: center; vertical-align: middle;">조회수</th>
+
 			</tr>
 		</thead>
 		<tbody>
@@ -33,8 +43,10 @@
 							<td width="4%">${item.rownum}</td>
 							<td width="20%"><a
 								href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
-							<td width="10%">${item.cnt}</td>
+							<td width="30%">${item.userId}</td>
 							<td width="30%">${item.regDate}</td>
+							<td width="10%">${item.cnt}</td>
+
 					</c:forEach>
 				</c:when>
 			</c:choose>
