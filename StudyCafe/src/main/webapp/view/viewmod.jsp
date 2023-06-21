@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
@@ -8,6 +9,7 @@
 	response.setHeader("expires","0");
 	response.setHeader("pragma","no-cache");
 %>
+<html>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <head>
 <meta charset="UTF-8">
@@ -28,8 +30,8 @@
 	    obj.submit();
 	  }
    
-      function fn_modify_artlce(obj,url) {
-    	  obj.action= url;
+      function fn_modify_artlce() {
+    	  obj.action= "${contextPath}/board/mod.do?brdNo=0";
     	  obj.submit();
       }
       
@@ -90,9 +92,10 @@ button-align {
 				<div class="container">
 					<div class="card" style="width: 100%;">
 						<div class="card-body">
- 							<input type="text" value="${info.title}" name="title"
+<!-- 							<input type="text" value="${info.title}" name="title"
 								id="i_content" required>
- 
+ -->
+							<h4 class="card-title">${info.title}</h4>
  			  				<p class="card-text"><i class="fa-solid fa-user"></i>${userId}</p>
 							<h6 class="card-subtitle mb-2 text-muted">등록일자 : ${info.regDate}  조회수 : ${info.cnt} </h6>
 						</div>
@@ -106,7 +109,11 @@ button-align {
 					<form id="message-form" action="#" method="post" name="frmArticle"
 						enctype="multipart/form-data">
 						<div class="group notice">
-<!--  							${info.content}-->
+							${info.content}
+							<br>
+							<br>
+							<br>
+							<br>
 							
 							<span class="highlight"></span>
 							<span class="bar"></span>
@@ -115,8 +122,8 @@ button-align {
 						<div class="center">
 							<input type=button value="👍 : ${info.voteNo}" onClick="fn_modify_artlce(this.form)">
 							<input type=button value="리스트로 돌아가기" onClick="backToList()"> 
-							<input type=button value="수정하기" onClick="fn_modify_artlce(this.form,'${contextPath}/board/mod.do?brdNo=${info.brdNo}&katNo=${katTargetNo}')"> 
-							<input type=button value="삭제하기" onClick="fn_remove_article(this.form,'${contextPath}/board/remove.do', ${info.brdNo})">
+							<input type=button value="수정하기" onClick="fn_modify_artlce()"> 
+							<input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/remove.do', ${deleted.brdNo})">
 						</div>
 
 						<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>

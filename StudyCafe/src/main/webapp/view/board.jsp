@@ -70,7 +70,7 @@ a, a:hover {
 		</div>
 	</div>
 	<div class="modal fade" id="myModal" role="dialog">
-		<form action="/board/add.do" method="post">
+		<form action="${contextPath}/board/add.do" method="post">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header back-blue">
@@ -82,11 +82,11 @@ a, a:hover {
 						<table class="table">
 							<tr>
 								<td>제목</td>
-								<td><input class="form-control" id="userName" type="text"></td>
+								<td><input class="form-control" name="title" type="text"></td>
 							</tr>
 							<tr>
 								<td>내용</td>
-								<td><textarea class="form-control" id="contents" rows="10"></textarea></td>
+								<td><textarea class="form-control" name="content" rows="10"></textarea></td>
 							</tr>
 						</table>
 					</div>
