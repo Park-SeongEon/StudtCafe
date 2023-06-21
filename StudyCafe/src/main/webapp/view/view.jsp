@@ -23,12 +23,12 @@
 <script src="../js/sidebar.js"></script>
 <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
-      function backToList(obj){
+      function backToList(){
 	    obj.action="${contextPath}/board/list.do?katNo=3";
 	    obj.submit();
 	  }
    
-      function fn_modify_artlce(obj) {
+      function fn_modify_artlce() {
     	  obj.action= "${contextPath}/board/mod.do?brdNo=0";
     	  obj.submit();
       }
@@ -100,23 +100,28 @@ button-align {
 					</div>
 
 
-					<div class='pull-right'>👍 : ${info.voteNo}</div>
+<!--  				<div class='pull-right'>👍 : ${info.voteNo}</div>-->
 					
 					<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
 					
 					<form id="message-form" action="#" method="post" name="frmArticle"
 						enctype="multipart/form-data">
-						<div class="group notice center">
-							<textarea rows="10" cols="100" name="content" id="i_content" disabled>${info.content}</textarea>
+						<div class="group notice">
+							${info.content}
+							<br>
+							<br>
+							<br>
+							<br>
+							
 							<span class="highlight"></span>
 							<span class="bar"></span>
 						</div>
 
 						<div class="center">
-							<input type=button value="수정하기" onClick="fn_modify_artlce(this.form)"> 
+							<input type=button value="👍 : ${info.voteNo}" onClick="fn_modify_artlce(this.form)">
+							<input type=button value="리스트로 돌아가기" onClick="backToList()"> 
+							<input type=button value="수정하기" onClick="fn_modify_artlce()"> 
 							<input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/remove.do', ${deleted.brdNo})">
-							<input type=button value="리스트로 돌아가기" onClick="backToList(this.form)"> 
-							<input type=button value="추천하기" onClick="fn_modify_artlce(this.form)">
 						</div>
 
 						<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>

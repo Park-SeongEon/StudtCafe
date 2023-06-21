@@ -6,7 +6,7 @@
 
 <div style="width: 100%; height: 70%; overflow: auto">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0"
-		class="active table table1" style="border: 1px solid #dddddd">
+		class="active table1" style="border: 1px solid #dddddd">
 		<colgroup>
 			<col width="5%" />
 			<col width="20%" />
@@ -61,15 +61,15 @@
 					<c:forEach var="page" begin="1" end="10" step="1">
 						<c:if test="${section > 1 && page==1 }">
 							<li><a class="no-uline"
-								href="/board/list.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp;
+								href="/board/list.do?section=${section-1}&pageNum=${(section-1)*10 +1 }&katNo=${katTargetNo}">&nbsp;
 									prev </a></li>
 						</c:if>
 						<li><a class="no-uline"
-							href="/board/list.do?section=${section}&pageNum=${page}">${(section-1)*10 +page }</a></li>
+							href="/board/list.do?section=${section}&pageNum=${page}&katNo=${katTargetNo}">${(section-1)*10 +page }</a></li>
 
 						<c:if test="${page ==10 }">
 							<li><a class="no-uline"
-								href="/board/list.do?section=${section+1}&pageNum=${section*10+1}">&nbsp;next</a></li>
+								href="/board/list.do?section=${section+1}&pageNum=${section*10+1}&katNo=${katTargetNo}">&nbsp;next</a></li>
 						</c:if>
 					</c:forEach>
 				</c:when>
@@ -85,12 +85,12 @@
 						<c:choose>
 							<c:when test="${page== pageNum }">
 								<li><a class="sel-page"
-									href="/board/list.do?section=${section}&pageNum=${page}">${page }
+									href="/board/list.do?section=${section}&pageNum=${page}&katNo=${katTargetNo}">${page }
 								</a></li>
 							</c:when>
 							<c:otherwise>
 								<li><a class="no-uline"
-									href="/board/list.do?section=${section}&pageNum=${page}">${page }
+									href="/board/list.do?section=${section}&pageNum=${page}&katNo=${katTargetNo}">${page }
 								</a></li>
 							</c:otherwise>
 						</c:choose>
