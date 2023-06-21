@@ -66,15 +66,15 @@ a, a:hover {
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="active table table1" style=" border: 1px solid #dddddd">
 							<thead>
 								<tr>
-									<th style="text-align: center; vertical-align:middle;">번호</th>
-									<th style="text-align: center; vertical-align:middle;">아이디</th>
-									<th style="text-align: center; vertical-align:middle;">이름</th>
-									<th style="text-align: center; vertical-align:middle;">Email</th>
-									<th style="text-align: center; vertical-align:middle;">연락처</th>
-									<th style="text-align: center; vertical-align:middle;">가입일</th>
-									<th style="text-align: center; vertical-align:middle;">최근접속일</th>
-									<th style="text-align: center; vertical-align:middle;">회원등급</th>
-									<th style="text-align: center; vertical-align:middle;">삭제</th>
+									<th style="text-align: center; vertical-align: middle;"></th>
+									<th style="text-align: center; vertical-align: middle;">아이디</th>
+									<th style="text-align: center; vertical-align: middle;">이름</th>
+									<th style="text-align: center; vertical-align: middle;">Email</th>
+									<th style="text-align: center; vertical-align: middle;">연락처</th>
+									<th style="text-align: center; vertical-align: middle;">회원등급</th>
+									<th style="text-align: center; vertical-align: middle;">가입일</th>
+									<th style="text-align: center; vertical-align: middle;">최근접속일</th>
+									<th style="text-align: center; vertical-align: middle;">삭제</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -93,14 +93,14 @@ a, a:hover {
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
 												<td width="5%">${articleNum.count}</td>
-												<td width="20%">${item.userId}</td>
-												<td width="15%">${item.userName}</td>
+												<td width="15%">${item.userId}</td>
+												<td width="14%">${item.userName}</td>
 												<td width="20%">${item.userEmail}</td>
-												<td width="10%">${item.userCp}</td>
-												<td width="10%">${item.regDate}</td>
-												<td width="10%">${item.joinDate}</td>
-												<td width="5%">${item.userGrade}</td>
-												<td width="5%" colspan="2"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove.do?id=${item.userId}'"></td>
+												<td width="15%">${item.userCp}</td>
+												<td width="10%">${item.userGrade}</td>
+												<td width="8%">${item.regDate}</td>
+												<td width="8%">${item.joinDate}</td>
+												<td width="5%" colspan="2"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove2.do?id=${item.userId}&katNo=${katTargetNo}'"></td>
 										</c:forEach>
 									</c:when>
 								</c:choose>

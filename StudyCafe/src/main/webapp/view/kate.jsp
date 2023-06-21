@@ -60,7 +60,7 @@ a, a:hover {
 									<input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
 								<td><button type="button" class="btn btn-white btn-dark">검색</button></td>
 								<td>
-									<a href="#" data-toggle="modal" data-target="#myModal"  class="btn back-blue btn-success pull-right">추가</a>
+									<a href="#" data-toggle="modal" data-target="#myModal" style="background-color:red; color:blue;"  class="btn addbtn pull-right">추가</a>
 								</td>
 							</tr>
 						</table>
@@ -69,11 +69,11 @@ a, a:hover {
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="active table table1" style=" border: 1px solid #dddddd">
 							<thead>
 								<tr>
-									<th style="background-color: #2e8b57; text-align: center;">번호</th>
-									<th style="background-color: #2e8b57; text-align: center;">수정</th>
-									<th style="background-color: #2e8b57; text-align: center;">삭제</th>
-									<th style="background-color: #2e8b57; text-align: center;">카테고리명</th>
-									<th style="background-color: #2e8b57; text-align: center;">카테고리 설명</th>
+									<th style="text-align: center; vertical-align: middle;"></th>
+									<th style="text-align: center; vertical-align: middle;">수정</th>
+									<th style="text-align: center; vertical-align: middle;">삭제</th>
+									<th style="text-align: center; vertical-align: middle;">카테고리명</th>
+									<th style="text-align: center; vertical-align: middle;">카테고리 설명</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -92,8 +92,8 @@ a, a:hover {
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
 												<td width="5%">${articleNum.count}</td>
-												<td width="5%"><input type="button" value="수정"></td>
-												<td width="5%"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove2.do?brd_no=${articleNum.count}'"></td>
+												<td width="5%"><a href="#" data-toggle="modal" data-target="#myModal2"  class="btn back-blue btn-success pull-right">수정</a></td>
+												<td width="5%"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove3.do?kateSearchNo=${item.kateNo}&katNo=${katTargetNo}'"></td>
 												<td width="35%">${item.kateName}</td>
 												<td width="50%">${item.kateDetail}</td>
 										</c:forEach>
@@ -103,8 +103,9 @@ a, a:hover {
 						</table>
 					</div>
 					
+					<!-- 카테고리 추가 Modal -->
 					<div class="modal fade" id="myModal" role="dialog">
-						<form action="/board/add.do" method="post">
+						<form action="/admin/katadd.do" method="post">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header back-blue">
@@ -116,16 +117,47 @@ a, a:hover {
 										<table class="table">
 											<tr>
 												<td>카테고리명</td>
-												<td><input class="form-control" id="kateName" type="text"></td>
+												<td><input class="form-control" name="kateName" type="text"></td>
 											</tr>
 											<tr>
 												<td>카테고리 설명</td>
-												<td><textarea class="form-control" id="kateDetail" rows="5"></textarea></td>
+												<td><textarea class="form-control" name="kateDetail" rows="5"></textarea></td>
 											</tr>
 										</table>
 									</div>
 									<div class="modal-footer">
 										<button class="btn btn-success pull-right" type="submit">작성</button>
+										<input type="hidden" size="67" maxlength="500" name="katNo" value="${katTargetNo}" />
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+					<!-- 카테고리 수정 Modal -->
+					<div class="modal fade" id="myModal2" role="dialog">
+						<form action="/admin/katmod.do" method="post">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header back-blue">
+										<span class="font-nanum">카테고리 수정</span>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 id="modal-title" class="modal-title"></h4>
+									</div>
+									<div class="modal-body">
+										<table class="table">
+											<tr>
+												<td>카테고리명</td>
+												<td><input class="form-control" name="kateName" type="text"></td>
+											</tr>
+											<tr>
+												<td>카테고리 설명</td>
+												<td><textarea class="form-control" name="kateDetail" rows="5"></textarea></td>
+											</tr>
+										</table>
+									</div>
+									<div class="modal-footer">
+										<button class="btn btn-success pull-right" type="submit">수정하기</button>
 										<input type="hidden" size="67" maxlength="500" name="katNo" value="${katTargetNo}" />
 									</div>
 								</div>

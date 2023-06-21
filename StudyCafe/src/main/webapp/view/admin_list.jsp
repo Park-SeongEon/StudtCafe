@@ -67,12 +67,12 @@ a, a:hover {
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="active table table1" style=" border: 1px solid #dddddd">
 							<thead>
 								<tr>
-									<th style="text-align: center; vertical-align:middle;">번호</th>
-									<th style="text-align: center; vertical-align:middle;">제목</th>
-									<th style="text-align: center; vertical-align:middle;">내용</th>
-									<th style="text-align: center; vertical-align:middle;">조회수</th>
-									<th style="text-align: center; vertical-align:middle;">작성일</th>
-									<th style="text-align: center; vertical-align:middle;">삭제</th>
+									<th style="text-align: center; vertical-align: middle;"></th>
+									<th style="text-align: center; vertical-align: middle;">제목</th>
+									<th style="text-align: center; vertical-align: middle;">내용</th>
+									<th style="text-align: center; vertical-align: middle;">조회수</th>
+									<th style="text-align: center; vertical-align: middle;">작성일</th>
+									<th style="text-align: center; vertical-align: middle;">삭제</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -95,7 +95,7 @@ a, a:hover {
 												<td width="45%"><a href="${contextPath}/admin/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.content}</a></td>
 												<td width="10%">${item.cnt}</td>
 												<td width="10%">${item.regDate}</td>
-												<td width="5%" colspan="2"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove.do?katNo=${item.rownum}&brdNo=${item.brdNo}'"></td>
+												<td width="5%" colspan="2"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove.do?katNo=${katTargetNo}&brdNo=${item.brdNo}'"></td>
 										</c:forEach>
 									</c:when>
 								</c:choose>

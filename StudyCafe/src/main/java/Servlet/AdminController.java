@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Board;
+import model.Comment;
 import model.Kategorie;
 import model.User;
 import service.AdminService;
@@ -127,31 +128,62 @@ public class AdminController extends HttpServlet {
 				brd.setTitle(title);
 				brd.setContent(content);
 				brd.setKateNo(katNo);
+				brd.setUserId((String)request.getSession().getAttribute("userId"));
+				
 				
 				adminService.save(brd);
 				
 				nextPage = "/admin/list.do";
-			} else if(action.equals("/view.do")){
-				String no = request.getParameter("brdNO");
+			} else if (action.equals("/katadd.do")){		  // 카테고리 작성
+				String kateName = request.getParameter("kateName");
+				String kateDetail = request.getParameter("kateDetail");
+				
+				Kategorie kat = new Kategorie();
+				kat.setKateName(kateName);
+				kat.setKateDetail(kateDetail);
+				
+				adminService.savekat(kat);
+				
+				nextPage = "/admin/kate.do";
+			}else if(action.equals("/view.do")){
+				String no = request.getParameter("brdNo");
 				Board vo = adminService.getBoardView(Integer.parseInt(no));
-				request.setAttribute("vo", vo);
-				nextPage = "/view/view.jsp";
+				request.setAttribute("info", vo);
+				adminService.CntUpdate(vo.getBrdNo(),vo.getCnt()+1);
+				vo.setCnt(vo.getCnt()+1);
+				List<Comment> comlist= adminService.getCommentList(Integer.parseInt(no));
+				request.setAttribute("list", comlist);
+				
+				nextPage = "/view/admin_view.jsp";
 				
 			} else if(action.equals("/mod.do")) {
+				String kateName = request.getParameter("kateName");
+				String kateDetail = request.getParameter("kateDetail");
+				String kateSearchNo = request.getParameter("kateSearchNo");
+
+				
 				return;
-			} else if(action.equals("/remove.do")){			   // 회원 삭제
+			} else if(action.equals("/remove.do")){			   // 공지사항 삭제
 				String str = request.getParameter("brdNo");
 				int brdNo = Integer.parseInt(str);
 				adminService.removeBoard(brdNo);
 				nextPage="/admin/list.do";
 				
-			} else if(action.equals("/remove2.do")){			   // 카테고리 삭제
-				String str = request.getParameter("kateNo");
-				int kateNo = Integer.parseInt(str);
-				adminService.removeKategorie(kateNo);
+			} else if(action.equals("/remove2.do")){			   // 회원 삭제
+				String str = request.getParameter("id");
+				adminService.removeUser(str);
+				nextPage="/admin/memberlist.do";
+				
+			} else if(action.equals("/remove3.do")){			   // 카테고리 삭제
+				String str = request.getParameter("kateSearchNo");
+				
+				adminService.removeKategorie(Integer.parseInt(str));
+				
 				nextPage="/admin/kate.do";
 				
-			}else if (action.equals("/replyForm.do")) {
+			} else if (action.equals("/katmod.do")) {		      // 카테고리 수정
+				
+			} else if (action.equals("/replyForm.do")) {
 				
 			} else if (action.equals("/addReply.do")) {
 				return;

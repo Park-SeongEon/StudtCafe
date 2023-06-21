@@ -28,6 +28,7 @@ public class KateDao extends SuperDao{
 				Kategorie vo = new Kategorie();
 				vo.setKateNo(re.getInt("kate_no"));
 				vo.setKateName(re.getString("kate_name"));
+				vo.setKateDetail(re.getString("kate_detail"));
 				list.add(vo);
 			}
 			re.close();
@@ -57,6 +58,7 @@ public class KateDao extends SuperDao{
 				vo = new Kategorie();
 				vo.setKateNo(re.getInt("kate_no"));
 				vo.setKateName(re.getString("kate_name"));
+				vo.setKateDetail(re.getString("kate_detail"));
 			}
 			re.close();
 			stmt.close();
@@ -76,11 +78,12 @@ public class KateDao extends SuperDao{
 
 		try {
 			Connection conn = getConnection();
-			String sql = "insert into Kategorie(kate_name) values(?)";
+			String sql = "insert into Kategorie(kate_name,kate_detail) values(?,?)";
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, vo.getKateName());
+			stmt.setString(2, vo.getKateDetail());
 
 			stmt.executeUpdate(); // 여기서 에러
 			stmt.close();
@@ -98,11 +101,13 @@ public class KateDao extends SuperDao{
 			Connection conn = getConnection();
 			
 
-			String sql = "update Kategorie set kate_name = ? where kate_no=? ";
+			String sql = "update Kategorie set kate_name = ?, kate_detail = ? where kate_no=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getKateName());
-			stmt.setInt(2, vo.getKateNo());
+			stmt.setString(2, vo.getKateDetail());
+			stmt.setInt(3, vo.getKateNo());
+			
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -116,7 +121,7 @@ public class KateDao extends SuperDao{
 	}
 
 
-	public void delete(int kateNo) {
+	public void delete(int katNo) {
 
 		try {
 			Connection conn = getConnection();
@@ -125,7 +130,7 @@ public class KateDao extends SuperDao{
 			String sql = "delete from Kategorie where kate_no=?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, kateNo);
+			stmt.setInt(1, katNo);
 			stmt.executeUpdate();
 			stmt.close();
 

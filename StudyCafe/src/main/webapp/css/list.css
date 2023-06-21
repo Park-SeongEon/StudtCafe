@@ -42,6 +42,9 @@
 .table1 tbody tr td a:hover{
 	text-decoration: underline;	
 }
+.addbtn:hover {
+	background-color: blue;
+}
 
 
 

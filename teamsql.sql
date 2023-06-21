@@ -1,5 +1,5 @@
 -- --------------------------------------------------------
--- 호스트:                          127.0.0.1
+-- 호스트:                          192.168.17.76
 -- 서버 버전:                        10.11.2-MariaDB - mariadb.org binary distribution
 -- 서버 OS:                        Win64
 -- HeidiSQL 버전:                  11.3.0.6295
@@ -27,29 +27,48 @@ CREATE TABLE IF NOT EXISTS `board` (
   `kate_no` int(10) NOT NULL,
   `vote_no` int(5) NOT NULL DEFAULT 0,
   `cnt` int(5) NOT NULL DEFAULT 0,
-  `user_id` varchar(10) DEFAULT NULL,
+  `user_id` varchar(10) NOT NULL,
   PRIMARY KEY (`brd_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 테이블 데이터 studycafe.board:~2 rows (대략적) 내보내기
+-- 테이블 데이터 studycafe.board:~6 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
 INSERT INTO `board` (`brd_no`, `title`, `content`, `file_name`, `regDate`, `kate_no`, `vote_no`, `cnt`, `user_id`) VALUES
-	(1, '132', '123', NULL, '2023-06-14 00:00:00', 3, 0, 0, '0'),
-	(2, 'title', 'content', NULL, '2023-06-14 00:00:00', 3, 0, 0, '0');
+	(2, '안녕하십니까 Spring 공부하고 있습니다', 'content', NULL, '2023-06-14 00:00:00', 3, 0, 0, 'admin'),
+	(3, '안녕하세요', '123', NULL, '2023-06-14 00:00:06', 3, 0, 0, 'admin'),
+	(4, '테스트합니다.', '1234567890', NULL, '2023-06-20 20:14:14', 3, 2, 18, 'admin'),
+	(9, '4341', '12', NULL, '2023-06-21 18:38:26', 1, 0, 7, 'admin');
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 
 -- 테이블 studycafe.board_comment 구조 내보내기
 CREATE TABLE IF NOT EXISTS `board_comment` (
+  `com_no` int(10) NOT NULL AUTO_INCREMENT,
   `parent_no` int(10) NOT NULL,
-  `com_no` int(10) NOT NULL,
   `com_content` varchar(50) NOT NULL,
+  `user_id` varchar(10) NOT NULL,
   `regData` datetime NOT NULL DEFAULT current_timestamp(),
-  `modeData` datetime DEFAULT NULL,
+  `modData` datetime DEFAULT NULL,
   PRIMARY KEY (`com_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 테이블 데이터 studycafe.board_comment:~0 rows (대략적) 내보내기
+-- 테이블 데이터 studycafe.board_comment:~13 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `board_comment` DISABLE KEYS */;
+INSERT INTO `board_comment` (`com_no`, `parent_no`, `com_content`, `user_id`, `regData`, `modData`) VALUES
+	(1, 2, 'test', 'admin', '2023-06-20 19:39:02', NULL),
+	(2, 1, 'test', 'admin', '2023-06-20 19:48:32', NULL),
+	(3, 1, 'test', 'admin', '2023-06-20 20:01:01', NULL),
+	(4, 1, '12312321', 'admin', '2023-06-20 20:05:58', NULL),
+	(5, 1, '12321321', 'admin', '2023-06-20 20:06:32', NULL),
+	(6, 1, '12321321', 'admin', '2023-06-20 20:06:38', NULL),
+	(7, 1, '12321321', 'admin', '2023-06-20 20:06:39', NULL),
+	(8, 1, '12321321', 'admin', '2023-06-20 20:06:39', NULL),
+	(9, 1, '12321321', 'admin', '2023-06-20 20:06:39', NULL),
+	(10, 1, '12321321', 'admin', '2023-06-20 20:06:39', NULL),
+	(11, 2, 'test', 'admin', '2023-06-21 10:24:44', NULL),
+	(12, 4, '123', 'admin', '2023-06-21 16:10:50', NULL),
+	(13, 8, '213', 'admin', '2023-06-21 17:18:22', NULL),
+	(14, 4, '123', 'admin', '2023-06-21 19:57:15', NULL),
+	(15, 9, 'adadada', 'admin', '2023-06-21 20:02:37', NULL);
 /*!40000 ALTER TABLE `board_comment` ENABLE KEYS */;
 
 -- 테이블 studycafe.kategorie 구조 내보내기
@@ -57,15 +76,16 @@ CREATE TABLE IF NOT EXISTS `kategorie` (
   `kate_no` int(10) NOT NULL AUTO_INCREMENT,
   `kate_name` varchar(10) NOT NULL,
   `user_type_cd` varchar(2) NOT NULL DEFAULT '02',
+  `kate_detail` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`kate_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 테이블 데이터 studycafe.kategorie:~3 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `kategorie` DISABLE KEYS */;
-INSERT INTO `kategorie` (`kate_no`, `kate_name`, `user_type_cd`) VALUES
-	(1, '공지사항', '01'),
-	(2, '유저목록', '01'),
-	(3, '게시판', '02');
+INSERT INTO `kategorie` (`kate_no`, `kate_name`, `user_type_cd`, `kate_detail`) VALUES
+	(1, '공지사항', '01', '공지사항입니다'),
+	(2, '유저목록', '01', '유저목록입니다.'),
+	(3, '게시판', '02', '게시판');
 /*!40000 ALTER TABLE `kategorie` ENABLE KEYS */;
 
 -- 테이블 studycafe.seat 구조 내보내기
@@ -83,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `seat` (
 INSERT INTO `seat` (`seat_no`, `seat_comment`, `seat_type`, `user_id`, `regdate`) VALUES
 	('01', '02', '01', '', '2023-06-14 00:00:00'),
 	('02', '02', '01', 'admin', '2023-06-14 00:00:00'),
-	('03', '01', '01', NULL, '2023-06-14 00:00:00'),
+	('03', '02', '01', 'test1', '2023-06-14 00:00:00'),
 	('04', '01', '01', NULL, '2023-06-14 00:00:00'),
 	('05', '01', '01', NULL, '2023-06-14 00:00:00'),
 	('06', '02', '01', '', '2023-06-14 00:00:00'),
@@ -147,15 +167,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 테이블 데이터 studycafe.user:~6 rows (대략적) 내보내기
+-- 테이블 데이터 studycafe.user:~4 rows (대략적) 내보내기
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`user_id`, `user_pwd`, `user_name`, `user_email`, `user_cp`, `user_addr`, `user_daddr`, `regDate`, `joinDate`, `user_grade`, `user_type_cd`) VALUES
 	('1234', '8fda6fd2cfc0477f803d4dc87d20b16a03ad76988796ef68dd8c61b31489dfa3', '1234', NULL, '1234', NULL, NULL, '2023-06-19 20:05:19', NULL, 'E', '02'),
-	('admin', '12345', '관리자', '관리자', '관리자', '관리자', '관리자', '2023-06-13 00:00:00', NULL, 'E', '01'),
-	('test', 'test1234', '지완', NULL, '', '', NULL, '2023-06-15 19:16:03', NULL, 'E', '02'),
-	('test00', 'test1111', '성언', NULL, '01096864790', NULL, NULL, '2023-06-19 16:18:03', NULL, 'E', '02'),
-	('test1', 'test1111', '성언', NULL, '01096864790', NULL, NULL, '2023-06-16 17:28:33', NULL, 'E', '02'),
-	('test22', 'test1234', '박성언', NULL, '1111', NULL, NULL, '2023-06-16 17:24:35', NULL, 'E', '02');
+	('adaddadd', '8fda6fd2cfc0477f803d4dc87d20b16a03ad76988796ef68dd8c61b31489dfa3', '1234', NULL, '1234', NULL, NULL, '2023-06-19 20:05:19', NULL, 'E', '02'),
+	('adadsadg', '8fda6fd2cfc0477f803d4dc87d20b16a03ad76988796ef68dd8c61b31489dfa3', '1234', NULL, '1234', NULL, NULL, '2023-06-19 20:05:19', NULL, 'E', '02'),
+	('admin', '5994471ABB01112AFCC18159F6CC74B4F511B99806DA59B3CAF5A9C173CACFC5', '관리자', '관리자', '관리자', '관리자', '관리자', '2023-06-13 00:00:00', '2023-06-21 00:00:00', 'E', '01'),
+	('dadqwdsad', '8fda6fd2cfc0477f803d4dc87d20b16a03ad76988796ef68dd8c61b31489dfa3', '1234', NULL, '1234', NULL, NULL, '2023-06-19 20:05:19', NULL, 'E', '02'),
+	('qwqewqr', '8fda6fd2cfc0477f803d4dc87d20b16a03ad76988796ef68dd8c61b31489dfa3', '1234', NULL, '1234', NULL, NULL, '2023-06-19 20:05:19', NULL, 'E', '02');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 -- 테이블 studycafe.user_type_cd 구조 내보내기

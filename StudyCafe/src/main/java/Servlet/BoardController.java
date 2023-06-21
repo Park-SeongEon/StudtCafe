@@ -177,7 +177,7 @@ public class BoardController extends HttpServlet {
 				brd.setTitle(title);
 				brd.setContent(content);
 				brd.setKateNo(katNo);
-				brd.setUserId((String)	request.getSession().getAttribute("userId"));
+				brd.setUserId((String)request.getSession().getAttribute("userId"));
 				
 				brdService.save(brd);
 				nextPage = "/board/list.do";
