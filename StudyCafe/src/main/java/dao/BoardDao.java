@@ -280,15 +280,13 @@ public class BoardDao extends SuperDao{
 			Connection conn = getConnection();
 			
 
-			String sql = "update board set title = ?,content = ?, file_name = ? where brd_no=? cnt=? vote_no=?";
+			String sql = "update board set title = ?,content = ?, file_name = ? where brd_no=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, vo.getTitle());
 			stmt.setString(2, vo.getContent());
 			stmt.setString(3, vo.getFilename());
 			stmt.setInt(4, vo.getBrdNo());				
-			stmt.setInt(5, vo.getCnt());
-			stmt.setInt(6, vo.getVoteNo());
 			
 			stmt.executeUpdate();
 			stmt.close();

@@ -3,6 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script>
+
+</script>
+
 
 <div style="width: 100%; height: 70%; overflow: auto">
 	<table width="100%" border="0" cellspacing="0" cellpadding="0"
@@ -42,7 +46,7 @@
 							<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
 							<td width="4%">${item.rownum}</td>
 							<td width="20%"><a
-								href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
+								href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title},${info.brdNo},${info.cnt}</a></td>
 							<td width="30%">${item.userId}</td>
 							<td width="30%">${item.regDate}</td>
 							<td width="10%">${item.cnt}</td>

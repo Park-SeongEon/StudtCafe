@@ -66,8 +66,19 @@ public class BoardService {
 	public List<Comment> getCommentList(int brdNo) {
 		return comDao.selectById(brdNo);
 	}
-
 	
+	public void VoteUpdate(int brdNo, int vote) {
+		
+			
+		brdDao.VoteUpdate(brdNo,vote);	
+	}
+
+	public void CntUpdate(int brdNo, int cnt) {
+		
+		
+		brdDao.CntUpdate(brdNo,cnt);	
+	}
+
 	
 	
 

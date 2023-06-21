@@ -23,7 +23,7 @@
 <script src="../js/sidebar.js"></script>
 <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
-      function backToList(){
+      function backToList(obj,url){
 	    obj.action="${contextPath}/board/list.do?katNo=3";
 	    obj.submit();
 	  }
@@ -69,6 +69,46 @@
 	    	 form.submit();
 		     
 		 }
+		
+	function fn_vote(brdNo,voteNo){
+		$.ajax({
+			url:"/board/Updatevote.do",		// servlet 
+			type: "post",
+			datatype:"text",
+			data: {"brdNo" : brdNo,"voteNo" : voteNo},
+			success:function(data){
+				//alert("s");
+				//int, string, 다수의 데이터
+				
+				//var data = JSON.parse(obj);
+				//console.log(data.id);
+				//alert(json.str);
+				/* var data = JSON.parse(json.map);
+				alert(data); */
+				//alert(json.map.title);
+				if(data === 'success'){
+					$('input[name=checkID]').val("ok");
+					alert("추천을 하였습니다..")
+					$('#message').text('사용할 수 있는 ID입니다.')   
+					$('#message').css('color','green')
+					
+				}
+				else {
+					alert("이미 추천을 하였습니다.")
+					$('#message').text('이미 추천을 하였습니다.')
+					$('#message').css('color','red')
+					
+				}
+			},
+			error:function(){
+				alert("error");
+			}
+		})
+		     
+	}
+	
+	
+
       
    </script>
 
@@ -90,9 +130,10 @@ button-align {
 				<div class="container">
 					<div class="card" style="width: 100%;">
 						<div class="card-body">
- 							<input type="text" value="${info.title}" name="title"
+<!-- 							<input type="text" value="${info.title}" name="title"
 								id="i_content" required>
- 
+ -->
+							<h4 class="card-title">${info.title}</h4>
  			  				<p class="card-text"><i class="fa-solid fa-user"></i>${userId}</p>
 							<h6 class="card-subtitle mb-2 text-muted">등록일자 : ${info.regDate}  조회수 : ${info.cnt} </h6>
 						</div>
@@ -106,15 +147,19 @@ button-align {
 					<form id="message-form" action="#" method="post" name="frmArticle"
 						enctype="multipart/form-data">
 						<div class="group notice">
-<!--  							${info.content}-->
+							${info.content}
+							<br>
+							<br>
+							<br>
+							<br>
 							
 							<span class="highlight"></span>
 							<span class="bar"></span>
 						</div>
 
 						<div class="center">
-							<input type=button value="👍 : ${info.voteNo}" onClick="fn_modify_artlce(this.form)">
-							<input type=button value="리스트로 돌아가기" onClick="backToList()"> 
+							<input type=button value="👍 : ${info.voteNo}" onClick="fn_vote(${info.brdNo},${info.voteNo})">
+							<input type=button value="리스트로 돌아가기" onClick="backToList(this.form,'${contextPath}/board/list.do?katNo=${katTargetNo}')"> 
 							<input type=button value="수정하기" onClick="fn_modify_artlce(this.form,'${contextPath}/board/mod.do?brdNo=${info.brdNo}&katNo=${katTargetNo}')"> 
 							<input type=button value="삭제하기" onClick="fn_remove_article(this.form,'${contextPath}/board/remove.do', ${info.brdNo})">
 						</div>

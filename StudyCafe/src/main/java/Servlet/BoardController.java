@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -180,11 +181,28 @@ public class BoardController extends HttpServlet {
 				
 				brdService.save(brd);
 				nextPage = "/board/list.do";
+			}else if (action.equals("/save.do")){
+				String title = request.getParameter("title");
+				String content = request.getParameter("content");
+				String brdNo = request.getParameter("brdNo");
+
+				//String imageFileName = request.getParameter("imageFileName");
+				System.out.println(title + "," + content);
+
+				Board brd =new Board();
+				brd.setTitle(title);
+				brd.setContent(content);
+				brd.setKateNo(katNo);
+				brd.setUserId((String)	request.getSession().getAttribute("userId"));
+				brd.setBrdNo(Integer.parseInt(brdNo));
+				brdService.save(brd);
+				nextPage = "/board/list.do";
 			} else if(action.equals("/view.do")){
 				String no = request.getParameter("brdNo");
 				Board vo = brdService.getBoardView(Integer.parseInt(no));
 				request.setAttribute("info", vo);
-				
+				brdService.CntUpdate(vo.getBrdNo(),vo.getCnt()+1);
+				vo.setCnt(vo.getCnt()+1);
 				List<Comment> comlist= brdService.getCommentList(Integer.parseInt(no));
 				
 				request.setAttribute("list", comlist);
@@ -229,7 +247,15 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("brdNo", brdNo);
 				
 				nextPage = "/board/view.do";
-			}
+			} else if ("/Updatevote.do".equals(action)) {
+				String voteNO = request.getParameter("voteNo");
+				String brdNo = request.getParameter("brdNo");
+				
+				brdService.VoteUpdate(Integer.parseInt(brdNo),Integer.parseInt(voteNO)+1);
+				
+				return;
+			} 
+			
 
 			RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 			dis.forward(request, response);
