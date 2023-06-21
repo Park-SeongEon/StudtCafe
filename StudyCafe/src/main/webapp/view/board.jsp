@@ -49,7 +49,6 @@ a, a:hover {
 							<tr>
 								<td>
 									<select class="form-control" name="searchId">
-										<option value="0">선택</option>
 										<option value="title">제목</option>
 										<option value="user_id">작성자</option>
 									</select>

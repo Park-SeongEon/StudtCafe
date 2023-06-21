@@ -54,8 +54,10 @@ body {
 #sidebar header {
 	background-color: #0075ff;
 	font-size: 20px;
-	line-height: 60px;
+	line-height: 80px;
 	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 #sidebar header a {

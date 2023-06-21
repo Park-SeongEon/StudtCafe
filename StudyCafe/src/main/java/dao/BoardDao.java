@@ -92,7 +92,7 @@ public class BoardDao extends SuperDao{
 			String sql = null;
 			
 			
-			if(searchId != "title")
+			if(searchId.equals("title"))
 				sql = "SELECT * FROM ( "
 					+ "SELECT  "
 					+ "	* "
