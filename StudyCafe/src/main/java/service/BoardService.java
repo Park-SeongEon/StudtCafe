@@ -40,7 +40,7 @@ public class BoardService {
 
 	public void save(Board brd) {
 
-		if(brd.getBrdNo() != 0) {
+		if(brd.getBrdNo() == 0) {
 			brdDao.create(brd);
 		} else {
 			brdDao.update(brd);			

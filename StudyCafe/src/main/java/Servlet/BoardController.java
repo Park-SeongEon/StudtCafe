@@ -176,6 +176,7 @@ public class BoardController extends HttpServlet {
 				brd.setTitle(title);
 				brd.setContent(content);
 				brd.setKateNo(katNo);
+				brd.setUserId((String)	request.getSession().getAttribute("userId"));
 				
 				brdService.save(brd);
 				nextPage = "/board/list.do";
@@ -195,19 +196,12 @@ public class BoardController extends HttpServlet {
 				String content = request.getParameter("content");
 				String brdNo = request.getParameter("brdNo");
 
+				Board fix = brdService.getBoardView(Integer.parseInt(brdNo));
+				request.setAttribute("info", fix);
 				
-				Board fix =new Board();
-				fix.setBrdNo(Integer.parseInt(brdNo));
-				fix.setTitle(title);
-				fix.setContent(content);
-				brdService.save(fix);
+				request.setAttribute("update", fix);
+				nextPage = "/view/viewmod.jsp";
 				
-				request.setAttribute("msg", fix);
-				nextPage = "/view/articleForm.jsp";
-				
-				
-				return;
-			
 			} else if(action.equals("/remove.do")){ // 글 삭제 부분 여기에 추가해 주세요
 				brdService.removeBoard(katNo);
 				
