@@ -26,7 +26,7 @@ response.setHeader("pragma", "no-cache");
 <script src="https://kit.fontawesome.com/def66b134a.js"
 	crossorigin="anonymous"></script>
 <script type="text/javascript">
-	function backToList() {
+	function backToList(obj,url) {
 		obj.action = "${contextPath}/board/list.do?katNo=3";
 		obj.submit();
 	}
@@ -130,6 +130,8 @@ button-align {
 
 						<div class="card" style="width: 100%;">
 							<div class="card-body">
+								
+								
 								<input type="text" value="${info.title}" name="title"
 									id="i_title">
 
@@ -145,15 +147,18 @@ button-align {
 
 
 						<div class="group notice">
-							<input type="text" value="${info.content}" name="content"
-								id="i_content" required> <br> <br> <br> <br>
+							
+						<textarea  style="border: none" rows="20" cols="60" name="content"
+						id="i_content">${info.content}</textarea>
+						<br> <br> <br> <br>
 
 							<span class="highlight"></span> <span class="bar"></span>
 
 							<div class="center">
 								<input type=button value="수정하기"
 									onClick="fn_reply_form('${contextPath}/board/save.do?brdNo=${info.brdNo}&katNo=${katTargetNo}',${info.brdNo})">
-								 <input type=button value="리스트로 돌아가기" onClick="backToList()">
+							 	 <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/remove.do?brdNo=${info.brdNo}&katNo=${katTargetNo}', ${info.brdNo})">
+								 <input type=button value="리스트로 돌아가기" onClick="backToList(this.form,'${contextPath}/board/list.do?katNo=${katTargetNo}')">
 							</div>
 						</div>
 						<input type="hidden" name="userId" value="${userId}">
