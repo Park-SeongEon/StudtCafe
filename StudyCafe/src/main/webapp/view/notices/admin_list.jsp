@@ -17,12 +17,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
-	<link rel="stylesheet" href="../css/bootstrap.css">
-	<link rel="stylesheet" href="../css/sidebar.css">
-	<link rel="stylesheet" href="../css/list.css">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/sidebar.css">
+	<link rel="stylesheet" href="../../css/list.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="../js/bootstrap.js"></script>
-	<script src="../js/sidebar.js"></script>
+	<script src="../../js/bootstrap.js"></script>
+	<script src="../../js/sidebar.js"></script>
 <style type="text/css">
 a, a:hover {
 	color: #000000;
@@ -35,10 +35,10 @@ a, a:hover {
 <body>
 
 	<div id="viewport">
-		<jsp:include page="sidebar.jsp"></jsp:include>
+		<jsp:include page="../common/sidebar.jsp"></jsp:include>
 		<!-- Content -->
 		<div id="content">
-			<jsp:include page="top.jsp"></jsp:include>
+			<jsp:include page="../common/top.jsp"></jsp:include>
 			<div class="main_back">
 				<div class="container">
 					<h1 style="font-family: Namum">공지사항</h1>
@@ -64,7 +64,7 @@ a, a:hover {
 						</table>
 					</form>
 					<div style="width:100%; height:70%; overflow:auto">
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="active table table1" style=" border: 1px solid #dddddd">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="active table1" style=" border: 1px solid #dddddd">
 							<thead>
 								<tr>
 									<th style="text-align: center; vertical-align: middle;"></th>

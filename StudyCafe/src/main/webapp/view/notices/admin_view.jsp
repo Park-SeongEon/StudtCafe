@@ -12,15 +12,15 @@
 <head>
 <meta charset="UTF-8">
 <title>글보기</title>
-<link rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="../css/sidebar.css">
-<link rel="stylesheet" href="../css/list.css">
-<link rel="stylesheet" href="../css/message.css">
+<link rel="stylesheet" href="../../css/bootstrap.css">
+<link rel="stylesheet" href="../../css/sidebar.css">
+<link rel="stylesheet" href="../../css/list.css">
+<link rel="stylesheet" href="../../css/message.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="../js/bootstrap.js"></script>
-<script src="../js/sidebar.js"></script>
+<script src="../../js/bootstrap.js"></script>
+<script src="../../js/sidebar.js"></script>
 <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
       function backToList(obj,url){
@@ -121,11 +121,10 @@ button-align {
 <body>
 	<div id="viewport">
 		<!--SideBar  -->
-		<jsp:include page="sidebar.jsp"></jsp:include>
+		<jsp:include page="../common/sidebar.jsp"></jsp:include>
 		<!-- Content -->
 		<div id="content">
-			<!--Top  -->
-			<jsp:include page="top.jsp"></jsp:include>
+			<jsp:include page="../common/top.jsp"></jsp:include>
 			<div class="main_back2">
 				<div class="container">
 					<div class="card" style="width: 100%;">

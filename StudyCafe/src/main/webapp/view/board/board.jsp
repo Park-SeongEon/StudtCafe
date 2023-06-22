@@ -17,13 +17,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
-	<link rel="stylesheet" href="../css/bootstrap.css">
-	<link rel="stylesheet" href="../css/sidebar.css">
-	<link rel="stylesheet" href="../css/list.css">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/sidebar.css">
+	<link rel="stylesheet" href="../../css/list.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="../js/bootstrap.js"></script>
-	<script src="../js/sidebar.js"></script>
-	<script src="../js/list.js"></script>
+	<script src="<c:url value="/js/bootstrap.js"/>"></script>
+	<script src="../../js/sidebar.js"></script>
+	<script src="../../js/list.js"></script>
 
 <style type="text/css">
 a, a:hover {
@@ -31,15 +31,15 @@ a, a:hover {
 	text-decoration: none;
 }
 </style>
-	<title>JSP 게시판 웹 사이트</title>
+	<title>Study & Cafe</title>
 
 </head>
 <body>
 	<div id="viewport">
-		<jsp:include page="sidebar.jsp"></jsp:include>
+		<jsp:include page="../common/sidebar.jsp"></jsp:include>
 		<!-- Content -->
 		<div id="content">
-			<jsp:include page="top.jsp"></jsp:include>
+			<jsp:include page="../common/top.jsp"></jsp:include>
 			<div class="main_back">
 				<div class="container">
 					<h1 style="font-family: Namum">게시판</h1>

@@ -1,4 +1,4 @@
-package Servlet;
+package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.Board;
 import model.Kategorie;
@@ -41,7 +40,6 @@ public class MainController extends HttpServlet {
 		String nextPage = null;
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
-		HttpSession session;
 		String action = request.getPathInfo();
 
 		
@@ -64,7 +62,7 @@ public class MainController extends HttpServlet {
 				List<Board> viewlist = mainService.getBoardViewList();
 				request.setAttribute("viewlist", viewlist);
 
-				nextPage = "/view/main.jsp";
+				nextPage = "/view/main/main.jsp";
 			} else if("/main.do".equals(action)) {
 				List<Seat> list = mainService.getSeatList();
 				request.setAttribute("list", list);
@@ -76,7 +74,7 @@ public class MainController extends HttpServlet {
 				request.setAttribute("statis", statis);
 
 				
-				nextPage = "/view/main.jsp";
+				nextPage = "/view/main/main.jsp";
 			} else if(action.equals("/change.do")){
 				
 				PrintWriter out = response.getWriter();

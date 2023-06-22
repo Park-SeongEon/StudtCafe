@@ -1,4 +1,4 @@
-package Servlet;
+package servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ import service.AdminService;
 @WebServlet("/admin/*")
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String ARTICEL_IMAGE_REPO = "D:\\file_repo";
+//	private static String ARTICEL_IMAGE_REPO = "D:\\file_repo";
 
 	AdminService adminService;
 	
@@ -84,7 +84,7 @@ public class AdminController extends HttpServlet {
 				request.setAttribute("pageNum", pageNum);
 				request.setAttribute("list", list);
 			
-				nextPage = "/view/list.jsp";
+				nextPage = "/view/notices/admin_list.jsp";
 			} else if("/list.do".equals(action)) {            // 공지사항
 
 				String _section = request.getParameter("setion");
@@ -105,17 +105,17 @@ public class AdminController extends HttpServlet {
 				request.setAttribute("pageNum", pageNum);
 				request.setAttribute("list", list);
 
-				nextPage = "/view/admin_list.jsp";
+				nextPage = "/view/notices/admin_list.jsp";
 
 			} else if(action.equals("/memberlist.do")) {      // 회원목록
 				userlist = adminService.getUserList();
 				request.setAttribute("list", userlist);
-				nextPage = "/view/listMembers.jsp";
+				nextPage = "/view/member/listMembers.jsp";
 				
 			} else if(action.equals("/kate.do")) {            // 카테고리
 				katlist = adminService.getKateList();
 				request.setAttribute("list", katlist);
-				nextPage = "/view/kate.jsp";
+				nextPage = "/view/notices/kate.jsp";
 				
 			}else if(action.equals("/Form.do")) {
 				nextPage = "/view/Form.jsp";
@@ -154,13 +154,13 @@ public class AdminController extends HttpServlet {
 				List<Comment> comlist= adminService.getCommentList(Integer.parseInt(no));
 				request.setAttribute("list", comlist);
 				
-				nextPage = "/view/admin_view.jsp";
+				nextPage = "/view/notices/admin_view.jsp";
 				
 			} else if(action.equals("/mod.do")) {
-				String kateName = request.getParameter("kateName");
+/*				String kateName = request.getParameter("kateName");
 				String kateDetail = request.getParameter("kateDetail");
 				String kateSearchNo = request.getParameter("kateSearchNo");
-
+*/
 				
 				return;
 			} else if(action.equals("/remove.do")){			   // 공지사항 삭제

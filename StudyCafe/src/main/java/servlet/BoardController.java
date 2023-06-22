@@ -1,7 +1,6 @@
-package Servlet;
+package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import model.Board;
 import model.Comment;
@@ -23,7 +21,7 @@ import service.BoardService;
 @WebServlet("/board/*")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String ARTICEL_IMAGE_REPO = "D:\\file_repo";
+//	private static String ARTICEL_IMAGE_REPO = "D:\\file_repo";
 
 	
 	BoardService brdService;
@@ -44,7 +42,6 @@ public class BoardController extends HttpServlet {
 		String nextPage = null;
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
-		HttpSession session;
 		String action = request.getPathInfo();
 
         if(request.getSession().getAttribute("userId") == null) {
@@ -99,7 +96,7 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("pageNum", pageNum);
 				request.setAttribute("list", list);
 				 			
-				nextPage = "/view/board.jsp";
+				nextPage = "/view/board/board.jsp";
 			} else if("/list.do".equals(action)) {
 
 				String _section = request.getParameter("setion");
@@ -130,7 +127,7 @@ public class BoardController extends HttpServlet {
 					request.setAttribute("tot", list.get(0).getTotalCount());
 
 
-				nextPage = "/view/board.jsp";
+				nextPage = "/view/board/board.jsp";
 
 			} else if("/searchlist.do".equals(action)) {
 
@@ -162,7 +159,7 @@ public class BoardController extends HttpServlet {
 					request.setAttribute("tot", list.get(0).getTotalCount());
 
 
-				nextPage = "/view/list.jsp";
+				nextPage = "/view/board/list.jsp";
 
 			} else if(action.equals("/Form.do")) {
 				nextPage = "/view/modaltest.jsp";
@@ -207,18 +204,16 @@ public class BoardController extends HttpServlet {
 				
 				request.setAttribute("list", comlist);
 
-				nextPage = "/view/view.jsp";
+				nextPage = "/view/board/view.jsp";
 				
 			} else if(action.equals("/mod.do")) {// 글 수정 부분 여기에 추가해 주세요
-				String title = request.getParameter("title");
-				String content = request.getParameter("content");
 				String brdNo = request.getParameter("brdNo");
 
 				Board fix = brdService.getBoardView(Integer.parseInt(brdNo));
 				request.setAttribute("info", fix);
 				
 				request.setAttribute("update", fix);
-				nextPage = "/view/viewmod.jsp";
+				nextPage = "/view/board/viewmod.jsp";
 				
 			} else if(action.equals("/remove.do")){  // 게시판 삭제								  
 			    String str = request.getParameter("brdNo");

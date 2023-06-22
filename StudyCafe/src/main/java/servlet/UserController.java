@@ -1,4 +1,4 @@
-package Servlet;
+package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,10 +46,10 @@ public class UserController extends HttpServlet {
 		String action = request.getPathInfo();
 
 		if (action == null) {
-			nextPage = "/view/login.jsp";
+			nextPage = "/view/member/login.jsp";
 
 		}else if("/main.do".equals(action)) {
-			nextPage = "/view/login.jsp";
+			nextPage = "/view/member/login.jsp";
 
 		} else if (action.equals("/save.do")) {
 			// 회원 가입
@@ -110,17 +110,7 @@ public class UserController extends HttpServlet {
 
 			nextPage = "/main/main.do";
 		} else if (action.equals("/join.do")) {
-			nextPage = "/view/join.jsp";
-		} else if (action.equals("/mod.do")) {
-			User vo = new User();
-
-//			dao.update(vo);
-			nextPage = "/member/list.do";
-		} else if (action.equals("/del.do")) { // 회원 삭제부분 여기에 추가
-			String id = request.getParameter("id");
-//			User vo = dao.selectById(id);
-
-			nextPage = "/member/main.do";
+			nextPage = "/view/member/join.jsp";
 		} else if ("/login.do".equals(action)) {
 			String userID = request.getParameter("userID");
 			String userPW = request.getParameter("userPW");
@@ -170,7 +160,7 @@ public class UserController extends HttpServlet {
 			
 			User user= userDao.selectById(userId);
 			request.setAttribute("user", user);
-			nextPage = "/view/update.jsp";
+			nextPage = "/view/member/update.jsp";
 		}
 		//로그아웃
 		else if (action.equals("/logout.do")) {
@@ -180,20 +170,16 @@ public class UserController extends HttpServlet {
 		        session.invalidate(); // 세션 무효화
 		    }
 		    nextPage = "/member/main.do";
-		}
-		
-		
-		else {
+		}else {
 			List<User> memList = userDao.selectAll();
 			request.setAttribute("memList", memList);
-			nextPage = "/view/member.jsp";
+			nextPage = "/view/member/member.jsp";
 
 		}
 		
 		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -8,8 +8,9 @@
 	<div id="sidebar">
 		<header>
 			<a href="${contextPath}/main/main.do">			
-				<!--<img src="../img/logo.png" width="120" height="60"></img>-->
-				  Study Cafe
+				<!--<img src="../img/logo.png" width="120" height="60"></img>-->				 
+
+				 Study Cafe
 			</a>
 		</header>
 		<ul class="nav">

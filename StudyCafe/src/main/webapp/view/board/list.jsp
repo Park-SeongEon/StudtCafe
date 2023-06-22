@@ -46,7 +46,7 @@
 							<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
 							<td width="4%">${item.rownum}</td>
 							<td width="20%"><a
-								href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title},${info.brdNo},${info.cnt}</a></td>
+								href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${katTargetNo}">${item.title}</a></td>
 							<td width="30%">${item.userId}</td>
 							<td width="30%">${item.regDate}</td>
 							<td width="10%">${item.cnt}</td>

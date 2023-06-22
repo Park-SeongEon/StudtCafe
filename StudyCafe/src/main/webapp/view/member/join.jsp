@@ -11,7 +11,7 @@
 <meta name="Keywords" content="">
 <meta name="Description" content="">
 <title>회원가입</title>
-<link rel="stylesheet" href="../css/join.css" />
+<link rel="stylesheet" href="../../css/join.css" />
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         function execDaumPostcode() {
@@ -198,6 +198,6 @@
 	</form>
 	
 	<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="../js/bootstrap.js"></script>
+	<script src="../../js/bootstrap.js"></script>
 </body>
 </html>

@@ -15,19 +15,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" , initial-scale="1">
-<link rel="stylesheet" href="../css/bootstrap.css">
-<link rel="stylesheet" href="../css/sidebar.css">
-<link rel="stylesheet" href="../css/main.css">
-<title>JSP 게시판 웹 사이트</title>
+<link rel="stylesheet" href="<c:url value="/css/bootstrap.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/sidebar.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/main.css"/>">
+<title>Study & Cafe</title>
 </head>
 <body>
 	<div id="viewport">
 		<!--SideBar  -->
-		<jsp:include page="sidebar.jsp"></jsp:include>
+		<jsp:include page="../common/sidebar.jsp"></jsp:include>
 		<!-- Content -->
 		<div id="content">
-			<!--Top  -->
-			<jsp:include page="top.jsp"></jsp:include>
+			<jsp:include page="../common/top.jsp"></jsp:include>
 			<div class="main_back">			
 				<div class="container">
 					<h1 style="font-family: Namum; text-align: center;">좌석배치</h1>
@@ -136,13 +135,13 @@
 								<td>
 									<div class="notice">
 										<p class="title">최신글보기</p>
-										<a href="${contextPath}/board/list.do?katNo=1" class="btn">더보기</a>
+										<a href="${contextPath}/board/list.do?katNo=3" class="btn">더보기</a>
 										<table class="notice-list">
 											<tbody>
 												<c:forEach var="item" items="${viewlist}" varStatus="rows">
 													<tr>
 														<td class="subject">
-															<a href="${contextPath}/board/view.do" title="게시글 상세보기">${item.title}</a>
+															<a href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${3}" title="게시글 상세보기">${item.title}</a>
 														</td>
 														<td class="date">${item.userId}</td>
 														<td class="date">${item.regDate}</td>
@@ -163,9 +162,8 @@
 		<input type="hidden" id="userId" name="userId" value="${userId}">
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="../js/bootstrap.js"></script>
-	<script src="../js/sidebar.js"></script>
-	<script src="../js/main.js"></script>
+	<script src="<c:url value="/js/bootstrap.js"/>"></script>
+	<script src="<c:url value="/js/main.js"/>"></script>
 	
 </body>
 </html>
