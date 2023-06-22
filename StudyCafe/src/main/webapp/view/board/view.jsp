@@ -75,7 +75,7 @@
 			type: "post",
 			datatype:"text",
 			data: {"brdNo" : brdNo,"voteNo" : voteNo},
-			success:function(data){
+			success:function(obj){
 				//alert("s");
 				//int, string, 다수의 데이터
 				
@@ -85,19 +85,16 @@
 				/* var data = JSON.parse(json.map);
 				alert(data); */
 				//alert(json.map.title);
-				if(data === 'success'){
-					$('input[name=checkID]').val("ok");
-					alert("추천을 하였습니다..")
-					$('#message').text('사용할 수 있는 ID입니다.')   
-					$('#message').css('color','green')
-					
+				
+				
+				var data=JSON.parse(obj);
+				console.log(data.check)
+
+				if(data.check === 1){
+					alert('이미 추천이 되었습니다.');
 				}
-				else {
-					alert("이미 추천을 하였습니다.")
-					$('#message').text('이미 추천을 하였습니다.')
-					$('#message').css('color','red')
-					
-				}
+
+				$('#vote').val('👍 : ' + data.voteCnt);
 			},
 			error:function(){
 				alert("error");
@@ -161,7 +158,7 @@ button-align {
 						</div>
 
 						<div class="center">
-							<input type=button value="👍 : ${info.voteNo}" onClick="fn_vote(${info.brdNo},${info.voteNo})">
+							<input type=button id="vote" value="👍 : ${info.voteNo}" onClick="fn_vote(${info.brdNo},${info.voteNo})">
 							<input type=button value="리스트로 돌아가기" onClick="backToList(this.form,'${contextPath}/board/list.do?katNo=${katTargetNo}')"> 
 							<input type=button value="수정하기" onClick="fn_modify_artlce(this.form,'${contextPath}/board/mod.do?brdNo=${info.brdNo}&katNo=${katTargetNo}')"> 
 							

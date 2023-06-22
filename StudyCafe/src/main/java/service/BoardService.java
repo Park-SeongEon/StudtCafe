@@ -67,12 +67,20 @@ public class BoardService {
 		return comDao.selectById(brdNo);
 	}
 	
-	public void VoteUpdate(int brdNo, int vote) {
-		
-			
-		brdDao.VoteUpdate(brdNo,vote);	
+	public int VoteUpdate(Board vo) {
+
+		int check = brdDao.VoteCheck(vo);	
+
+		if(check == 0)
+			brdDao.insertVote(vo);
+
+		return check;
 	}
 
+	public int getVote(int brdNo) {
+		return brdDao.selectVote(brdNo);
+	}
+	
 	public void CntUpdate(int brdNo, int cnt) {
 		
 		

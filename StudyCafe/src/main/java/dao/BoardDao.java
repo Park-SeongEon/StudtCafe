@@ -219,11 +219,12 @@ public class BoardDao extends SuperDao{
 
 		try {
 			Connection conn = getConnection();
-			String sql = "select * from board where brd_no=?";
+			String sql = "select *,(select count(*) from board_vote where brd_no=?) as vote2 from board where brd_no=?";
 
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, brdNo);
+			stmt.setInt(2, brdNo);
 			ResultSet re = stmt.executeQuery();
 			while (re.next()) {
 				vo = new Board();
@@ -233,7 +234,7 @@ public class BoardDao extends SuperDao{
 				vo.setFilename(re.getString("file_name"));
 				vo.setRegDate(re.getDate("regdate"));
 				vo.setKateNo(re.getInt("kate_no"));
-				vo.setVoteNo(re.getInt("vote_no"));
+				vo.setVoteNo(re.getInt("vote2"));
 				vo.setCnt(re.getInt("cnt"));
 				vo.setUserId(re.getString("user_id"));
 
@@ -320,18 +321,18 @@ public class BoardDao extends SuperDao{
 		}
 
 	}
-	
-	public void VoteUpdate(int brdNo, int vote) {
+
+	public void insertVote(Board vo) {
 		try {
 			
 			Connection conn = getConnection();
 			
-			String sql = "update board set vote_no = ? where brd_no=?  ";
+			String sql = "insert into board_vote values(?,?) ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
-			stmt.setInt(1, vote);
-			stmt.setInt(2, brdNo);
+			stmt.setString(1, vo.getUserId());
+			stmt.setInt(2, vo.getBrdNo());
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -344,6 +345,72 @@ public class BoardDao extends SuperDao{
 
 	}
 
+	public int VoteCheck(Board vo) {
+		int isAuthenticated = 0;
+
+		try {
+
+			Connection conn = getConnection();
+
+			String sql = "select count(*) as cnt from board_vote where brd_no = ? and user_id=?  ";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, vo.getBrdNo());
+			stmt.setString(2, vo.getUserId());
+
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				
+				isAuthenticated = rs.getInt("cnt");
+			}
+
+			rs.close();
+			stmt.close();
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		return isAuthenticated;
+
+	}
+
+	
+	public int selectVote(int brdNo) {
+		int isAuthenticated = 0;
+
+		try {
+
+			Connection conn = getConnection();
+
+			String sql = "select count(*) as cnt from board_vote where brd_no = ?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, brdNo);
+
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				
+				isAuthenticated = rs.getInt("cnt");
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		return isAuthenticated;
+
+	}
+	
 	public void delete(int brdNo) {
 
 		try {

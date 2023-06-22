@@ -53,7 +53,7 @@ public class MainController extends HttpServlet {
 		request.setAttribute("katTargetNo", 0);
 		request.setAttribute("katTargetName", "Dashboard");
 
-		try {			
+		try {
 			if(action == null){
 				
 				List<Seat> list = mainService.getSeatList();
@@ -63,6 +63,7 @@ public class MainController extends HttpServlet {
 				request.setAttribute("viewlist", viewlist);
 
 				nextPage = "/view/main/main.jsp";
+				
 			} else if("/main.do".equals(action)) {
 				List<Seat> list = mainService.getSeatList();
 				request.setAttribute("list", list);

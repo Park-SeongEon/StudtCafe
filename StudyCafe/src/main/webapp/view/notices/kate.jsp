@@ -19,22 +19,32 @@
 	<link rel="stylesheet" href="../../css/sidebar.css">
 	<link rel="stylesheet" href="../../css/list.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<title>Study & Cafe</title>
-<style type="text/css">
-a, a:hover {
-	color: #000000;
-	text-decoration: none;
-}
-<c:choose>
-	<c:when test='${msg=="deleted"}'>
-		<script>
-			window.onload = function () {
-				alert("회원 정보를 삭제했습니다.");
-			}
-		</script>
-	</c:when>
-</c:choose>
-</style>
+	<title>Study & Cafe</title>
+	<style type="text/css">
+	a, a:hover {
+		color: #000000;
+		text-decoration: none;
+	}
+
+	</style>
+	<c:choose>
+		<c:when test='${msg=="deleted"}'>
+			<script>
+				window.onload = function () {
+					alert("회원 정보를 삭제했습니다.");
+				}
+			</script>
+		</c:when>
+	</c:choose>
+	<script>
+	$( document ).ready( function() {
+        $( 'button' ).click( function() {
+        	
+        	
+        });
+      });
+	
+	</script>
 </head>
 <body>
 	<div id="viewport">

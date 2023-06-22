@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import model.Board;
 import model.Comment;
@@ -245,10 +248,30 @@ public class BoardController extends HttpServlet {
 				
 				nextPage = "/board/view.do";
 			} else if ("/Updatevote.do".equals(action)) {
+				
+				PrintWriter out = response.getWriter();
 				String voteNO = request.getParameter("voteNo");
 				String brdNo = request.getParameter("brdNo");
+//				comment.setUserId((String)request.getSession().getAttribute("userId"));
+				Board brd =new Board();
+
+				brd.setUserId((String)request.getSession().getAttribute("userId"));
+				brd.setBrdNo(Integer.parseInt(brdNo));
+
 				
-				brdService.VoteUpdate(Integer.parseInt(brdNo),Integer.parseInt(voteNO)+1);
+				int check = brdService.VoteUpdate(brd);
+				int voteCnt = brdService.getVote(brd.getBrdNo());
+
+		        // Map
+		        Map<String, Integer> map = new HashMap<>();
+		        map.put("check", check);
+		        map.put("voteCnt", voteCnt);
+		 
+		        // Map -> Json 문자열
+		        Gson gson = new Gson();
+		        String jsonStr = gson.toJson(map);
+				
+				out.print(jsonStr);				
 				
 				return;
 			} 

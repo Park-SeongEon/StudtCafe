@@ -174,7 +174,6 @@ public class UserController extends HttpServlet {
 
 		}
 		
-		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
 		dis.forward(request, response);
 	}
