@@ -20,8 +20,6 @@
 				<form action="${contextPath}/member/login.do" method="post">
 					<input type="text" id="login" class="fadeIn second" name="userID" placeholder="아이디"> 
 					<input type="password" id="password" class="fadeIn third" name="userPW" placeholder="비밀번호" autocomplete="off"> 
-					<input type="password" style="display: block; width:0px; height:0px; border: 0;" @focus="$refs.pwdInput.focus()">
-					<input type="password" class="form-control m-b-5" placeholder="패스워드" v-model="user.password" autocomplete="off" ref="pwdInput"/>
 					<input type="submit" class="fadeIn fourth" value="로그인">
 				</form>
 				<!-- Signup Link -->

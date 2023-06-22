@@ -42,7 +42,7 @@ a, a:hover {
 			<jsp:include page="../common/top.jsp"></jsp:include>
 			<div class="main_back">
 				<div class="container">
-					<h1 style="font-family: Namum">게시판</h1>
+					<h1 style="font-family: Namum">${katTargetName}</h1>
 					<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
 					<form id="frmSearch" method="post" name="search">
 						<table class="pull-right">

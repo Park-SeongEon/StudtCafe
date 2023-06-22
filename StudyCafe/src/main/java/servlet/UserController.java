@@ -41,7 +41,6 @@ public class UserController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session;
-
 		
 		String action = request.getPathInfo();
 
@@ -74,7 +73,6 @@ public class UserController extends HttpServlet {
 
 			userDao.create(user);
 			
-
 			nextPage = "/member/main.do";
 		} else if (action.equals("/update.do")) {
 			// 회원정보수정
@@ -128,7 +126,6 @@ public class UserController extends HttpServlet {
 				java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());				
 				userDao.joinDateUpdate(userID, sqlDate);
 
-				// response.sendRedirect(request.getContextPath() + "/main/main.do");
 				nextPage = "/main/main.do";
 
 			} else {
@@ -155,7 +152,7 @@ public class UserController extends HttpServlet {
 			return;
 		}else if (action.equals("/updatefrom.do")) {
 			
-			session=request.getSession();
+			session = request.getSession();
 			String userId = (String) session.getAttribute("userId");
 			
 			User user= userDao.selectById(userId);

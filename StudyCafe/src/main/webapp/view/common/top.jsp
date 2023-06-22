@@ -41,10 +41,8 @@
 		</nav>
 	</c:when>
 	<c:when test="${!empty userId}">
-    <nav>
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="zmdi zmdi-notifications text-danger"></i> </a></li>
                 <li id="btn"><a href="#">${userId}</a>
                     <ul id="slideTogglebox">
                         <li><a href="/member/updatefrom.do">회원정보수정</a></li>
@@ -53,7 +51,6 @@
                 </li>
             </ul>
         </div>
-    </nav>
 </c:when>
 </c:choose>
 
