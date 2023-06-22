@@ -220,13 +220,15 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("update", fix);
 				nextPage = "/view/viewmod.jsp";
 				
-			} else if(action.equals("/remove.do")){ // 글 삭제 부분 여기에 추가해 주세요
-				brdService.removeBoard(katNo);
+			} else if(action.equals("/remove.do")){  // 게시판 삭제								  
+			    String str = request.getParameter("brdNo");
+			    
+			    int brdNo = Integer.parseInt(str);
+			    
+			    brdService.removeBoard(brdNo);   
+			    nextPage="/board/list.do";
 				
-				request.setAttribute("msg", "deleted");
-				nextPage = "/view/board.jsp";
 				
-				return;
 			} else if (action.equals("/replyForm.do")) {// 댓글 쓰는 기능 여기에 추가해 주세요
 				
 				

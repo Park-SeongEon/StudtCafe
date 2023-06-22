@@ -103,9 +103,14 @@
 			error:function(){
 				alert("error");
 			}
-		})
-		     
+		})	     
 	}
+	
+	$( document ).ready( function() {
+        $( 'button' ).click( function() {
+         $( 'h1' ).remove( '.rm' );
+        } );
+      } );
 	
 	
 
@@ -161,7 +166,7 @@ button-align {
 							<input type=button value="👍 : ${info.voteNo}" onClick="fn_vote(${info.brdNo},${info.voteNo})">
 							<input type=button value="리스트로 돌아가기" onClick="backToList(this.form,'${contextPath}/board/list.do?katNo=${katTargetNo}')"> 
 							<input type=button value="수정하기" onClick="fn_modify_artlce(this.form,'${contextPath}/board/mod.do?brdNo=${info.brdNo}&katNo=${katTargetNo}')"> 
-							<input type=button value="삭제하기" onClick="fn_remove_article(this.form,'${contextPath}/board/remove.do', ${info.brdNo})">
+							
 						</div>
 
 						<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
