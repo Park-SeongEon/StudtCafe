@@ -103,15 +103,7 @@
 			datatype:"text",
 			data: {"userId" : form.userID.value},
 			success:function(data){
-				//alert("s");
-				//int, string, 다수의 데이터
-				
-				//var data = JSON.parse(obj);
-				//console.log(data.id);
-				//alert(json.str);
-				/* var data = JSON.parse(json.map);
-				alert(data); */
-				//alert(json.map.title);
+
 				if(data === 'success'){
 					$('input[name=checkID]').val("ok");
 					alert("사용 가능한 아이디입니다.")

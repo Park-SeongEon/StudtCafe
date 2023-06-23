@@ -71,6 +71,7 @@
 								<td><button type="button" class="btn btn-white btn-dark">검색</button></td>
 								<td>
 									<a href="#" data-toggle="modal" data-target="#myModal" class="btn addbtn back-blue2 pull-right">추가</a>
+
 								</td>
 							</tr>
 						</table>
@@ -105,7 +106,7 @@
 												<td width="5%"><a href="#" data-toggle="modal" data-target="#myModal2"  class="btn back-blue2 pull-right">수정</a></td>
 												<td width="5%"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove3.do?kateSearchNo=${item.kateNo}&katNo=${katTargetNo}'"></td>
 												<td width="35%">${item.kateName}</td>
-												<td width="50%">${item.kateDetail}</td>
+												<td width="50%" style="text-align: left;">${item.kateDetail}</td>
 										</c:forEach>
 									</c:when>
 								</c:choose>
