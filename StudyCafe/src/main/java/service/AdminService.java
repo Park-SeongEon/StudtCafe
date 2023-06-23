@@ -66,6 +66,12 @@ public class AdminService {
 		return katDao.selectAll();
 	}
 
+	
+	public Kategorie getKateView(int katNo) {
+		return katDao.selectById(katNo);
+	}
+
+	
 	public void savekat(Kategorie kat) {
 		if (kat.getKateNo() == 0) {
 			katDao.create(kat);

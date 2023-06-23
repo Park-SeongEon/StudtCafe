@@ -37,14 +37,29 @@
 		</c:when>
 	</c:choose>
 	<script>
-	$( document ).ready( function() {
-        $( 'button' ).click( function() {
-        	
-        	
-        });
-      });
+		function modify(katNo) {
+			var form = document.joinForm;
 	
-	</script>
+			$.ajax({
+				url:"/admin/katmod.do",		// servlet 
+				type: "post",
+				datatype:"json",
+				data: {"katNo" : katNo},
+				success:function(obj){
+	
+					var data=JSON.parse(obj);
+					
+					$('#kateName').val(data.kateName);			
+					$('#kateDetail').val(data.kateDetail);
+					$('#katSearchId').val(data.kateNo);
+				},
+				error:function(){
+					alert("error");
+				}
+			});
+		}
+    
+	</script>	
 </head>
 <body>
 	<div id="viewport">
@@ -103,7 +118,7 @@
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
 												<td width="5%">${articleNum.count}</td>
-												<td width="5%"><a href="#" data-toggle="modal" data-target="#myModal2"  class="btn back-blue2 pull-right">수정</a></td>
+												<td width="5%"><a href="#" data-toggle="modal" data-target="#myModal2" onclick="modify(${item.kateNo})"  class="btn back-blue2 pull-right">수정</a></td>
 												<td width="5%"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove3.do?kateSearchNo=${item.kateNo}&katNo=${katTargetNo}'"></td>
 												<td width="35%">${item.kateName}</td>
 												<td width="50%" style="text-align: left;">${item.kateDetail}</td>
@@ -147,7 +162,7 @@
 					
 					<!-- 카테고리 수정 Modal -->
 					<div class="modal fade" id="myModal2" role="dialog">
-						<form action="/admin/katmod.do" method="post">
+						<form action="/admin/katsave.do?katNo=100" method="post">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header back-blue">
@@ -159,17 +174,19 @@
 										<table class="table">
 											<tr>
 												<td>카테고리명</td>
-												<td><input class="form-control" name="kateName" type="text"></td>
+												<td><input class="form-control" id="kateName" name="kateName" type="text"></td>
 											</tr>
 											<tr>
 												<td>카테고리 설명</td>
-												<td><textarea class="form-control" name="kateDetail" rows="5"></textarea></td>
+												<td><textarea class="form-control" id="kateDetail" name="kateDetail" rows="5"></textarea></td>
 											</tr>
 										</table>
 									</div>
 									<div class="modal-footer">
 										<button class="btn btn-success pull-right" type="submit">수정하기</button>
-										<input type="hidden" size="67" maxlength="500" name="katNo" value="${katTargetNo}" />
+										<input type="hidden" size="67" id="katSearchId" maxlength="500" name="katSearchId" />
+										<input type="hidden" size="67" id="katNo" maxlength="500" name="katNo" value="${katTargetNo}" />
+
 									</div>
 								</div>
 							</div>

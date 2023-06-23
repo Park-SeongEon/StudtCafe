@@ -159,8 +159,6 @@ public class BoardController extends HttpServlet {
 				pagingMap.put("searchId", searchId); // 검색 속성 설정
 				pagingMap.put("searchText", searchText); //검색어 설정
 
-				
-				
 				//게시판 내용 불러오기
 				list  = brdService.getBoardSearchList(pagingMap);  // 게시판 리스트와 총건수를 받음
 

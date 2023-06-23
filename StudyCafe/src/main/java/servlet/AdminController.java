@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import model.Board;
 import model.Comment;
@@ -192,9 +195,38 @@ public class AdminController extends HttpServlet {
 				nextPage="/admin/kate.do";
 				
 			} else if (action.equals("/katmod.do")) {		      // 카테고리 수정
+				PrintWriter out = response.getWriter();
+				String katSearchNo = request.getParameter("katNo");
+
+
+				//추천 표시
+				Kategorie kat = adminService.getKateView(Integer.parseInt(katSearchNo)); // 추천 여부 확인
+
+
+				// Gson 객체 생성
+		        Gson gson = new Gson();
+		 
+		        // Student 객체 -> Json 문자열
+		        String studentJson = gson.toJson(kat);
+		 
+		        //ajax로 전달
+				out.print(studentJson);				
 				
-			} else if (action.equals("/replyForm.do")) {
+				return;
 				
+				
+			} else if (action.equals("/katsave.do")) {
+				String kateName = request.getParameter("kateName");
+				String kateDetail = request.getParameter("kateDetail");
+				String kateSearchId = request.getParameter("katSearchId");
+
+				Kategorie kat = new Kategorie();
+				kat.setKateName(kateName);
+				kat.setKateDetail(kateDetail);
+				kat.setKateNo(Integer.parseInt(kateSearchId));
+
+				adminService.savekat(kat);
+				nextPage = "/admin/kate.do";
 			} else if (action.equals("/addReply.do")) {
 				return;
 			}

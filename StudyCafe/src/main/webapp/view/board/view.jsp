@@ -88,7 +88,6 @@
 				
 				
 				var data=JSON.parse(obj);
-				console.log(data.check)
 
 				if(data.check === 1){
 					alert('이미 추천이 되었습니다.');
