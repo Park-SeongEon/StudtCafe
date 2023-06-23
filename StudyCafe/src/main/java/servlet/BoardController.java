@@ -125,7 +125,13 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("section", section);
 				request.setAttribute("pageNum", pageNum);
 				request.setAttribute("list", list);
+				pagingMap.put("katNo", 1);	// 게시판 ID 설정
 
+				//게시판 내용 불러오기
+				List<Board> noticelist  = brdService.getBoardList(pagingMap);  // 게시판 리스트와 총건수를 받음
+				request.setAttribute("noticelist", noticelist); 
+
+				
 				if(list.size() > 0)
 					request.setAttribute("tot", list.get(0).getTotalCount());
 
@@ -153,9 +159,18 @@ public class BoardController extends HttpServlet {
 				pagingMap.put("searchId", searchId); // 검색 속성 설정
 				pagingMap.put("searchText", searchText); //검색어 설정
 
+				
+				
 				//게시판 내용 불러오기
 				list  = brdService.getBoardSearchList(pagingMap);  // 게시판 리스트와 총건수를 받음
 
+				pagingMap.put("katNo", 1);	// 게시판 ID 설정
+
+				//게시판 내용 불러오기
+				List<Board> noticelist  = brdService.getBoardSearchList(pagingMap);  // 게시판 리스트와 총건수를 받음
+				request.setAttribute("noticelist", noticelist); 
+				
+				
 				//jsp에 페이징값 세팅
 				request.setAttribute("section", section);
 				request.setAttribute("pageNum", pageNum);
@@ -163,6 +178,7 @@ public class BoardController extends HttpServlet {
 				//최신 글 세팅
 				request.setAttribute("list", list); 
 
+				
 				//총건수 세팅
 				if(list.size() > 0)
 					request.setAttribute("tot", list.get(0).getTotalCount());

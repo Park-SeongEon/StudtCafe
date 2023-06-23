@@ -30,6 +30,16 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:forEach var="item2" items="${noticelist }" varStatus="articleNum">
+				<tr align="center">
+					<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
+					<td width="4%">[공지]</td>
+					<td width="20%"><a
+						href="${contextPath}/board/view.do?brdNo=${item2.brdNo}&katNo=1">${item2.title}</a></td>
+					<td width="30%">${item2.userId}</td>
+					<td width="30%">${item2.regDate}</td>
+					<td width="10%">${item2.cnt}</td>
+			</c:forEach>
 			<c:choose>
 				<c:when test="${list == null }">
 					<tr height="10">
