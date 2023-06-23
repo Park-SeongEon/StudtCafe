@@ -102,7 +102,7 @@
 											<tr align="center">
 												<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
 												<td width="5%">${articleNum.count}</td>
-												<td width="5%"><a href="#" data-toggle="modal" data-target="#myModal2"  class="btn back-blue btn-success pull-right">수정</a></td>
+												<td width="5%"><a href="#" data-toggle="modal" data-target="#myModal2"  class="btn back-blue2 pull-right">수정</a></td>
 												<td width="5%"><input type="button" value="삭제" onclick="location.href='${contextPath}/admin/remove3.do?kateSearchNo=${item.kateNo}&katNo=${katTargetNo}'"></td>
 												<td width="35%">${item.kateName}</td>
 												<td width="50%">${item.kateDetail}</td>
