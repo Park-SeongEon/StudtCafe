@@ -299,17 +299,16 @@ public class BoardDao extends SuperDao{
 		}
 
 	}
-	public void CntUpdate(int brdNo, int cnt) {
+	public void CntUpdate(int brdNo) {
 		try {
 			
 			Connection conn = getConnection();
 			
-			String sql = "update board set cnt = ? where brd_no=? ";
+			String sql = "update board set cnt = cnt+1 where brd_no=? ";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
-			stmt.setInt(1, cnt);
-			stmt.setInt(2, brdNo);
+			stmt.setInt(1, brdNo);
 
 			stmt.executeUpdate();
 			stmt.close();

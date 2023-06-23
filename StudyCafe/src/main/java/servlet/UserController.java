@@ -60,8 +60,10 @@ public class UserController extends HttpServlet {
 			String addr = request.getParameter("addr");
 			String addr2 = request.getParameter("addr2");
 			
+			//password 암호화
 			String hashedPassword = sha256Hash(userPW);
-
+	
+			//정보 세팅
 			User user = new User();
 			user.setUserId(userID);
 			user.setUserPwd(hashedPassword);
@@ -70,7 +72,7 @@ public class UserController extends HttpServlet {
 			user.setUserAddr(addr);
 			user.setUserDaddr(addr2);
 			user.setUserCp(tel);
-
+			//저장
 			userDao.create(user);
 			
 			nextPage = "/member/main.do";
@@ -113,6 +115,7 @@ public class UserController extends HttpServlet {
 			String userID = request.getParameter("userID");
 			String userPW = request.getParameter("userPW");
 			
+			//password 암호화
 			String hashedPassword = sha256Hash(userPW);
 			
 			// 로그인 처리
@@ -121,7 +124,7 @@ public class UserController extends HttpServlet {
 			if (isAuthenticated) {
 				// 로그인 성공
 				request.getSession().setAttribute("userId", userID);
-				
+				//로그인 성공시 접속날짜 업데이트. sql에서 SYSDATE() 또는 now() 함수를 써도됨
 				Date utilDate = new Date();
 				java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());				
 				userDao.joinDateUpdate(userID, sqlDate);
@@ -133,7 +136,7 @@ public class UserController extends HttpServlet {
 				PrintWriter out = response.getWriter();				
 				out.print("<script>" 
 				+ "  alert('아이디 또는 비밀번호가 올바르지 않습니다.');"   // 알림창 
-				+ " location.href='" + request.getContextPath() + "/member/main.do';"  // 전체글 보기 페이지로 이동
+				+ " location.href='" + request.getContextPath() + "/member/main.do';"  // 로그인 페이지로 이동
 				+ "</script>");
 
 				return;
@@ -168,10 +171,7 @@ public class UserController extends HttpServlet {
 		    }
 		    nextPage = "/member/main.do";
 		}else {
-			List<User> memList = userDao.selectAll();
-			request.setAttribute("memList", memList);
-			nextPage = "/view/member/member.jsp";
-
+			nextPage = "/view/member/login.jsp";
 		}
 		
 		RequestDispatcher dis = request.getRequestDispatcher(nextPage);

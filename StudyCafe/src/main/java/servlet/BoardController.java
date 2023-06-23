@@ -134,34 +134,40 @@ public class BoardController extends HttpServlet {
 
 			} else if("/searchlist.do".equals(action)) {
 
-				String _section = request.getParameter("setion");
-				String _pageNum = request.getParameter("pageNum");
-				String searchId = request.getParameter("searchId");
-				String searchText = request.getParameter("searchText");
+				// 페이징 값 세팅
+				String _section = request.getParameter("setion");  // request getParameter을 통해 jsp setion 값 가져오기. prev, next 값으로 그 페이지로 이동
+				String _pageNum = request.getParameter("pageNum"); // request getParameter을 통해 jsp pageNum 값 가져오기. 현재 페이지 번호
+				String searchId = request.getParameter("searchId"); //검색 속성 제목인이 유저인지 등
+				String searchText = request.getParameter("searchText"); // 검색어
 
 				
-				//페이징처리
-				int section = Integer.parseInt(((_section == null) ? "1" : _section));
-				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
+				//페이징 값 int 값으로 변환
+				int section = Integer.parseInt(((_section == null) ? "1" : _section)); // _section 값 확인하여 값이 존재하지 않을 시 1로 세팅
+				int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum)); // _pageNum 값 확인하여 값이 존재하지 않을 시 1로 세팅
 				
+				//매개변수로 페이징, 검색 값설정
 				Map<String,Object> pagingMap = new HashMap<String,Object>();
-				pagingMap.put("section", section);
-				pagingMap.put("pageNum", pageNum);
-				pagingMap.put("katNo", katNo);
-				pagingMap.put("searchId", searchId);
-				pagingMap.put("searchText", searchText);
+				pagingMap.put("section", section); // 검색할때 페이징 처리를 위해 "section"에 section값을  세팅
+				pagingMap.put("pageNum", pageNum); // 검색할때 페이징 처리를 위해  "pageNum"에 pageNum값을  세팅
+				pagingMap.put("katNo", katNo);	// 게시판 ID 설정
+				pagingMap.put("searchId", searchId); // 검색 속성 설정
+				pagingMap.put("searchText", searchText); //검색어 설정
 
-				
-				list  = brdService.getBoardSearchList(pagingMap);
+				//게시판 내용 불러오기
+				list  = brdService.getBoardSearchList(pagingMap);  // 게시판 리스트와 총건수를 받음
 
+				//jsp에 페이징값 세팅
 				request.setAttribute("section", section);
 				request.setAttribute("pageNum", pageNum);
-				request.setAttribute("list", list);
 
+				//최신 글 세팅
+				request.setAttribute("list", list); 
+
+				//총건수 세팅
 				if(list.size() > 0)
 					request.setAttribute("tot", list.get(0).getTotalCount());
 
-
+				//view 설정
 				nextPage = "/view/board/list.jsp";
 
 			} else if(action.equals("/Form.do")) {
@@ -197,12 +203,12 @@ public class BoardController extends HttpServlet {
 				brd.setBrdNo(Integer.parseInt(brdNo));
 				brdService.save(brd);
 				nextPage = "/board/list.do";
+				
 			} else if(action.equals("/view.do")){
 				String no = request.getParameter("brdNo");
+				brdService.CntUpdate(Integer.parseInt(no));
 				Board vo = brdService.getBoardView(Integer.parseInt(no));
 				request.setAttribute("info", vo);
-				brdService.CntUpdate(vo.getBrdNo(),vo.getCnt()+1);
-				vo.setCnt(vo.getCnt()+1);
 				List<Comment> comlist= brdService.getCommentList(Integer.parseInt(no));
 				
 				request.setAttribute("list", comlist);
@@ -248,21 +254,18 @@ public class BoardController extends HttpServlet {
 				
 				nextPage = "/board/view.do";
 			} else if ("/Updatevote.do".equals(action)) {
-				
 				PrintWriter out = response.getWriter();
-				String voteNO = request.getParameter("voteNo");
 				String brdNo = request.getParameter("brdNo");
-//				comment.setUserId((String)request.getSession().getAttribute("userId"));
-				Board brd =new Board();
 
+				Board brd =new Board();
 				brd.setUserId((String)request.getSession().getAttribute("userId"));
 				brd.setBrdNo(Integer.parseInt(brdNo));
 
-				
-				int check = brdService.VoteUpdate(brd);
-				int voteCnt = brdService.getVote(brd.getBrdNo());
+				//추천 표시
+				int check = brdService.VoteUpdate(brd); // 추천 여부 확인
+				int voteCnt = brdService.getVote(brd.getBrdNo()); // 추천 카운트 가져오기
 
-		        // Map
+		        // Map. 추천 정보 세팅
 		        Map<String, Integer> map = new HashMap<>();
 		        map.put("check", check);
 		        map.put("voteCnt", voteCnt);
@@ -271,6 +274,7 @@ public class BoardController extends HttpServlet {
 		        Gson gson = new Gson();
 		        String jsonStr = gson.toJson(map);
 				
+		        //ajax로 전달
 				out.print(jsonStr);				
 				
 				return;

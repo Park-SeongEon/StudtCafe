@@ -56,23 +56,26 @@ public class MainController extends HttpServlet {
 		try {
 			if(action == null){
 				
-				List<Seat> list = mainService.getSeatList();
-				request.setAttribute("list", list);
+				List<Seat> list = mainService.getSeatList(); // 좌석 정보 가져오기
+				request.setAttribute("list", list);	// VIEW에 좌석 정보 세팅
 
-				List<Board> viewlist = mainService.getBoardViewList();
-				request.setAttribute("viewlist", viewlist);
-
-				nextPage = "/view/main/main.jsp";
-				
-			} else if("/main.do".equals(action)) {
-				List<Seat> list = mainService.getSeatList();
-				request.setAttribute("list", list);
-
-				List<Board> viewlist = mainService.getBoardViewList();
-				request.setAttribute("viewlist", viewlist);
+				List<Board> viewlist = mainService.getBoardViewList(); // 최신글 가져오기
+				request.setAttribute("viewlist", viewlist); //최신글 세팅
 
 				Map<String,Integer> statis = mainService.getSeatCount();
 				request.setAttribute("statis", statis);
+				
+				nextPage = "/view/main/main.jsp";
+				
+			} else if("/main.do".equals(action)) {
+				List<Seat> list = mainService.getSeatList();// 좌석 정보 가져오기
+				request.setAttribute("list", list);// VIEW에 좌석 정보 세팅
+
+				List<Board> viewlist = mainService.getBoardViewList();  // 최신글 가져오기
+				request.setAttribute("viewlist", viewlist);  //최신글 세팅
+
+				Map<String,Integer> statis = mainService.getSeatCount(); // 좌석 카운트 가져오기
+				request.setAttribute("statis", statis); // 좌석 가운트 세팅
 
 				
 				nextPage = "/view/main/main.jsp";
@@ -80,13 +83,14 @@ public class MainController extends HttpServlet {
 				
 				PrintWriter out = response.getWriter();
 
+				// 좌석 정보 세팅
 				Seat seat = new Seat();
-				
-				String userId = request.getParameter("userId");
+				String userId = request.getParameter("userId"); 
 				seat.setUserId(userId);
 				seat.setSeatNo(request.getParameter("SeatNo"));
 				seat.setSeatComment("02");
 
+				//저장
 				mainService.SeatUpdate(seat);
 				out.print("success");
 			}

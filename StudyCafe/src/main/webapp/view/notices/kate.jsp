@@ -70,7 +70,7 @@
 									<input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100"></td>
 								<td><button type="button" class="btn btn-white btn-dark">검색</button></td>
 								<td>
-									<a href="#" data-toggle="modal" data-target="#myModal" style="background-color:red; color:blue;"  class="btn addbtn pull-right">추가</a>
+									<a href="#" data-toggle="modal" data-target="#myModal" class="btn addbtn back-blue2 pull-right">추가</a>
 								</td>
 							</tr>
 						</table>

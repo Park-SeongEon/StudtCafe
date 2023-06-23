@@ -81,10 +81,10 @@ public class BoardService {
 		return brdDao.selectVote(brdNo);
 	}
 	
-	public void CntUpdate(int brdNo, int cnt) {
+	public void CntUpdate(int brdNo) {
 		
 		
-		brdDao.CntUpdate(brdNo,cnt);	
+		brdDao.CntUpdate(brdNo);	
 	}
 
 	

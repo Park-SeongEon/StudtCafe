@@ -42,21 +42,31 @@ public class AdminController extends HttpServlet {
 		String nextPage = null;
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
-		String action = request.getPathInfo();
+
+		String action = request.getPathInfo(); // url 확인
+
 		
+		// 관리자 계정만 접근
+        if(!request.getSession().getAttribute("userId").equals("admin")) {   
+            response.sendRedirect("/main/main.do");
+            return;
+        }
+
 		
-        if(request.getSession().getAttribute("userId") == null) {
+		// 로그인 되어 있지 않다면 로그인 페이지로 이동
+        if(request.getSession().getAttribute("userId") == null) {   
             response.sendRedirect("/member/main.do");
             return;
         }
 		
-		
+		//메뉴 가져오기
 		List<Kategorie> katlist  = adminService.getMenu();
-		request.setAttribute("katlist", katlist);
+		request.setAttribute("katlist", katlist); // 메뉴 세팅
 
 		
 		int katNo = Integer.parseInt(request.getParameter("katNo"));
 		request.setAttribute("katTargetNo", katNo);
+		
 		String KatName = katNo == 1 ? "공지사항" : "회원목록";
 		request.setAttribute("katTargetName", KatName);
 
@@ -149,7 +159,7 @@ public class AdminController extends HttpServlet {
 				String no = request.getParameter("brdNo");
 				Board vo = adminService.getBoardView(Integer.parseInt(no));
 				request.setAttribute("info", vo);
-				adminService.CntUpdate(vo.getBrdNo(),vo.getCnt()+1);
+				adminService.CntUpdate(vo.getBrdNo());
 				vo.setCnt(vo.getCnt()+1);
 				List<Comment> comlist= adminService.getCommentList(Integer.parseInt(no));
 				request.setAttribute("list", comlist);

@@ -58,7 +58,7 @@ a, a:hover {
 								<td><button type="button" class="btn btn-white btn-dark">검색</button></td>
 								<td>
 									<%-- <a href="${contextPath}/board/Form.do?katNo=${katTargetNo}" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">모달 열기</a> --%>
-									<a href="#" data-toggle="modal" data-target="#myModal"  class="btn back-blue btn-success pull-right">글쓰기</a>
+									<a href="#" data-toggle="modal" data-target="#myModal"  class="btn back-blue2 addbtn pull-right">글쓰기</a>
 								</td>
 							</tr>
 						</table>

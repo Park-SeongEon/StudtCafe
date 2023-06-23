@@ -160,8 +160,9 @@ button-align {
 						<div class="center">
 							<input type=button id="vote" value="👍 : ${info.voteNo}" onClick="fn_vote(${info.brdNo},${info.voteNo})">
 							<input type=button value="리스트로 돌아가기" onClick="backToList(this.form,'${contextPath}/board/list.do?katNo=${katTargetNo}')"> 
-							<input type=button value="수정하기" onClick="fn_modify_artlce(this.form,'${contextPath}/board/mod.do?brdNo=${info.brdNo}&katNo=${katTargetNo}')"> 
-							
+							<c:if test="${info.userId == userId}">
+								<input type=button value="수정하기" onClick="fn_modify_artlce(this.form,'${contextPath}/board/mod.do?brdNo=${info.brdNo}&katNo=${katTargetNo}')"> 
+							</c:if>
 						</div>
 
 						<div style="border-bottom: 1px solid #bdbdbd42; margin: 5px 20px 20px 20px"></div>
