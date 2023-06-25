@@ -133,7 +133,7 @@ button-align {
 								id="i_content" required>
  -->
 							<h4 class="card-title">${info.title}</h4>
- 			  				<p class="card-text"><i class="fa-solid fa-user"></i>${userId}</p>
+ 			  				<p class="card-text"><i class="fa-solid fa-user"></i>${info.userId}</p>
 							<h6 class="card-subtitle mb-2 text-muted">등록일자 : ${info.regDate}  조회수 : ${info.cnt} </h6>
 						</div>
 					</div>
@@ -161,6 +161,9 @@ button-align {
 							<input type=button value="리스트로 돌아가기" onClick="backToList(this.form,'${contextPath}/board/list.do?katNo=${katTargetNo}')"> 
 							<c:if test="${info.userId == userId}">
 								<input type=button value="수정하기" onClick="fn_modify_artlce(this.form,'${contextPath}/board/mod.do?brdNo=${info.brdNo}&katNo=${katTargetNo}')"> 
+							</c:if>
+							<c:if test="${info.userId == userId}">
+								<input type=button value="삭제하기" onClick="fn_modify_artlce(this.form,'${contextPath}/board/remove.do?brdNo=${info.brdNo}&katNo=${katTargetNo}')"> 
 							</c:if>
 						</div>
 
